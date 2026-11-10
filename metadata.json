@@ -1,0 +1,6 @@
+{
+  "name": "Client Management System",
+  "description": "One Workspace. Every Client. Enterprise client management, project delivery, team allocation, proof reviews, and role-based dashboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
