@@ -98,31 +98,61 @@ The system provides four types of user access:
 The following is a suggested logical structure for organizing the application. Actual filenames and folders may differ in the current repository.
 
 ```text
-client-management-system/
+Client-Management-System-One-Workspace.-Every-Client/
 │
 ├── public/
 │   ├── favicon.ico
 │   ├── logo.png
-│   └── images/
+│   ├── images/
+│   └── assets/
 │
 ├── src/
+│   │
 │   ├── assets/
 │   │   ├── images/
 │   │   ├── icons/
+│   │   ├── fonts/
 │   │   └── styles/
 │   │
 │   ├── components/
 │   │   ├── common/
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Button.tsx
+│   │   │   ├── Modal.tsx
+│   │   │   ├── Loader.tsx
+│   │   │   └── ProtectedRoute.tsx
+│   │   │
 │   │   ├── layout/
+│   │   │   ├── MainLayout.tsx
+│   │   │   ├── DashboardLayout.tsx
+│   │   │   └── AuthLayout.tsx
+│   │   │
 │   │   ├── clients/
+│   │   │   ├── ClientForm.tsx
+│   │   │   ├── ClientList.tsx
+│   │   │   └── ClientDetails.tsx
+│   │   │
 │   │   ├── projects/
+│   │   │   ├── ProjectForm.tsx
+│   │   │   ├── ProjectList.tsx
+│   │   │   └── ProjectDetails.tsx
+│   │   │
 │   │   ├── tasks/
+│   │   │   ├── TaskForm.tsx
+│   │   │   ├── TaskList.tsx
+│   │   │   └── TaskStatus.tsx
+│   │   │
 │   │   └── notifications/
+│   │       ├── NotificationCenter.tsx
+│   │       └── NotificationItem.tsx
 │   │
 │   ├── pages/
 │   │   ├── Home.tsx
 │   │   ├── About.tsx
 │   │   ├── Login.tsx
+│   │   ├── Team.tsx
 │   │   └── NotFound.tsx
 │   │
 │   ├── dashboards/
@@ -132,10 +162,34 @@ client-management-system/
 │   │   └── TeamMemberDashboard.tsx
 │   │
 │   ├── services/
+│   │   ├── authService.ts
+│   │   ├── clientService.ts
+│   │   ├── projectService.ts
+│   │   ├── taskService.ts
+│   │   ├── userService.ts
+│   │   └── notificationService.ts
+│   │
 │   ├── hooks/
+│   │   ├── useAuth.ts
+│   │   ├── useProjects.ts
+│   │   ├── useTasks.ts
+│   │   └── useNotifications.ts
+│   │
 │   ├── contexts/
+│   │   ├── AuthContext.tsx
+│   │   └── ThemeContext.tsx
+│   │
 │   ├── types/
+│   │   ├── user.ts
+│   │   ├── client.ts
+│   │   ├── project.ts
+│   │   ├── task.ts
+│   │   └── notification.ts
+│   │
 │   ├── utils/
+│   │   ├── dateUtils.ts
+│   │   ├── validation.ts
+│   │   └── helpers.ts
 │   │
 │   ├── App.tsx
 │   ├── main.tsx
@@ -150,7 +204,6 @@ client-management-system/
 ├── vite.config.ts
 ├── README.md
 └── LICENSE
-```
 
 ## ⚙️ Installation and Setup
 
