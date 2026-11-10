@@ -81,16 +81,21 @@ The system provides four types of user access:
 
 ## 🛠️ Technology Stack
 
-Update this section according to the technologies actually used in your application.
+| Technology | Purpose |
+|---|---|
+| React.js | Frontend development |
+| TypeScript | Type-safe application development |
+| Tailwind CSS | Responsive user interface styling |
+| Vite | Development server and build tool |
+| Git | Version control |
+| GitHub | Source code hosting |
+| Vercel | Application deployment |
 
-- **Frontend:** React.js, TypeScript
-- **Styling:** Tailwind CSS
-- **Build Tool:** Vite
-- **Backend:** Add your actual backend technology
-- **Database:** Add your actual database
-- **Version Control:** Git and GitHub
+*Backend and database technologies should be added after confirming the actual implementation.*
 
 ## 📂 Project Structure
+
+The following is a suggested logical structure for organizing the application. Actual filenames and folders may differ in the current repository.
 
 ```text
 client-management-system/
@@ -101,7 +106,6 @@ client-management-system/
 │   └── images/
 │
 ├── src/
-│   │
 │   ├── assets/
 │   │   ├── images/
 │   │   ├── icons/
@@ -109,36 +113,11 @@ client-management-system/
 │   │
 │   ├── components/
 │   │   ├── common/
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── Footer.tsx
-│   │   │   ├── Modal.tsx
-│   │   │   ├── Button.tsx
-│   │   │   └── Loader.tsx
-│   │   │
 │   │   ├── layout/
-│   │   │   ├── MainLayout.tsx
-│   │   │   ├── AuthLayout.tsx
-│   │   │   └── DashboardLayout.tsx
-│   │   │
 │   │   ├── clients/
-│   │   │   ├── ClientForm.tsx
-│   │   │   ├── ClientList.tsx
-│   │   │   └── ClientDetails.tsx
-│   │   │
 │   │   ├── projects/
-│   │   │   ├── ProjectForm.tsx
-│   │   │   ├── ProjectList.tsx
-│   │   │   └── ProjectDetails.tsx
-│   │   │
 │   │   ├── tasks/
-│   │   │   ├── TaskForm.tsx
-│   │   │   ├── TaskList.tsx
-│   │   │   └── TaskStatus.tsx
-│   │   │
 │   │   └── notifications/
-│   │       ├── NotificationCenter.tsx
-│   │       └── NotificationItem.tsx
 │   │
 │   ├── pages/
 │   │   ├── Home.tsx
@@ -153,31 +132,10 @@ client-management-system/
 │   │   └── TeamMemberDashboard.tsx
 │   │
 │   ├── services/
-│   │   ├── authService.ts
-│   │   ├── clientService.ts
-│   │   ├── projectService.ts
-│   │   ├── taskService.ts
-│   │   └── notificationService.ts
-│   │
 │   ├── hooks/
-│   │   ├── useAuth.ts
-│   │   ├── useProjects.ts
-│   │   └── useNotifications.ts
-│   │
 │   ├── contexts/
-│   │   ├── AuthContext.tsx
-│   │   └── ThemeContext.tsx
-│   │
 │   ├── types/
-│   │   ├── user.ts
-│   │   ├── client.ts
-│   │   ├── project.ts
-│   │   └── task.ts
-│   │
 │   ├── utils/
-│   │   ├── dateUtils.ts
-│   │   ├── validation.ts
-│   │   └── helpers.ts
 │   │
 │   ├── App.tsx
 │   ├── main.tsx
@@ -194,11 +152,10 @@ client-management-system/
 └── LICENSE
 ```
 
-*Note: Adjust the folder structure to match your actual repository.*
-
 ## ⚙️ Installation and Setup
 
 ### Prerequisites
+
 - Node.js
 - npm
 - Git
@@ -207,13 +164,13 @@ client-management-system/
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Devanath36/REPOSITORY-NAME.git
+git clone https://github.com/Devanath36/Client-Management-System-One-Workspace.-Every-Client.git
 ```
 
 ### Step 2: Navigate to the Project
 
 ```bash
-cd REPOSITORY-NAME
+cd Client-Management-System-One-Workspace.-Every-Client
 ```
 
 ### Step 3: Install Dependencies
@@ -230,20 +187,34 @@ npm run dev
 
 ### Step 5: Open the Application
 
-Open the local URL displayed in your terminal, usually:
+Open the local URL displayed in your terminal. For a typical Vite development server:
 
 ```text
 http://localhost:5173
 ```
 
+### Step 6: Build for Production
+
+```bash
+npm run build
+```
+
+The production build is generated in the `dist` directory when using the standard Vite configuration.
+
 ## 🔐 Security and Access
 
-The application uses role-based access to organize user responsibilities. Users should access only the features and information permitted by their assigned roles.
+The application uses role-based access to organize user responsibilities.
 
+- Administrator access for system administration.
+- Manager access for client and project management.
+- Team Lead access for task allocation and monitoring.
+- Team Member access for assigned task execution.
+
+Users should only access the information and functionality permitted by their assigned roles. Authorization should be enforced by the backend, not just by hiding frontend controls.
 
 ## 🚀 Deployment
 
-The **Client Management System** is deployed on Vercel, making the application accessible online through a public URL. The source code is maintained in GitHub for version control and project development.
+The **Client Management System** is deployed on Vercel, making the application accessible online through a public URL. The source code is maintained in GitHub for version control and further development.
 
 ### 🌐 Live Application
 
@@ -267,55 +238,46 @@ Vercel is used to build and host the React and Vite frontend application, provid
 | Output Directory | `dist` |
 | Development Command | `npm run dev` |
 
-### 📦 Deployment Process
+### 📦 Deployment Workflow
 
-1. Push the project source code to the GitHub repository.
-2. Import the GitHub repository into Vercel.
-3. Configure the project framework as Vite.
+1. Maintain the application source code in the GitHub repository.
+2. Connect the GitHub repository to the Vercel project.
+3. Configure the Vite framework and build settings.
 4. Set the build command to `npm run build`.
 5. Set the output directory to `dist`.
 6. Configure required environment variables, if applicable.
 7. Deploy the application through Vercel.
-8. Access the deployed application using the generated public URL.
+8. Access the application through its public deployment URL.
 
 ### 🔄 Continuous Deployment
 
-When changes are pushed to the connected GitHub deployment branch, Vercel can automatically build and deploy the latest version of the application, provided automatic deployments are enabled.
+When GitHub integration and automatic deployments are enabled, Vercel can automatically build and deploy updates whenever changes are pushed to the connected deployment branch.
 
 ### ✅ Deployment Status
 
-<badge color="success">Deployed</badge> **Successfully hosted on Vercel**
+**Deployed on Vercel**
 
 The application is available through the live demo link above.
 
----
-
-<div align="center">
-
-**Client Management System**
-
-*One Workspace. Every Client. Every Project.*
-
-[Live Demo](https://client-management-system-flax.vercel.app/) · [GitHub Repository](https://github.com/Devanath36/Client-Management-System-One-Workspace.-Every-Client)
-
-</div>
-
 ## 🚀 Future Enhancements
+
+The following improvements may be considered in future versions:
 
 - Advanced project analytics and reporting.
 - Improved dashboard insights.
 - Additional workflow automation.
 - Enhanced notification capabilities.
 - Further improvements to mobile accessibility.
+- Additional integrations with business tools.
 
-*These are potential future enhancements, not claims that they are already implemented.*
-👨‍💻 Project Development Team
+*These are proposed enhancements and should not be interpreted as completed features.*
 
 ## 👨‍💻 Project Development Team
 
 This project was collaboratively developed by the following team members:
 
 ### 1. Devanath N
+
 **Role:** Software Testing & UI/UX Designer | MCA Student
 
 - **GitHub:** [Devanath36](https://github.com/Devanath36)
@@ -324,6 +286,7 @@ This project was collaboratively developed by the following team members:
 - **Email:** devanathdevanath36@gmail.com
 
 ### 2. Shiva Shankar P
+
 **Role:** Full-Stack Developer (Frontend & Backend)
 
 - **GitHub:** [Shiva Shankar](https://github.com/shivashankarP2006)
@@ -331,11 +294,10 @@ This project was collaboratively developed by the following team members:
 - **Portfolio:** [Visit Portfolio](https://shivashankarp2006.github.io/protfolio/)
 
 ### 3. Bhuvaneswaran K
+
 **Role:** Project Ideation & Documentation Lead
 
 - **LinkedIn:** [Bhuvaneswaran K](https://www.linkedin.com/in/bhuvaneshwaran-k-590b192a9/)
-
----
 
 ## 🎓 Project Information
 
@@ -349,21 +311,23 @@ Each team member contributed to different aspects of the project, including deve
 
 This project is developed for academic and educational purposes.
 
-All rights reserved to the project development team unless otherwise specified. For permission to reuse, modify, or distribute this project, please contact the project developers.
+No specific open-source license has been declared. Please contact the project development team for permission to reuse, modify, or distribute the project.
 
 ---
 
 <div align="center">
 
-### Client Management System
+# Client Management System
 
-**One Workspace. Every Client. Every Project.**
+### One Workspace. Every Client. Every Project.
 
-Designed & Developed by
+**Designed & Developed by**
 
 **Devanath N · Shiva Shankar P · Bhuvaneswaran K**
 
-[GitHub](https://github.com/Devanath36) · [LinkedIn](https://www.linkedin.com/in/devanathn1706/) · [Portfolio](https://devanath-portfolio.vercel.app/)
+[Live Application](https://client-management-system-flax.vercel.app/) · [GitHub Repository](https://github.com/Devanath36/Client-Management-System-One-Workspace.-Every-Client)
+
+[LinkedIn](https://www.linkedin.com/in/devanathn1706/) · [Portfolio](https://devanath-portfolio.vercel.app/)
 
 © 2026 Client Management System. All Rights Reserved.
 
