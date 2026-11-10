@@ -6,7 +6,7 @@ import {
 } from '../components/team/TeamMemberProfileModal';
 import { INITIAL_TEAM_PROFILES } from '../data/mockData';
 import devanathPhoto from '../assets/images/devanath_profile.jpg';
-import shivaPhoto from '../assets/images/shiva_profile.jpg';
+import shivaPhoto from '../assets/images/shiva_profile.png';
 import bhuvaneshPhoto from '../assets/images/bhuvanesh_profile.jpg';
 import heroCommandUniverseBg from '../assets/images/hero_command_universe_1794147879933.jpg';
 import {
@@ -808,7 +808,7 @@ export const LandingPage: React.FC = () => {
                 <div
                   key={member.id || member.name || Math.random()}
                   onClick={() => {
-                    setSelectedMember(member);
+                    setSelectedMember({ ...member, photoUrl: photoSrc });
                     setIsProfileModalOpen(true);
                   }}
                   className="group relative rounded-3xl border border-slate-200 dark:border-slate-800/90 bg-white dark:bg-slate-900/95 p-5 sm:p-6 shadow-sm hover:shadow-2xl hover:shadow-blue-950/20 dark:hover:shadow-blue-950/50 hover:border-blue-500/60 dark:hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between cursor-pointer md:last:col-span-2 md:last:max-w-md md:last:mx-auto lg:last:col-span-1 lg:last:max-w-none lg:last:mx-0 w-full"

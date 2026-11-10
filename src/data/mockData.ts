@@ -1,5 +1,5 @@
 import devanathPhoto from '../assets/images/devanath_profile.jpg';
-import shivaPhoto from '../assets/images/shiva_profile.jpg';
+import shivaPhoto from '../assets/images/shiva_profile.png';
 import bhuvaneshPhoto from '../assets/images/bhuvanesh_profile.jpg';
 import {
   User,
