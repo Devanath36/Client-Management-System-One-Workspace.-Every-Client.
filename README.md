@@ -249,7 +249,7 @@ The application uses role-based access to organize user responsibilities. Users 
 - Further improvements to mobile accessibility.
 
 *These are potential future enhancements, not claims that they are already implemented.*
-## 👨‍💻 Developer
+👨‍💻 Project Development Team
 
 **Devanath N**  
 Software Testing & UI/UX Designer | MCA Student
@@ -258,6 +258,23 @@ Software Testing & UI/UX Designer | MCA Student
 - **LinkedIn:** [Devanath N](https://www.linkedin.com/in/devanathn1706/)
 - **Portfolio:** [Visit My Portfolio](https://devanath-portfolio.vercel.app/)
 - **Email:** devanathdevanath36@gmail.com
+
+2. Shiva Shankar P
+
+Role: Full-Stack Developer (Frontend & Backend)
+
+GitHub: Shiva Shankar
+
+LinkedIn: Shiva Shankar P
+
+Portfolio: Visit Portfolio
+
+
+3. Bhuvaneswaran K
+
+Role: Project Ideation & Documentation Lead
+
+LinkedIn: Bhuvaneswaran K
 
 ## 🎓 Project Information
 
@@ -277,8 +294,9 @@ For permission to reuse, modify, or distribute this project, please contact the 
 
 **One Workspace. Every Client. Every Project.**
 
-Designed & Developed by **Devanath N**
+Designed & Developed by Devanath N, Shiva Shankar P & Bhuvaneswaran K
 
+</div>
 [GitHub](https://github.com/Devanath36) · [LinkedIn](https://www.linkedin.com/in/devanathn1706/) · [Portfolio](https://devanath-portfolio.vercel.app/)
 
 </div>
