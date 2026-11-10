@@ -249,18 +249,36 @@ The application uses role-based access to organize user responsibilities. Users 
 - Further improvements to mobile accessibility.
 
 *These are potential future enhancements, not claims that they are already implemented.*
-
 ## 👨‍💻 Developer
 
-**Devanath N**
+**Devanath N**  
+Software Testing & UI/UX Designer | MCA Student
 
-- GitHub: https://github.com/Devanath36
-- LinkedIn: https://www.linkedin.com/in/devanathn1706/
+- **GitHub:** [Devanath36](https://github.com/Devanath36)
+- **LinkedIn:** [Devanath N](https://www.linkedin.com/in/devanathn1706/)
+- **Portfolio:** [Visit My Portfolio](https://devanath-portfolio.vercel.app/)
+- **Email:** devanathdevanath36@gmail.com
+
+## 🎓 Project Information
+
+This Client Management System was developed as an academic project to demonstrate the practical application of web development, client management, project coordination, task assignment, and role-based access control.
 
 ## 📄 License
 
-This project is developed for academic and learning purposes. Add a specific open-source license if you intend to distribute it under one.
+This project is developed for academic and educational purposes. All rights reserved to the project developer unless otherwise specified.
+
+For permission to reuse, modify, or distribute this project, please contact the developer.
 
 ---
 
-**Client Management System – One Workspace. Every Client.**
+<div align="center">
+
+### Client Management System
+
+**One Workspace. Every Client. Every Project.**
+
+Designed & Developed by **Devanath N**
+
+[GitHub](https://github.com/Devanath36) · [LinkedIn](https://www.linkedin.com/in/devanathn1706/) · [Portfolio](https://devanath-portfolio.vercel.app/)
+
+</div>
