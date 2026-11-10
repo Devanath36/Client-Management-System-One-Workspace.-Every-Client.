@@ -1,76 +1,266 @@
 # Client Management System (CMS)
-> **One Workspace. Every Client.**
 
-A professional, enterprise-grade Client Management System built with React 19, TypeScript, and Tailwind CSS. The platform coordinates client accounts, contractual service level agreements (SLAs), multi-disciplinary squad workloads, project pipelines, and verified deliverable proof reviews with strict role-based access control.
+### One Workspace. Every Client.
 
----
-
-## 🌟 Architecture & Implemented Capabilities
-
-### 1. Updated 11-Section Professional Home Page
-The Home Page has been organized into all 11 required sections with smooth-scrolling navigation:
-1. **Home** (`#home`): Project introduction, brand name (*Client Management System*), tagline (*"One Workspace. Every Client."*), primary CTAs, trust marks, and a 4-metric strip.
-2. **About Us** (`#about`): Detailed rationale on why the system exists, eliminating fragmented spreadsheets, and providing a single source of truth.
-3. **Features** (`#features`): 6 core feature cards covering Client Management, Team Management, Project Tracking, Task Assignments & Proofs, Reports & Analytics, and Notifications & Alerts.
-4. **How It Works** (`#how-it-works`): 4-stage operational workflow from onboarding and SLA definition to verified deliverable sign-offs and reporting.
-5. **Our Objectives** (`#objectives`): Key organizational goals (Zero Missed SLAs, Deliverable Verification & Traceability, Balanced Team Bandwidth, Data-Driven Account Retention).
-6. **User Roles** (`#user-roles`): In-depth breakdown of Administrator, Operations Manager, Solutions Team Lead, and Team Member responsibilities.
-7. **Help & Support** (`#support`): User guidance, best practice cards, white-glove onboarding info, and support contact triggers.
-8. **Frequently Asked Questions (FAQ)** (`#faq`): Interactive accordions addressing RBAC, proof evaluations, 48h SLA warning engines, and broadcast notifications.
-9. **Privacy Policy** (`#privacy`): Clear statements on corporate data isolation, SOC 2 / ISO 27001 compliance, audit logging, and data retention rules.
-10. **Terms & Conditions** (`#terms`): Acceptable use policy, account responsibilities, 99.98% infrastructure SLA benchmarks, and intellectual property terms.
-11. **Contact & Footer** (`#contact`): Interactive inquiry form with client-side validation, department selection, direct office contacts, and comprehensive footer navigation.
+A centralized web-based platform designed to simplify client management, organize project activities, coordinate teams, and monitor task progress in one place.
 
 ---
 
-### 2. Role-Based Access Control (RBAC) System
-- **Strict Role Isolation**: Defined via TypeScript interfaces (`UserRole`, `RolePermissions`).
-- **Dashboard Section Guards**: Each role is restricted to their specific operational view:
-  - **Administrator**: User provisioning, role permissions matrix, system overview, immutable activity audit logs, organization config.
-  - **Operations Manager**: Client directory (contract value, health scores, 360° modal), team capacity balancing, projects pipeline, global task allocation, revenue charts, and SLA alerts.
-  - **Solutions Team Lead**: Assigned projects, task distribution, sprint burndown, status Kanban board, and the **Deliverable Proof Approvals Queue**.
-  - **Team Member**: Focused **My Tasks** board, task details, status updates (To Do → In Progress), proof upload modal, upcoming delivery deadlines, and notification log.
-- **Access Guard Enforcement**: If an unauthorized tab is requested, an access restriction card is presented explaining that the role lacks privileges, with a quick return button to permitted workspaces.
+## 📌 About the Project
 
----
+The **Client Management System (CMS)** is a web-based application developed to simplify client information management, organize project activities, and improve coordination among team members.
 
-### 3. Comprehensive Notification System
-- **Notification Center**: Slide-out tray displaying read and unread notifications with an unread badge counter on the top-bar bell icon.
-- **Categorized Notification Types**:
-  - `task_assigned`: New project deliverable assigned
-  - `deadline_approaching`: 48-hour approaching deadline warnings
-  - `client_update`: Client SLA and contract renewals
-  - `proof_review`: Deliverable proof submissions, approvals, and revision requests
-  - `system_broadcast`: Organization-wide executive announcements
-  - `sla_alert`: Critical contractual SLA risk warnings
-- **Notification Dispatch Modal**: Administrators and Managers can broadcast notifications to all workspace users, specific roles, or individual team members.
-- **Filtering & Management**: Filter by *All* / *Unread*, mark individual notifications as read, mark all read, or delete notifications.
+It provides a unified digital workspace where organizations can manage client records, project assignments, task responsibilities, deadlines, and work progress in an organized and efficient manner.
 
----
+Managing multiple clients and projects can become challenging when information is maintained across different platforms or manual processes. This system addresses these challenges by bringing essential client and project management activities together within a single platform.
 
-### 4. Complete User Authentication & Registration Flow
-- **Sign In**: Email & password authentication with show/hide password toggle, remember workstation option, client-side validation, and trusted role resolution.
-- **Sign Up**: New account registration with full name, corporate email, department, job title, requested role, password matching (min 8 chars), and Terms & Conditions acceptance.
-- **Email Verification**: Generates a 6-digit confirmation code, displays verification screen with demo code prefilled for testing ease, validates code, and provisions active account.
-- **Password Reset Mechanism**: Request reset token via work email, receive authorization token, and set a new password.
-- **Protected Routes**: Unauthenticated users visiting dashboard routes are redirected to the Login page.
-- **Quick Demo Logins**: 1-click pre-fill cards for all 4 roles:
-  - *Administrator*: `admin@cmsworkspace.com` (pw: `password123`)
-  - *Manager*: `manager@cmsworkspace.com` (pw: `password123`)
-  - *Team Lead*: `teamlead@cmsworkspace.com` (pw: `password123`)
-  - *Team Member*: `member@cmsworkspace.com` (pw: `password123`)
+The application follows a structured workflow from project creation and team assignment to task execution and progress monitoring.
 
----
+## 🎯 Project Objectives
 
-## 💻 Local Development Instructions
+- Centralize client information and project records.
+- Simplify project creation and assignment.
+- Organize task distribution among team members.
+- Monitor project and task progress.
+- Track upcoming deadlines and overdue activities.
+- Improve coordination between different organizational roles.
+- Provide a structured and user-friendly workspace.
+
+## ✨ Key Features
+
+### 1. Client Management
+- Maintain organized client information.
+- Access relevant client records.
+- Manage client-related project details.
+
+### 2. Project Management
+- Create and manage projects.
+- Enter project purpose and descriptions.
+- Set project start dates and deadlines.
+- Assign projects to registered Team Leads.
+
+### 3. Task Management
+- Create and distribute tasks.
+- Assign tasks to Team Members.
+- Update task statuses.
+- Monitor individual task progress.
+
+### 4. Team Management
+- Support multiple users with different responsibilities.
+- Coordinate work between Managers, Team Leads, and Team Members.
+- Provide dedicated dashboards for each user.
+
+### 5. Deadline Tracking
+- Monitor project deadlines.
+- Track upcoming task due dates.
+- Identify pending, ongoing, completed, and overdue work.
+
+### 6. Notification Management
+- Receive project assignment updates.
+- Get task-related notifications.
+- Stay informed about approaching deadlines and status changes.
+
+### 7. Role-Based Access
+The system provides four types of user access:
+
+| Role | Responsibilities |
+|---|---|
+| Administrator | Manage users and overall system access |
+| Manager | Manage clients, create projects and assign Team Leads |
+| Team Lead | Distribute tasks and monitor Team Members |
+| Team Member | Complete assigned tasks and update progress |
+
+## 🔄 System Workflow
+
+1. The Administrator manages user accounts and system access.
+2. The Manager creates a project and assigns it to a Team Lead.
+3. The Team Lead receives the project and distributes tasks among Team Members.
+4. Team Members complete their assigned work and update task statuses.
+5. The Team Lead monitors task progress and deadlines.
+6. The Manager monitors overall project progress.
+
+## 🛠️ Technology Stack
+
+Update this section according to the technologies actually used in your application.
+
+- **Frontend:** React.js, TypeScript
+- **Styling:** Tailwind CSS
+- **Build Tool:** Vite
+- **Backend:** Add your actual backend technology
+- **Database:** Add your actual database
+- **Version Control:** Git and GitHub
+
+## 📂 Project Structure
+
+```text
+client-management-system/
+│
+├── public/
+│   ├── favicon.ico
+│   ├── logo.png
+│   └── images/
+│
+├── src/
+│   │
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── styles/
+│   │
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Modal.tsx
+│   │   │   ├── Button.tsx
+│   │   │   └── Loader.tsx
+│   │   │
+│   │   ├── layout/
+│   │   │   ├── MainLayout.tsx
+│   │   │   ├── AuthLayout.tsx
+│   │   │   └── DashboardLayout.tsx
+│   │   │
+│   │   ├── clients/
+│   │   │   ├── ClientForm.tsx
+│   │   │   ├── ClientList.tsx
+│   │   │   └── ClientDetails.tsx
+│   │   │
+│   │   ├── projects/
+│   │   │   ├── ProjectForm.tsx
+│   │   │   ├── ProjectList.tsx
+│   │   │   └── ProjectDetails.tsx
+│   │   │
+│   │   ├── tasks/
+│   │   │   ├── TaskForm.tsx
+│   │   │   ├── TaskList.tsx
+│   │   │   └── TaskStatus.tsx
+│   │   │
+│   │   └── notifications/
+│   │       ├── NotificationCenter.tsx
+│   │       └── NotificationItem.tsx
+│   │
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   ├── Login.tsx
+│   │   └── NotFound.tsx
+│   │
+│   ├── dashboards/
+│   │   ├── AdminDashboard.tsx
+│   │   ├── ManagerDashboard.tsx
+│   │   ├── TeamLeadDashboard.tsx
+│   │   └── TeamMemberDashboard.tsx
+│   │
+│   ├── services/
+│   │   ├── authService.ts
+│   │   ├── clientService.ts
+│   │   ├── projectService.ts
+│   │   ├── taskService.ts
+│   │   └── notificationService.ts
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.ts
+│   │   ├── useProjects.ts
+│   │   └── useNotifications.ts
+│   │
+│   ├── contexts/
+│   │   ├── AuthContext.tsx
+│   │   └── ThemeContext.tsx
+│   │
+│   ├── types/
+│   │   ├── user.ts
+│   │   ├── client.ts
+│   │   ├── project.ts
+│   │   └── task.ts
+│   │
+│   ├── utils/
+│   │   ├── dateUtils.ts
+│   │   ├── validation.ts
+│   │   └── helpers.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── .env.example
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── vite.config.ts
+├── README.md
+└── LICENSE
+```
+
+*Note: Adjust the folder structure to match your actual repository.*
+
+## ⚙️ Installation and Setup
+
+### Prerequisites
+- Node.js
+- npm
+- Git
+- Visual Studio Code (recommended)
+
+### Step 1: Clone the Repository
 
 ```bash
-# 1. Install dependencies
-npm install
-
-# 2. Run the local development server (port 3000)
-npm run dev
-
-# 3. Compile and build for production
-npm run build
+git clone https://github.com/Devanath36/REPOSITORY-NAME.git
 ```
+
+### Step 2: Navigate to the Project
+
+```bash
+cd REPOSITORY-NAME
+```
+
+### Step 3: Install Dependencies
+
+```bash
+npm install
+```
+
+### Step 4: Start the Development Server
+
+```bash
+npm run dev
+```
+
+### Step 5: Open the Application
+
+Open the local URL displayed in your terminal, usually:
+
+```text
+http://localhost:5173
+```
+
+## 🔐 Security and Access
+
+The application uses role-based access to organize user responsibilities. Users should access only the features and information permitted by their assigned roles.
+
+## 🚀 Future Enhancements
+
+- Advanced project analytics and reporting.
+- Improved dashboard insights.
+- Additional workflow automation.
+- Enhanced notification capabilities.
+- Further improvements to mobile accessibility.
+
+*These are potential future enhancements, not claims that they are already implemented.*
+
+## 👨‍💻 Developer
+
+**Devanath N**
+
+- GitHub: https://github.com/Devanath36
+- LinkedIn: https://www.linkedin.com/in/devanathn1706/
+
+## 📄 License
+
+This project is developed for academic and learning purposes. Add a specific open-source license if you intend to distribute it under one.
+
+---
+
+**Client Management System – One Workspace. Every Client.**
