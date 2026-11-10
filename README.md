@@ -240,6 +240,66 @@ http://localhost:5173
 
 The application uses role-based access to organize user responsibilities. Users should access only the features and information permitted by their assigned roles.
 
+
+## 🚀 Deployment
+
+The **Client Management System** is deployed on Vercel, making the application accessible online through a public URL. The source code is maintained in GitHub for version control and project development.
+
+### 🌐 Live Application
+
+- **Live Demo:** [Client Management System](https://client-management-system-flax.vercel.app/)
+- **GitHub Repository:** [View Source Code](https://github.com/Devanath36/Client-Management-System-One-Workspace.-Every-Client)
+
+### ☁️ Hosting Platform
+
+**Vercel**
+
+Vercel is used to build and host the React and Vite frontend application, providing a public URL for accessing the system.
+
+### ⚙️ Deployment Configuration
+
+| Configuration | Value |
+|---|---|
+| Hosting Platform | Vercel |
+| Source Code | GitHub |
+| Framework | Vite |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| Development Command | `npm run dev` |
+
+### 📦 Deployment Process
+
+1. Push the project source code to the GitHub repository.
+2. Import the GitHub repository into Vercel.
+3. Configure the project framework as Vite.
+4. Set the build command to `npm run build`.
+5. Set the output directory to `dist`.
+6. Configure required environment variables, if applicable.
+7. Deploy the application through Vercel.
+8. Access the deployed application using the generated public URL.
+
+### 🔄 Continuous Deployment
+
+When changes are pushed to the connected GitHub deployment branch, Vercel can automatically build and deploy the latest version of the application, provided automatic deployments are enabled.
+
+### ✅ Deployment Status
+
+<badge color="success">Deployed</badge> **Successfully hosted on Vercel**
+
+The application is available through the live demo link above.
+
+---
+
+<div align="center">
+
+**Client Management System**
+
+*One Workspace. Every Client. Every Project.*
+
+[Live Demo](https://client-management-system-flax.vercel.app/) · [GitHub Repository](https://github.com/Devanath36/Client-Management-System-One-Workspace.-Every-Client)
+
+</div>
+
 ## 🚀 Future Enhancements
 
 - Advanced project analytics and reporting.
