@@ -251,40 +251,45 @@ The application uses role-based access to organize user responsibilities. Users 
 *These are potential future enhancements, not claims that they are already implemented.*
 👨‍💻 Project Development Team
 
-**Devanath N**  
-Software Testing & UI/UX Designer | MCA Student
+## 👨‍💻 Project Development Team
+
+This project was collaboratively developed by the following team members:
+
+### 1. Devanath N
+**Role:** Software Testing & UI/UX Designer | MCA Student
 
 - **GitHub:** [Devanath36](https://github.com/Devanath36)
 - **LinkedIn:** [Devanath N](https://www.linkedin.com/in/devanathn1706/)
 - **Portfolio:** [Visit My Portfolio](https://devanath-portfolio.vercel.app/)
 - **Email:** devanathdevanath36@gmail.com
 
-2. Shiva Shankar P
+### 2. Shiva Shankar P
+**Role:** Full-Stack Developer (Frontend & Backend)
 
-Role: Full-Stack Developer (Frontend & Backend)
+- **GitHub:** [Shiva Shankar](https://github.com/shivashankarP2006)
+- **LinkedIn:** [Shiva Shankar P](https://www.linkedin.com/in/shivashankar-p-ba0354341/)
+- **Portfolio:** [Visit Portfolio](https://shivashankarp2006.github.io/protfolio/)
 
-GitHub: Shiva Shankar
+### 3. Bhuvaneswaran K
+**Role:** Project Ideation & Documentation Lead
 
-LinkedIn: Shiva Shankar P
+- **LinkedIn:** [Bhuvaneswaran K](https://www.linkedin.com/in/bhuvaneshwaran-k-590b192a9/)
 
-Portfolio: Visit Portfolio
-
-
-3. Bhuvaneswaran K
-
-Role: Project Ideation & Documentation Lead
-
-LinkedIn: Bhuvaneswaran K
+---
 
 ## 🎓 Project Information
 
-This Client Management System was developed as an academic project to demonstrate the practical application of web development, client management, project coordination, task assignment, and role-based access control.
+The Client Management System was developed as a collaborative academic project to demonstrate the practical application of web development, client information management, project coordination, task assignment, and role-based access control.
+
+The project brings together client records, project activities, team responsibilities, task updates, and deadline tracking in one centralized workspace.
+
+Each team member contributed to different aspects of the project, including development, interface design, testing, project planning, documentation, and implementation.
 
 ## 📄 License
 
-This project is developed for academic and educational purposes. All rights reserved to the project developer unless otherwise specified.
+This project is developed for academic and educational purposes.
 
-For permission to reuse, modify, or distribute this project, please contact the developer.
+All rights reserved to the project development team unless otherwise specified. For permission to reuse, modify, or distribute this project, please contact the project developers.
 
 ---
 
@@ -294,9 +299,12 @@ For permission to reuse, modify, or distribute this project, please contact the 
 
 **One Workspace. Every Client. Every Project.**
 
-Designed & Developed by Devanath N, Shiva Shankar P & Bhuvaneswaran K
+Designed & Developed by
 
-</div>
+**Devanath N · Shiva Shankar P · Bhuvaneswaran K**
+
 [GitHub](https://github.com/Devanath36) · [LinkedIn](https://www.linkedin.com/in/devanathn1706/) · [Portfolio](https://devanath-portfolio.vercel.app/)
+
+© 2026 Client Management System. All Rights Reserved.
 
 </div>
