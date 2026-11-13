@@ -412,8 +412,12 @@ if (typeof window !== 'undefined') {
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Theme state: defaults to dark matte black mode
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS.THEME);
-    return saved === 'light' ? 'light' : 'dark';
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.THEME) || localStorage.getItem('cms_theme');
+      return saved === 'light' ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
   });
 
   // Authenticated User with LocalStorage caching
@@ -681,15 +685,40 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
-  // Sync theme to document class
+  // Sync theme to documentElement class and localStorage
   useEffect(() => {
+    const root = document.documentElement;
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
     }
-    localStorage.setItem(STORAGE_KEYS.THEME, theme);
+    try {
+      localStorage.setItem(STORAGE_KEYS.THEME, theme);
+      localStorage.setItem('cms_theme', theme);
+    } catch {}
   }, [theme]);
+
+  // Listen for external ThemeToggle updates or cross-tab storage changes
+  useEffect(() => {
+    const handleExternalThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<'light' | 'dark'>;
+      if (customEvent.detail === 'light' || customEvent.detail === 'dark') {
+        setTheme((prev) => (prev === customEvent.detail ? prev : customEvent.detail));
+      }
+    };
+    const handleStorageChange = (e: StorageEvent) => {
+      if ((e.key === STORAGE_KEYS.THEME || e.key === 'cms_theme') && (e.newValue === 'light' || e.newValue === 'dark')) {
+        setTheme(e.newValue);
+      }
+    };
+    window.addEventListener('cms-theme-change', handleExternalThemeChange);
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('cms-theme-change', handleExternalThemeChange);
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   // Persist data
   useEffect(() => {

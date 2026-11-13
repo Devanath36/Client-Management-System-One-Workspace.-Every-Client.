@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { UserRole } from '../types';
+import { ThemeToggle } from '../components/common/ThemeToggle';
 import { INITIAL_DEMO_CREDENTIALS } from '../data/mockData';
 import {
   Shield,
@@ -305,11 +306,14 @@ export const LoginPage: React.FC = () => {
             <span>Back to Home</span>
           </button>
 
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
-            <div className={`w-2 h-2 rounded-full ${currentConfig.topAccentBar} animate-pulse`} />
-            <span className="text-[11px] font-semibold text-[#555555] dark:text-[#A3A3A3]">
-              Role: <strong className="text-[#101010] dark:text-white">{currentConfig.title}</strong>
-            </span>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
+              <div className={`w-2 h-2 rounded-full ${currentConfig.topAccentBar} animate-pulse`} />
+              <span className="text-[11px] font-semibold text-[#555555] dark:text-[#A3A3A3]">
+                Role: <strong className="text-[#101010] dark:text-white">{currentConfig.title}</strong>
+              </span>
+            </div>
+            <ThemeToggle />
           </div>
         </div>
 

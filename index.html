@@ -15,7 +15,7 @@
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem('cms_theme');
+          var saved = localStorage.getItem('cms_theme_preference') || localStorage.getItem('cms_theme');
           if (saved === 'light') {
             document.documentElement.classList.remove('dark');
           } else {
