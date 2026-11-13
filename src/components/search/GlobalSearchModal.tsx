@@ -145,37 +145,37 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-slate-900/60 backdrop-blur-xs">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[80vh]">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-black/85 backdrop-blur-sm">
+      <div className="bg-[#141414] w-full max-w-2xl rounded-3xl border border-[#333333] shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[80vh] text-white">
         {/* Search Header Input */}
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
-          <Search className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
+        <div className="p-4 border-b border-[#333333] flex items-center gap-3">
+          <Search className="w-5 h-5 text-[#E50914] shrink-0" />
           <input
             type="text"
             autoFocus
             placeholder="Search projects, tasks, team members, or clients... (Press ESC to close)"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full text-sm bg-transparent border-none text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none"
+            className="w-full text-sm bg-transparent border-none text-white placeholder:text-[#A3A3A3] focus:outline-none"
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 px-1.5 py-0.5 rounded cursor-pointer"
+              className="text-xs text-[#A3A3A3] hover:text-white px-1.5 py-0.5 rounded cursor-pointer"
             >
               Clear
             </button>
           )}
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg cursor-pointer"
+            className="text-[#A3A3A3] hover:text-white p-1 rounded-lg cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Category Filter Chips */}
-        <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 overflow-x-auto bg-slate-50/50 dark:bg-slate-800/30">
+        <div className="px-4 py-2 border-b border-[#333333] flex items-center gap-2 overflow-x-auto bg-[#101010]">
           {(
             [
               { id: 'all', label: 'All Results' },
@@ -188,10 +188,10 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
+                  ? 'bg-[#E50914] text-white shadow-xs'
+                  : 'bg-[#171717] text-[#A3A3A3] hover:text-white border border-[#333333]'
               }`}
             >
               {cat.label}
@@ -202,9 +202,9 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
         {/* Search Results */}
         <div className="p-4 overflow-y-auto space-y-4 flex-1">
           {!trimmed ? (
-            <div className="py-12 text-center text-slate-400 space-y-2">
-              <Search className="w-8 h-8 mx-auto text-slate-300 dark:text-slate-700 mb-1" />
-              <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
+            <div className="py-12 text-center text-[#A3A3A3] space-y-2">
+              <Search className="w-8 h-8 mx-auto text-[#555555] mb-1" />
+              <p className="text-xs font-medium text-white">
                 Type keywords above to search across your authorized workspace
               </p>
               <p className="text-[11px]">
@@ -212,8 +212,8 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
               </p>
             </div>
           ) : totalResults === 0 ? (
-            <div className="py-12 text-center text-slate-400 space-y-1">
-              <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
+            <div className="py-12 text-center text-[#A3A3A3] space-y-1">
+              <p className="text-xs font-medium text-white">
                 No matching results found for "{query}"
               </p>
               <p className="text-[11px]">
@@ -226,7 +226,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
               {(activeCategory === 'all' || activeCategory === 'projects') &&
                 matchingProjects.length > 0 && (
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block px-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A3A3A3] block px-1">
                       Projects ({matchingProjects.length})
                     </span>
                     <div className="space-y-1">
@@ -237,26 +237,26 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                             onSelectProject(proj);
                             onClose();
                           }}
-                          className="p-3 bg-slate-50 dark:bg-slate-800/60 hover:bg-blue-50/60 dark:hover:bg-blue-950/30 rounded-xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-3 cursor-pointer transition-colors group"
+                          className="p-3 bg-[#171717] hover:bg-[#1f1f1f] rounded-xl border border-[#333333] hover:border-[#E50914] flex items-center justify-between gap-3 cursor-pointer transition-colors group"
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 shrink-0">
+                            <div className="p-2 rounded-lg bg-[#101010] text-[#FFC928] border border-[#333333] shrink-0">
                               <Briefcase className="w-4 h-4" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                              <p className="text-xs font-bold text-white truncate group-hover:text-[#E50914] transition-colors">
                                 {proj.title}
                               </p>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                              <p className="text-[11px] text-[#A3A3A3] truncate">
                                 Purpose: {proj.purpose} • Lead: {proj.leadName}
                               </p>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#101010] text-[#FFC928] border border-[#333333] font-medium">
                               {proj.status}
                             </span>
-                            <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                            <ArrowRight className="w-3.5 h-3.5 text-[#A3A3A3] group-hover:text-[#E50914] transition-colors" />
                           </div>
                         </div>
                       ))}
@@ -268,7 +268,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
               {(activeCategory === 'all' || activeCategory === 'tasks') &&
                 matchingTasks.length > 0 && (
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block px-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A3A3A3] block px-1">
                       Tasks & Deliverables ({matchingTasks.length})
                     </span>
                     <div className="space-y-1">
@@ -279,34 +279,34 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                             onSelectTask(task);
                             onClose();
                           }}
-                          className="p-3 bg-slate-50 dark:bg-slate-800/60 hover:bg-blue-50/60 dark:hover:bg-blue-950/30 rounded-xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-3 cursor-pointer transition-colors group"
+                          className="p-3 bg-[#171717] hover:bg-[#1f1f1f] rounded-xl border border-[#333333] hover:border-[#FF7900] flex items-center justify-between gap-3 cursor-pointer transition-colors group"
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <div className="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 shrink-0">
+                            <div className="p-2 rounded-lg bg-[#101010] text-[#FF7900] border border-[#333333] shrink-0">
                               <CheckSquare className="w-4 h-4" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                              <p className="text-xs font-bold text-white truncate group-hover:text-[#FF7900] transition-colors">
                                 {task.title}
                               </p>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                              <p className="text-[11px] text-[#A3A3A3] truncate">
                                 Project: {task.projectTitle} • Assignee: {task.assigneeName} • Due: {task.deadline}
                               </p>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
                             <span
-                              className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                              className={`text-[10px] px-2 py-0.5 rounded-full font-medium border ${
                                 task.status === 'Done' || task.status === 'Completed'
-                                  ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
+                                  ? 'bg-[#101010] text-[#FFC928] border-[#FFC928]/40'
                                   : task.status === 'In Progress'
-                                  ? 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'
-                                  : 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
+                                  ? 'bg-[#101010] text-[#FF7900] border-[#FF7900]/40'
+                                  : 'bg-[#101010] text-white border-[#333333]'
                               }`}
                             >
                               {task.status}
                             </span>
-                            <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                            <ArrowRight className="w-3.5 h-3.5 text-[#A3A3A3] group-hover:text-[#FF7900] transition-colors" />
                           </div>
                         </div>
                       ))}
@@ -318,7 +318,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
               {(activeCategory === 'all' || activeCategory === 'clients') &&
                 matchingClients.length > 0 && (
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block px-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A3A3A3] block px-1">
                       Clients ({matchingClients.length})
                     </span>
                     <div className="space-y-1">
@@ -329,22 +329,22 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                             if (onSelectClient) onSelectClient(client);
                             onClose();
                           }}
-                          className="p-3 bg-slate-50 dark:bg-slate-800/60 hover:bg-blue-50/60 dark:hover:bg-blue-950/30 rounded-xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-3 cursor-pointer transition-colors group"
+                          className="p-3 bg-[#171717] hover:bg-[#1f1f1f] rounded-xl border border-[#333333] hover:border-[#E50914] flex items-center justify-between gap-3 cursor-pointer transition-colors group"
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <div className="p-2 rounded-lg bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 shrink-0">
+                            <div className="p-2 rounded-lg bg-[#101010] text-[#E50914] border border-[#333333] shrink-0">
                               <Building className="w-4 h-4" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                              <p className="text-xs font-bold text-white truncate group-hover:text-[#E50914] transition-colors">
                                 {client.name}
                               </p>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                              <p className="text-[11px] text-[#A3A3A3] truncate">
                                 Industry: {client.industry} • Contact: {client.primaryContact.name}
                               </p>
                             </div>
                           </div>
-                          <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" />
+                          <ArrowRight className="w-3.5 h-3.5 text-[#A3A3A3] group-hover:text-[#E50914] transition-colors shrink-0" />
                         </div>
                       ))}
                     </div>
@@ -355,35 +355,35 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
               {(activeCategory === 'all' || activeCategory === 'members') &&
                 matchingMembers.length > 0 && (
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block px-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A3A3A3] block px-1">
                       Team Members ({matchingMembers.length})
                     </span>
                     <div className="space-y-1">
                       {matchingMembers.map((member) => (
                         <div
                           key={member.id}
-                          className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-3"
+                          className="p-3 bg-[#171717] rounded-xl border border-[#333333] flex items-center justify-between gap-3"
                         >
                           <div className="flex items-center gap-3 min-w-0">
                             <img
                               src={member.avatar}
                               alt={member.name}
                               referrerPolicy="no-referrer"
-                              className="w-8 h-8 rounded-full object-cover shrink-0 border border-slate-200 dark:border-slate-700"
+                              className="w-8 h-8 rounded-full object-cover shrink-0 border border-[#333333]"
                             />
                             <div className="min-w-0">
-                              <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                              <p className="text-xs font-bold text-white truncate">
                                 {member.name}
-                                <span className="ml-1.5 font-mono text-[10px] text-slate-400">
+                                <span className="ml-1.5 font-mono text-[10px] text-[#A3A3A3]">
                                   ({member.loginId})
                                 </span>
                               </p>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                              <p className="text-[11px] text-[#A3A3A3] truncate">
                                 {member.title} • {member.department}
                               </p>
                             </div>
                           </div>
-                          <span className="text-[10px] px-2 py-0.5 rounded border bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold shrink-0">
+                          <span className="text-[10px] px-2 py-0.5 rounded border border-[#333333] bg-[#101010] text-[#FFC928] font-semibold shrink-0">
                             {member.role.replace('_', ' ').toUpperCase()}
                           </span>
                         </div>
@@ -396,7 +396,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+        <div className="p-3 bg-[#101010] border-t border-[#333333] flex items-center justify-between text-[11px] text-[#A3A3A3]">
           <span>Press ESC to exit search</span>
           <span>Role-Based Access Control Active</span>
         </div>

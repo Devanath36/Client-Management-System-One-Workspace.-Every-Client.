@@ -124,8 +124,8 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
       <form onSubmit={handleSubmit} className="p-6 space-y-5 overflow-y-auto max-h-[75vh]">
         {/* General Error Banner */}
         {errors.general && (
-          <div className="p-3.5 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-xl flex items-start gap-2.5 text-xs text-rose-700 dark:text-rose-300">
-            <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+          <div className="p-3.5 bg-[#E50914]/10 border border-[#E50914]/30 rounded-xl flex items-start gap-2.5 text-xs text-[#E50914]">
+            <AlertCircle className="w-4 h-4 text-[#E50914] shrink-0 mt-0.5" />
             <span className="leading-relaxed">{errors.general}</span>
           </div>
         )}
@@ -136,12 +136,12 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
           <div className="space-y-1.5">
             <label
               htmlFor="provision-fullname"
-              className="block text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="block text-xs font-semibold text-[#333333] dark:text-[#D4D4D4]"
             >
-              Full Name <span className="text-rose-500">*</span>
+              Full Name <span className="text-[#E50914]">*</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#888888]">
                 <User className="w-4 h-4" />
               </div>
               <input
@@ -153,15 +153,15 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
                   if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
                 }}
                 placeholder="e.g. Cameron Wright"
-                className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white transition-colors ${
+                className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm bg-white dark:bg-[#101010] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white transition-colors ${
                   errors.name
-                    ? 'border-rose-500 focus:ring-rose-500'
-                    : 'border-slate-300 dark:border-slate-700'
+                    ? 'border-[#E50914] focus:ring-[#E50914]'
+                    : 'border-[#E0E0E0] dark:border-[#333333]'
                 }`}
               />
             </div>
             {errors.name && (
-              <p className="text-[11px] text-rose-500 font-medium">{errors.name}</p>
+              <p className="text-[11px] text-[#E50914] font-medium">{errors.name}</p>
             )}
           </div>
 
@@ -169,12 +169,12 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
           <div className="space-y-1.5">
             <label
               htmlFor="provision-loginid"
-              className="block text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="block text-xs font-semibold text-[#333333] dark:text-[#D4D4D4]"
             >
-              Login ID <span className="text-rose-500">*</span>
+              Login ID <span className="text-[#E50914]">*</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#888888]">
                 <KeyRound className="w-4 h-4" />
               </div>
               <input
@@ -186,15 +186,15 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
                   if (errors.loginId) setErrors((prev) => ({ ...prev, loginId: undefined }));
                 }}
                 placeholder="e.g. cameron.wright"
-                className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white font-mono transition-colors ${
+                className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm bg-white dark:bg-[#101010] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white font-mono transition-colors ${
                   errors.loginId
-                    ? 'border-rose-500 focus:ring-rose-500'
-                    : 'border-slate-300 dark:border-slate-700'
+                    ? 'border-[#E50914] focus:ring-[#E50914]'
+                    : 'border-[#E0E0E0] dark:border-[#333333]'
                 }`}
               />
             </div>
             {errors.loginId && (
-              <p className="text-[11px] text-rose-500 font-medium">{errors.loginId}</p>
+              <p className="text-[11px] text-[#E50914] font-medium">{errors.loginId}</p>
             )}
           </div>
 
@@ -202,12 +202,12 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
           <div className="space-y-1.5">
             <label
               htmlFor="provision-password"
-              className="block text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="block text-xs font-semibold text-[#333333] dark:text-[#D4D4D4]"
             >
-              Initial Account Password <span className="text-rose-500">*</span>
+              Initial Account Password <span className="text-[#E50914]">*</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#888888]">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -221,23 +221,23 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
                   }
                 }}
                 placeholder="Assign account password"
-                className={`w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white transition-colors ${
+                className={`w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm bg-white dark:bg-[#101010] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white transition-colors ${
                   errors.initialPassword
-                    ? 'border-rose-500 focus:ring-rose-500'
-                    : 'border-slate-300 dark:border-slate-700'
+                    ? 'border-[#E50914] focus:ring-[#E50914]'
+                    : 'border-[#E0E0E0] dark:border-[#333333]'
                 }`}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#888888] hover:text-[#101010] dark:hover:text-white transition-colors cursor-pointer"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
             {errors.initialPassword && (
-              <p className="text-[11px] text-rose-500 font-medium">{errors.initialPassword}</p>
+              <p className="text-[11px] text-[#E50914] font-medium">{errors.initialPassword}</p>
             )}
           </div>
 
@@ -245,12 +245,12 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
           <div className="space-y-1.5">
             <label
               htmlFor="provision-role"
-              className="block text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="block text-xs font-semibold text-[#333333] dark:text-[#D4D4D4]"
             >
-              Designated System Role <span className="text-rose-500">*</span>
+              Designated System Role <span className="text-[#E50914]">*</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#888888]">
                 <Shield className="w-4 h-4" />
               </div>
               <select
@@ -260,10 +260,10 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
                   setRole(e.target.value as UserRole);
                   if (errors.role) setErrors((prev) => ({ ...prev, role: undefined }));
                 }}
-                className={`w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white transition-colors cursor-pointer ${
+                className={`w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm bg-white dark:bg-[#101010] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white transition-colors cursor-pointer ${
                   errors.role
-                    ? 'border-rose-500 focus:ring-rose-500'
-                    : 'border-slate-300 dark:border-slate-700'
+                    ? 'border-[#E50914] focus:ring-[#E50914]'
+                    : 'border-[#E0E0E0] dark:border-[#333333]'
                 }`}
               >
                 <option value="admin">Administrator</option>
@@ -273,32 +273,32 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose }) =
               </select>
             </div>
             {errors.role && (
-              <p className="text-[11px] text-rose-500 font-medium">{errors.role}</p>
+              <p className="text-[11px] text-[#E50914] font-medium">{errors.role}</p>
             )}
           </div>
         </div>
 
         {/* Security callout note */}
-        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl text-[11px] text-slate-600 dark:text-slate-400 flex items-center gap-2">
-          <Shield className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+        <div className="p-3 bg-[#F7F7F7] dark:bg-[#101010] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[11px] text-[#555555] dark:text-[#A3A3A3] flex items-center gap-2">
+          <Shield className="w-4 h-4 text-[#E50914] shrink-0" />
           <span>
             Passwords are securely hashed (SHA-256) before storage. The new user will be able to sign in immediately with their Login ID.
           </span>
         </div>
 
         {/* Modal Action Buttons at bottom */}
-        <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
           <button
             type="button"
             onClick={handleClose}
-            className="min-h-[44px] px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl transition-colors cursor-pointer"
+            className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white rounded-xl transition-colors cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-50 inline-flex items-center gap-2"
+            className="min-h-[44px] px-5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#b80710] rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-50 inline-flex items-center gap-2"
           >
             {isSubmitting ? (
               <>

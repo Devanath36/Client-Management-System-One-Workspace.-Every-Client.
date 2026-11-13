@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
-import { PersonalToDo, ToDoPriority, ToDoStatus, CalendarEvent } from '../../types';
+import { PersonalToDo, ToDoPriority, CalendarEvent } from '../../types';
 import {
   Clock,
   Calendar as CalendarIcon,
@@ -16,14 +16,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
-  RefreshCw,
-  FolderKanban,
-  Users,
-  Shield,
   Briefcase,
-  Layers,
-  ArrowRight,
-  Filter,
   CheckSquare,
 } from 'lucide-react';
 import { DailyMotivationCard } from '../motivation/DailyMotivationCard';
@@ -109,7 +102,6 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
         currentUser?.role === 'admin')
   );
 
-
   // Filter & Sort To-Dos
   const filteredTodos = userTodos
     .filter((t) => {
@@ -168,9 +160,6 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
       setCalendarCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
     }
   };
-
-  const handlePrevMonth = handlePrev;
-  const handleNextMonth = handleNext;
 
   const handleTodayCalendar = () => {
     const now = new Date();
@@ -275,11 +264,11 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
     setIsEventModalOpen(false);
   };
 
-  const priorityColor = {
-    Urgent: 'bg-rose-100 text-rose-700 dark:bg-rose-950/80 dark:text-rose-300 border-rose-200 dark:border-rose-900',
-    High: 'bg-amber-100 text-amber-700 dark:bg-amber-950/80 dark:text-amber-300 border-amber-200 dark:border-amber-900',
-    Medium: 'bg-blue-100 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 border-blue-200 dark:border-blue-900',
-    Low: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700',
+  const priorityColor: Record<ToDoPriority, string> = {
+    Urgent: 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/30',
+    High: 'bg-[#E50914]/10 text-[#E50914] border-[#E50914]/25',
+    Medium: 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/30',
+    Low: 'bg-[#F0F0F0] dark:bg-[#101010] text-[#555555] dark:text-[#A3A3A3] border-[#E0E0E0] dark:border-[#333333]',
   };
 
   return (
@@ -289,8 +278,8 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
       {/* ========================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         {/* Welcome & Live Time Card */}
-        <div className="lg:col-span-7 bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute inset-0 bg-black/10 mix-blend-overlay pointer-events-none" />
+        <div className="lg:col-span-7 bg-gradient-to-r from-[#E50914] via-[#c40812] to-[#FF7900] rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute inset-0 bg-black/15 pointer-events-none" />
           <div className="absolute -right-10 -bottom-10 w-56 h-56 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
           <div className="relative z-10 space-y-3">
@@ -299,7 +288,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>My Workspace</span>
               </span>
-              <span className="px-3 py-1 rounded-full bg-black/20 text-white text-xs font-mono font-medium">
+              <span className="px-3 py-1 rounded-full bg-black/30 text-white text-xs font-mono font-medium">
                 {currentUser?.role === 'admin'
                   ? 'Administrator'
                   : currentUser?.role === 'manager'
@@ -313,7 +302,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
               {getGreeting()}, {currentUser?.name}!
             </h1>
-            <p className="text-blue-100 text-xs sm:text-sm max-w-xl leading-relaxed">
+            <p className="text-white/90 text-xs sm:text-sm max-w-xl leading-relaxed">
               Here is your synchronized personal productivity cockpit, meetings schedule, and
               scheduled milestone agenda.
             </p>
@@ -326,10 +315,10 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 <Clock className="w-5 h-5 text-white" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-bold font-mono tracking-wider tabular-nums">
+                <div className="text-xl sm:text-2xl font-bold font-mono tracking-wider tabular-nums text-white">
                   {currentTime.toLocaleTimeString()}
                 </div>
-                <div className="text-xs text-blue-100">
+                <div className="text-xs text-[#FFC928]">
                   {currentTime.toLocaleDateString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
@@ -344,7 +333,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
               {onNavigateTab && (
                 <button
                   onClick={() => onNavigateTab('meetings')}
-                  className="px-3.5 py-1.5 rounded-xl bg-white text-blue-700 hover:bg-blue-50 text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 rounded-xl bg-[#101010] text-[#FFC928] hover:bg-[#1f1f1f] hover:text-white border border-[#333333] text-xs font-bold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5"
                 >
                   <Video className="w-3.5 h-3.5" />
                   <span>Meetings</span>
@@ -354,7 +343,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
           </div>
         </div>
 
-        {/* Upgraded Dynamic Daily Motivation Card */}
+        {/* Dynamic Daily Motivation Card */}
         <DailyMotivationCard />
       </div>
 
@@ -363,23 +352,23 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
       {/* ========================================================= */}
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Pending To-Dos */}
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <div className="p-5 bg-white dark:bg-[#171717] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
             <span>My Active To-Dos</span>
-            <ListTodo className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <ListTodo className="w-4 h-4 text-[#E50914]" />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-[#101010] dark:text-white">
               {pendingTodosCount}
             </span>
-            <span className="text-xs text-slate-500 font-mono">/ {totalTodosCount} Total</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">/ {totalTodosCount} Total</span>
           </div>
           <div className="mt-2 flex items-center gap-2 text-[11px]">
-            <span className="text-emerald-600 dark:text-emerald-400 font-medium font-mono">
+            <span className="text-[#555555] dark:text-[#A3A3A3] font-medium font-mono">
               {completedTodosCount} Completed
             </span>
             {overdueTodosCount > 0 && (
-              <span className="text-rose-600 dark:text-rose-400 font-medium font-mono">
+              <span className="text-[#E50914] font-bold font-mono">
                 · {overdueTodosCount} Overdue
               </span>
             )}
@@ -387,20 +376,20 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
         </div>
 
         {/* Meetings Today */}
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <div className="p-5 bg-white dark:bg-[#171717] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
             <span>Meetings Today</span>
-            <Video className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+            <Video className="w-4 h-4 text-[#FF7900]" />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-[#101010] dark:text-white">
               {todayMeetings.length}
             </span>
-            <span className="text-xs text-slate-500 font-mono">Scheduled</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">Scheduled</span>
           </div>
-          <div className="mt-2 text-[11px] text-slate-500">
+          <div className="mt-2 text-[11px] text-[#555555] dark:text-[#A3A3A3]">
             {todayMeetings.length > 0 ? (
-              <span className="text-indigo-600 dark:text-indigo-400 font-medium">
+              <span className="text-[#FF7900] font-semibold">
                 Next: {todayMeetings[0].startTime} ({todayMeetings[0].platform})
               </span>
             ) : (
@@ -410,37 +399,37 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
         </div>
 
         {/* Active Projects */}
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <div className="p-5 bg-white dark:bg-[#171717] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
             <span>Active Projects</span>
-            <Briefcase className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+            <Briefcase className="w-4 h-4 text-[#FF7900] dark:text-[#FFC928]" />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-[#101010] dark:text-white">
               {projects.filter((p) => p.status === 'In Progress' || p.status === 'New' || p.status === 'Active').length}
             </span>
-            <span className="text-xs text-slate-500 font-mono">/ {projects.length} Total</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">/ {projects.length} Total</span>
           </div>
-          <p className="mt-2 text-[11px] text-slate-500 font-mono">
+          <p className="mt-2 text-[11px] text-[#555555] dark:text-[#A3A3A3] font-mono">
             Client initiatives in delivery
           </p>
         </div>
 
         {/* Deliverables / Assigned Tasks */}
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <div className="p-5 bg-white dark:bg-[#171717] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
             <span>Client Tasks Oversight</span>
-            <CheckSquare className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+            <CheckSquare className="w-4 h-4 text-[#E50914]" />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
+            <span className="text-2xl font-bold font-mono text-[#101010] dark:text-white">
               {currentUser?.role === 'team_member'
                 ? tasks.filter((t) => t.assigneeId === currentUser?.id).length
                 : tasks.length}
             </span>
-            <span className="text-xs text-slate-500 font-mono">Tasks</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">Tasks</span>
           </div>
-          <p className="mt-2 text-[11px] text-slate-500 font-mono">
+          <p className="mt-2 text-[11px] text-[#555555] dark:text-[#A3A3A3] font-mono">
             {currentUser?.role === 'team_member' ? 'Assigned to your queue' : 'All active projects'}
           </p>
         </div>
@@ -451,18 +440,18 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
       {/* ========================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
         {/* Calendar Section (7 Cols on LG/XL) */}
-        <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3 sm:space-y-3.5">
+        <div className="lg:col-span-7 bg-white dark:bg-[#171717] rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-3 sm:space-y-3.5 transition-colors">
           {/* Calendar Header Controls */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-[#E0E0E0] dark:border-[#333333]">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 shrink-0">
+              <div className="p-1.5 rounded-lg bg-[#FF7900]/10 text-[#FF7900] border border-[#FF7900]/25 shrink-0">
                 <CalendarIcon className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-tight">
+                <h3 className="text-sm sm:text-base font-bold text-[#101010] dark:text-white leading-tight">
                   Interactive Calendar
                 </h3>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                   Personal deadlines, meetings & project milestones
                 </p>
               </div>
@@ -470,14 +459,14 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
 
             <div className="flex items-center justify-between sm:justify-end gap-1.5 w-full sm:w-auto">
               {/* View Selector */}
-              <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-0.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+              <div className="inline-flex rounded-xl bg-[#F0F0F0] dark:bg-[#101010] p-0.5 text-[11px] font-semibold text-[#555555] dark:text-[#A3A3A3] border border-[#E0E0E0] dark:border-[#333333]">
                 <button
                   type="button"
                   onClick={() => setCalendarView('month')}
                   className={`px-2 py-0.5 rounded-lg transition-colors cursor-pointer ${
                     calendarView === 'month'
-                      ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs font-bold'
-                      : 'hover:text-slate-900 dark:hover:text-white'
+                      ? 'bg-[#E50914] text-white shadow-xs font-bold'
+                      : 'hover:text-[#101010] dark:hover:text-white'
                   }`}
                 >
                   Month
@@ -487,8 +476,8 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                   onClick={() => setCalendarView('week')}
                   className={`px-2 py-0.5 rounded-lg transition-colors cursor-pointer ${
                     calendarView === 'week'
-                      ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs font-bold'
-                      : 'hover:text-slate-900 dark:hover:text-white'
+                      ? 'bg-[#E50914] text-white shadow-xs font-bold'
+                      : 'hover:text-[#101010] dark:hover:text-white'
                   }`}
                 >
                   Week
@@ -498,8 +487,8 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                   onClick={() => setCalendarView('day')}
                   className={`px-2 py-0.5 rounded-lg transition-colors cursor-pointer ${
                     calendarView === 'day'
-                      ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-xs font-bold'
-                      : 'hover:text-slate-900 dark:hover:text-white'
+                      ? 'bg-[#E50914] text-white shadow-xs font-bold'
+                      : 'hover:text-[#101010] dark:hover:text-white'
                   }`}
                 >
                   Day
@@ -511,7 +500,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="w-7 h-7 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer flex items-center justify-center shrink-0"
+                  className="w-7 h-7 rounded-lg border border-[#E0E0E0] dark:border-[#333333] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white transition-colors cursor-pointer flex items-center justify-center shrink-0"
                   aria-label="Previous"
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
@@ -519,14 +508,14 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 <button
                   type="button"
                   onClick={handleTodayCalendar}
-                  className="h-7 px-2 rounded-lg text-[11px] font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer flex items-center justify-center shrink-0"
+                  className="h-7 px-2 rounded-lg text-[11px] font-semibold border border-[#E0E0E0] dark:border-[#333333] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] text-[#101010] dark:text-white transition-colors cursor-pointer flex items-center justify-center shrink-0"
                 >
                   Today
                 </button>
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="w-7 h-7 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer flex items-center justify-center shrink-0"
+                  className="w-7 h-7 rounded-lg border border-[#E0E0E0] dark:border-[#333333] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white transition-colors cursor-pointer flex items-center justify-center shrink-0"
                   aria-label="Next"
                 >
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -537,13 +526,13 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
 
           {/* Month Title & Add Event button */}
           <div className="flex items-center justify-between gap-2">
-            <h4 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 font-mono">
+            <h4 className="text-xs sm:text-sm font-bold text-[#101010] dark:text-white font-mono">
               {currentMonthName}
             </h4>
             <button
               type="button"
               onClick={() => setIsEventModalOpen(true)}
-              className="text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 bg-blue-50/80 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/40 px-2.5 py-1 rounded-lg border border-blue-200/50 dark:border-blue-900/30 flex items-center gap-1 cursor-pointer transition-colors"
+              className="text-[11px] sm:text-xs font-semibold text-white bg-[#FF7900] hover:bg-[#e06a00] px-3 py-1 rounded-xl shadow-xs flex items-center gap-1 cursor-pointer transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Event / Deadline</span>
@@ -563,7 +552,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 { full: 'Fri', short: 'Fr' },
                 { full: 'Sat', short: 'Sa' },
               ].map((d) => (
-                <div key={d.full} className="py-0.5 text-[10px] sm:text-xs font-bold text-slate-400 select-none">
+                <div key={d.full} className="py-0.5 text-[10px] sm:text-xs font-bold text-[#888888] select-none">
                   <span className="hidden sm:inline">{d.full}</span>
                   <span className="sm:hidden">{d.short}</span>
                 </div>
@@ -574,7 +563,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
             {calendarView === 'month' && (
               <div className="grid grid-cols-7 gap-1 sm:gap-1.5">
                 {Array.from({ length: getFirstDayOfMonth(calendarCursor.getFullYear(), calendarCursor.getMonth()) }).map((_, i) => (
-                  <div key={`empty-${i}`} className="h-8 sm:h-9 md:h-10 rounded-lg sm:rounded-xl bg-slate-50/40 dark:bg-slate-800/20 opacity-30" />
+                  <div key={`empty-${i}`} className="h-8 sm:h-9 md:h-10 rounded-lg sm:rounded-xl bg-[#F0F0F0]/50 dark:bg-[#141414]/50 opacity-40" />
                 ))}
 
                 {Array.from({ length: getDaysInMonth(calendarCursor.getFullYear(), calendarCursor.getMonth()) }).map((_, i) => {
@@ -593,26 +582,26 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                       onClick={() => setSelectedDateStr(dayStr)}
                       className={`h-8 sm:h-9 md:h-10 p-1 sm:p-1.5 rounded-lg sm:rounded-xl border transition-all text-left flex flex-col justify-between cursor-pointer select-none ${
                         isSelected
-                          ? 'border-blue-500 bg-blue-50/90 dark:bg-blue-950/70 ring-1 sm:ring-2 ring-blue-500/30'
+                          ? 'border-[#FFC928] bg-[#FFC928]/15 ring-2 ring-[#FFC928]/50 shadow-xs'
                           : isToday
-                          ? 'border-indigo-400 dark:border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/30'
-                          : 'border-slate-100 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/40 dark:bg-slate-800/40'
+                          ? 'border-[#E50914] bg-[#E50914]/10'
+                          : 'border-[#EAEAEA] dark:border-[#262626] hover:border-[#CCCCCC] dark:hover:border-[#555555] bg-[#FDFDFD] dark:bg-[#141414]'
                       }`}
                     >
                       <div className="flex items-center justify-between leading-none">
                         <span
                           className={`text-[11px] sm:text-xs font-mono font-bold ${
                             isSelected
-                              ? 'text-blue-600 dark:text-blue-400'
+                              ? 'text-[#FF7900] dark:text-[#FFC928]'
                               : isToday
-                              ? 'text-indigo-600 dark:text-indigo-400'
-                              : 'text-slate-700 dark:text-slate-300'
+                              ? 'text-[#E50914]'
+                              : 'text-[#101010] dark:text-white'
                           }`}
                         >
                           {dayNum}
                         </span>
                         {isToday && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#E50914] animate-pulse" />
                         )}
                       </div>
 
@@ -621,25 +610,25 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                         <div className="flex items-center gap-0.5 overflow-hidden">
                           {dayItems.meetings.length > 0 && (
                             <span
-                              className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"
+                              className="w-1.5 h-1.5 rounded-full bg-[#FF7900] shrink-0"
                               title={`${dayItems.meetings.length} Meeting(s)`}
                             />
                           )}
                           {dayItems.todos.length > 0 && (
                             <span
-                              className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"
+                              className="w-1.5 h-1.5 rounded-full bg-[#888888] dark:bg-[#FFFFFF] shrink-0"
                               title={`${dayItems.todos.length} To-Do(s)`}
                             />
                           )}
                           {dayItems.projectDeadlines.length > 0 && (
                             <span
-                              className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"
+                              className="w-1.5 h-1.5 rounded-full bg-[#E50914] shrink-0"
                               title={`${dayItems.projectDeadlines.length} Project Milestone(s)`}
                             />
                           )}
                           {dayItems.events.length > 0 && (
                             <span
-                              className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"
+                              className="w-1.5 h-1.5 rounded-full bg-[#FFC928] shrink-0"
                               title={`${dayItems.events.length} Event(s)`}
                             />
                           )}
@@ -670,35 +659,35 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                       onClick={() => setSelectedDateStr(dayStr)}
                       className={`h-12 sm:h-14 p-1 sm:p-1.5 rounded-lg sm:rounded-xl border transition-all text-center flex flex-col justify-between cursor-pointer select-none ${
                         isSelected
-                          ? 'border-blue-500 bg-blue-50/90 dark:bg-blue-950/70 ring-1 sm:ring-2 ring-blue-500/30'
+                          ? 'border-[#FFC928] bg-[#FFC928]/15 ring-2 ring-[#FFC928]/50 shadow-xs'
                           : isToday
-                          ? 'border-indigo-400 dark:border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/30'
-                          : 'border-slate-100 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/40 dark:bg-slate-800/40'
+                          ? 'border-[#E50914] bg-[#E50914]/10'
+                          : 'border-[#EAEAEA] dark:border-[#262626] hover:border-[#CCCCCC] dark:hover:border-[#555555] bg-[#FDFDFD] dark:bg-[#141414]'
                       }`}
                     >
-                      <span className="text-[10px] text-slate-400 uppercase font-semibold">
+                      <span className="text-[10px] text-[#888888] uppercase font-semibold">
                         {date.toLocaleDateString('en-US', { weekday: 'narrow' })}
                       </span>
                       <span
                         className={`text-xs sm:text-sm font-mono font-bold ${
                           isSelected
-                            ? 'text-blue-600 dark:text-blue-400'
+                            ? 'text-[#FF7900] dark:text-[#FFC928]'
                             : isToday
-                            ? 'text-indigo-600 dark:text-indigo-400'
-                            : 'text-slate-700 dark:text-slate-300'
+                            ? 'text-[#E50914]'
+                            : 'text-[#101010] dark:text-white'
                         }`}
                       >
                         {dayNum}
                       </span>
                       {dayItems.totalCount > 0 ? (
                         <div className="flex items-center justify-center gap-0.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF7900]" />
                           {dayItems.totalCount > 1 && (
-                            <span className="text-[9px] font-mono text-slate-400">+{dayItems.totalCount - 1}</span>
+                            <span className="text-[9px] font-mono text-[#888888]">+{dayItems.totalCount - 1}</span>
                           )}
                         </div>
                       ) : (
-                        <span className="text-[9px] text-slate-300 dark:text-slate-600">·</span>
+                        <span className="text-[9px] text-[#CCCCCC] dark:text-[#555555]">·</span>
                       )}
                     </button>
                   );
@@ -708,9 +697,9 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
 
             {/* Day View Summary Card */}
             {calendarView === 'day' && (
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div className="p-3 rounded-xl bg-[#F9F9F9] dark:bg-[#141414] border border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">
+                  <p className="text-xs font-bold text-[#101010] dark:text-white">
                     {new Date(selectedDateStr + 'T00:00:00').toLocaleDateString('en-US', {
                       weekday: 'long',
                       month: 'long',
@@ -718,14 +707,14 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                       year: 'numeric',
                     })}
                   </p>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                     {selectedDateSchedule.totalCount} active items scheduled
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={handleTodayCalendar}
-                  className="px-2 py-1 text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer"
+                  className="px-2 py-1 text-[11px] font-semibold text-[#E50914] hover:underline bg-white dark:bg-[#171717] rounded-lg border border-[#E0E0E0] dark:border-[#333333] cursor-pointer"
                 >
                   Go to Today
                 </button>
@@ -734,47 +723,47 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
           </div>
 
           {/* Selected Date Schedule Inspection Panel */}
-          <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800 space-y-2">
+          <div className="pt-2.5 border-t border-[#E0E0E0] dark:border-[#333333] space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1.5 font-bold text-slate-700 dark:text-slate-300">
-                <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <div className="flex items-center gap-1.5 font-bold text-[#101010] dark:text-white">
+                <Clock className="w-3.5 h-3.5 text-[#FF7900]" />
                 <span>
-                  Schedule for <span className="font-mono text-blue-600 dark:text-blue-400">{selectedDateStr}</span>
+                  Schedule for <span className="font-mono text-[#E50914] dark:text-[#FFC928]">{selectedDateStr}</span>
                 </span>
               </div>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#F0F0F0] dark:bg-[#101010] text-[#555555] dark:text-[#A3A3A3] border border-[#E0E0E0] dark:border-[#333333]">
                 {selectedDateSchedule.totalCount} item{selectedDateSchedule.totalCount === 1 ? '' : 's'}
               </span>
             </div>
 
             {selectedDateSchedule.totalCount === 0 ? (
-              <div className="p-2.5 rounded-xl bg-slate-50/70 dark:bg-slate-800/30 text-center text-xs text-slate-500 border border-slate-100 dark:border-slate-800/60 flex items-center justify-center gap-2">
+              <div className="p-3 rounded-xl bg-[#F9F9F9] dark:bg-[#141414] text-center text-xs text-[#555555] dark:text-[#A3A3A3] border border-[#E0E0E0] dark:border-[#333333] flex items-center justify-center gap-2">
                 <span>No meetings or deadlines scheduled for this date.</span>
                 <button
                   type="button"
                   onClick={() => setIsEventModalOpen(true)}
-                  className="text-blue-600 dark:text-blue-400 font-semibold hover:underline cursor-pointer"
+                  className="text-[#E50914] dark:text-[#FFC928] font-bold hover:underline cursor-pointer"
                 >
                   + Add
                 </button>
               </div>
             ) : (
-              <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+              <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
                 {/* Meetings */}
                 {selectedDateSchedule.meetings.map((m) => (
                   <div
                     key={m.id}
-                    className="p-2 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 flex items-center justify-between gap-2.5"
+                    className="p-2.5 rounded-xl bg-[#FF7900]/10 border border-[#FF7900]/30 flex items-center justify-between gap-2.5"
                   >
                     <div className="flex items-center gap-2 min-w-0">
-                      <div className="p-1 rounded-md bg-blue-600 text-white shrink-0">
+                      <div className="p-1 rounded-md bg-[#FF7900] text-white shrink-0">
                         <Video className="w-3 h-3" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                        <p className="text-xs font-bold text-[#101010] dark:text-white truncate">
                           {m.title}
                         </p>
-                        <p className="text-[10px] text-blue-600 dark:text-blue-400 font-mono">
+                        <p className="text-[10px] text-[#FF7900] font-mono font-medium">
                           {m.startTime} – {m.endTime} · {m.platform}
                         </p>
                       </div>
@@ -784,7 +773,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                         href={m.meetingUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-2 py-0.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-semibold shrink-0 cursor-pointer flex items-center gap-1"
+                        className="px-2.5 py-1 rounded-lg bg-[#FF7900] hover:bg-[#e06a00] text-white text-[10px] font-bold shrink-0 cursor-pointer flex items-center gap-1 shadow-xs"
                       >
                         <span>Join</span>
                         <ExternalLink className="w-2.5 h-2.5" />
@@ -797,7 +786,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 {selectedDateSchedule.todos.map((t) => (
                   <div
                     key={t.id}
-                    className="p-2 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 flex items-center justify-between gap-2.5"
+                    className="p-2.5 rounded-xl bg-[#F9F9F9] dark:bg-[#141414] border border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between gap-2.5"
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <button
@@ -805,28 +794,28 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                         onClick={() => toggleTodoComplete(t.id)}
                         className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 cursor-pointer ${
                           t.status === 'Completed'
-                            ? 'bg-emerald-600 border-emerald-600 text-white'
-                            : 'border-slate-300 dark:border-slate-600 hover:border-emerald-500'
+                            ? 'bg-[#101010] dark:bg-white border-[#101010] dark:border-white text-white dark:text-[#101010]'
+                            : 'border-[#CCCCCC] dark:border-[#555555] hover:border-[#E50914]'
                         }`}
                       >
-                        {t.status === 'Completed' && <Check className="w-2.5 h-2.5" />}
+                        {t.status === 'Completed' && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                       </button>
                       <div className="min-w-0">
                         <p
                           className={`text-xs font-semibold ${
                             t.status === 'Completed'
-                              ? 'line-through text-slate-400'
-                              : 'text-slate-900 dark:text-white'
+                              ? 'line-through text-[#888888]'
+                              : 'text-[#101010] dark:text-white'
                           } truncate`}
                         >
                           {t.title}
                         </p>
-                        <p className="text-[10px] text-slate-500 font-mono">
+                        <p className="text-[10px] text-[#555555] dark:text-[#A3A3A3] font-mono">
                           Due: {t.dueDate}
                         </p>
                       </div>
                     </div>
-                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+                    <span className="px-2 py-0.5 rounded text-[9px] font-mono border border-[#E0E0E0] dark:border-[#333333] text-[#555555] dark:text-[#A3A3A3]">
                       {t.status}
                     </span>
                   </div>
@@ -836,22 +825,22 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 {selectedDateSchedule.projectDeadlines.map((p) => (
                   <div
                     key={p.id}
-                    className="p-2 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 flex items-center justify-between gap-2.5"
+                    className="p-2.5 rounded-xl bg-[#E50914]/10 border border-[#E50914]/30 flex items-center justify-between gap-2.5"
                   >
                     <div className="flex items-center gap-2 min-w-0">
-                      <div className="p-1 rounded-md bg-rose-600 text-white shrink-0">
+                      <div className="p-1 rounded-md bg-[#E50914] text-white shrink-0">
                         <AlertCircle className="w-3 h-3" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                        <p className="text-xs font-bold text-[#101010] dark:text-white truncate">
                           Milestone: {p.title}
                         </p>
-                        <p className="text-[10px] text-rose-600 dark:text-rose-400 font-mono">
+                        <p className="text-[10px] text-[#E50914] font-mono font-medium">
                           Client: {p.clientName}
                         </p>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold text-rose-600 font-mono shrink-0">Due Today</span>
+                    <span className="text-[10px] font-bold text-[#E50914] font-mono shrink-0">Due Today</span>
                   </div>
                 ))}
 
@@ -859,25 +848,23 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 {selectedDateSchedule.events.map((e) => (
                   <div
                     key={e.id}
-                    className="p-2 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 flex items-center justify-between gap-2.5"
+                    className="p-2.5 rounded-xl bg-[#FFC928]/10 border border-[#FFC928]/30 flex items-center justify-between gap-2.5"
                   >
                     <div className="flex items-center gap-2 min-w-0">
-                      <div className="p-1 rounded-md bg-amber-600 text-white shrink-0">
-                        <Sparkles className="w-3 h-3" />
-                      </div>
+                      <span className="w-2 h-2 rounded-full bg-[#FF7900] shrink-0" />
                       <div className="min-w-0">
-                        <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                        <p className="text-xs font-bold text-[#101010] dark:text-white truncate">
                           {e.title}
                         </p>
-                        <p className="text-[10px] text-amber-700 dark:text-amber-400 font-mono">
-                          Time: {e.time} · {e.type}
+                        <p className="text-[10px] text-[#555555] dark:text-[#A3A3A3] font-mono">
+                          {e.time} · {e.type}
                         </p>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => deleteCalendarEvent(e.id)}
-                      className="p-1 text-slate-400 hover:text-rose-600 cursor-pointer"
+                      className="p-1 text-[#888888] hover:text-[#E50914] cursor-pointer"
                       title="Remove Event"
                     >
                       <Trash2 className="w-3 h-3" />
@@ -892,17 +879,17 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
         {/* ========================================================= */}
         {/* PERSONAL TO-DO LIST (5 Cols on LG/XL)                     */}
         {/* ========================================================= */}
-        <div className="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3.5 sm:space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div className="lg:col-span-5 bg-white dark:bg-[#171717] rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-3.5 sm:space-y-4 transition-colors">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E0E0E0] dark:border-[#333333]">
             <div className="flex items-center gap-2">
-              <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400">
+              <div className="p-2 rounded-xl bg-[#E50914]/15 text-[#E50914] border border-[#E50914]/30">
                 <ListTodo className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                <h3 className="text-base font-bold text-[#101010] dark:text-white">
                   Personal To-Do List
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-[#555555] dark:text-[#A3A3A3]">
                   {pendingTodosCount} pending · {completedTodosCount} done
                 </p>
               </div>
@@ -917,7 +904,7 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 setTodoDueDate(todayStr);
                 setIsAddTodoModalOpen(true);
               }}
-              className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer active:scale-95"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Task</span>
@@ -926,33 +913,33 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
 
           {/* Filter Pills & Sorting */}
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+            <div className="flex items-center gap-1 bg-[#F0F0F0] dark:bg-[#101010] p-1 rounded-xl border border-[#E0E0E0] dark:border-[#333333]">
               <button
                 onClick={() => setTodoFilter('all')}
-                className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
                   todoFilter === 'all'
-                    ? 'bg-white dark:bg-slate-900 text-blue-600 font-bold shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400'
+                    ? 'bg-[#E50914] text-white font-bold shadow-xs'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 All ({totalTodosCount})
               </button>
               <button
                 onClick={() => setTodoFilter('pending')}
-                className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
                   todoFilter === 'pending'
-                    ? 'bg-white dark:bg-slate-900 text-blue-600 font-bold shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400'
+                    ? 'bg-[#E50914] text-white font-bold shadow-xs'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 Pending ({pendingTodosCount})
               </button>
               <button
                 onClick={() => setTodoFilter('completed')}
-                className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
                   todoFilter === 'completed'
-                    ? 'bg-white dark:bg-slate-900 text-blue-600 font-bold shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400'
+                    ? 'bg-[#E50914] text-white font-bold shadow-xs'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 Done ({completedTodosCount})
@@ -960,10 +947,10 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
               {overdueTodosCount > 0 && (
                 <button
                   onClick={() => setTodoFilter('overdue')}
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
                     todoFilter === 'overdue'
-                      ? 'bg-white dark:bg-slate-900 text-rose-600 font-bold shadow-xs'
-                      : 'text-rose-500'
+                      ? 'bg-[#E50914] text-white font-bold shadow-xs'
+                      : 'text-[#E50914] font-bold'
                   }`}
                 >
                   Overdue ({overdueTodosCount})
@@ -971,18 +958,26 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
               )}
             </div>
 
-            <span className="text-[11px] font-medium text-slate-400">Sorted by Due Date</span>
+            <div className="flex items-center gap-1 text-[11px] text-[#555555] dark:text-[#A3A3A3]">
+              <span>Sort:</span>
+              <button
+                onClick={() => setTodoSortBy(todoSortBy === 'dueDate' ? 'priority' : 'dueDate')}
+                className="font-bold text-[#E50914] dark:text-[#FFC928] hover:underline cursor-pointer"
+              >
+                {todoSortBy === 'dueDate' ? 'Due Date' : 'Priority'}
+              </button>
+            </div>
           </div>
 
-          {/* List of Tasks */}
-          <div className="space-y-2 max-h-[360px] sm:max-h-[380px] overflow-y-auto pr-1">
+          {/* List of To-Dos */}
+          <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
             {filteredTodos.length === 0 ? (
               <div className="py-12 text-center space-y-2">
-                <CheckCircle2 className="w-10 h-10 text-slate-300 dark:text-slate-700 mx-auto" />
-                <p className="text-xs text-slate-500 font-medium">No tasks found in this view</p>
+                <CheckCircle2 className="w-10 h-10 text-[#CCCCCC] dark:text-[#333333] mx-auto" />
+                <p className="text-xs text-[#555555] dark:text-[#A3A3A3] font-medium">No tasks found in this view</p>
                 <button
                   onClick={() => setIsAddTodoModalOpen(true)}
-                  className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer"
+                  className="text-xs font-bold text-[#E50914] dark:text-[#FFC928] hover:underline cursor-pointer"
                 >
                   Create a personal to-do
                 </button>
@@ -995,10 +990,10 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                     key={todo.id}
                     className={`p-3.5 rounded-2xl border transition-all flex items-start gap-3 group ${
                       todo.status === 'Completed'
-                        ? 'bg-slate-50/60 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 opacity-75'
+                        ? 'bg-[#F9F9F9] dark:bg-[#141414] border-[#E0E0E0] dark:border-[#262626] opacity-75'
                         : isOverdue
-                        ? 'bg-rose-50/50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/60'
-                        : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-blue-400'
+                        ? 'bg-[#E50914]/5 dark:bg-[#E50914]/10 border-[#E50914]/40'
+                        : 'bg-white dark:bg-[#141414] border-[#E0E0E0] dark:border-[#333333] hover:border-[#E50914]'
                     }`}
                   >
                     {/* Checkbox */}
@@ -1006,12 +1001,12 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                       onClick={() => toggleTodoComplete(todo.id)}
                       className={`mt-0.5 w-5 h-5 rounded-lg border transition-colors flex items-center justify-center shrink-0 cursor-pointer ${
                         todo.status === 'Completed'
-                          ? 'bg-emerald-600 border-emerald-600 text-white'
-                          : 'border-slate-300 dark:border-slate-600 hover:border-emerald-500 bg-white dark:bg-slate-900'
+                          ? 'bg-[#101010] dark:bg-white border-[#101010] dark:border-white text-white dark:text-[#101010]'
+                          : 'border-[#CCCCCC] dark:border-[#555555] hover:border-[#E50914] bg-white dark:bg-[#101010]'
                       }`}
                       aria-label={todo.status === 'Completed' ? 'Mark incomplete' : 'Mark completed'}
                     >
-                      {todo.status === 'Completed' && <Check className="w-3.5 h-3.5" />}
+                      {todo.status === 'Completed' && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                     </button>
 
                     {/* Content */}
@@ -1020,22 +1015,29 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                         <p
                           className={`text-xs sm:text-sm font-semibold leading-snug ${
                             todo.status === 'Completed'
-                              ? 'line-through text-slate-400 dark:text-slate-500'
-                              : 'text-slate-900 dark:text-white'
+                              ? 'line-through text-[#888888]'
+                              : 'text-[#101010] dark:text-white'
                           }`}
                         >
                           {todo.title}
                         </p>
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border shrink-0 ${
+                            priorityColor[todo.priority]
+                          }`}
+                        >
+                          {todo.priority}
+                        </span>
                       </div>
 
                       {todo.description && (
-                        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">
+                        <p className="text-xs text-[#555555] dark:text-[#A3A3A3] leading-relaxed line-clamp-2">
                           {todo.description}
                         </p>
                       )}
 
-                      <div className="flex items-center justify-between pt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                        <span className={isOverdue ? 'text-rose-600 font-bold' : ''}>
+                      <div className="flex items-center justify-between pt-1 text-[11px] text-[#555555] dark:text-[#A3A3A3] font-mono">
+                        <span className={isOverdue ? 'text-[#E50914] font-bold' : ''}>
                           Due: {todo.dueDate} {isOverdue && '(Overdue)'}
                         </span>
 
@@ -1043,14 +1045,14 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           <button
                             onClick={() => handleOpenEditTodo(todo)}
-                            className="p-1 text-slate-400 hover:text-blue-600 cursor-pointer"
+                            className="p-1 text-[#888888] hover:text-[#E50914] cursor-pointer"
                             title="Edit task"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => deleteTodo(todo.id)}
-                            className="p-1 text-slate-400 hover:text-rose-600 cursor-pointer"
+                            className="p-1 text-[#888888] hover:text-[#E50914] cursor-pointer"
                             title="Delete task"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -1070,15 +1072,15 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
       {/* MODAL: ADD / EDIT TO-DO                                   */}
       {/* ========================================================= */}
       {isAddTodoModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="w-full max-w-md bg-white dark:bg-[#171717] rounded-3xl p-6 border border-[#E0E0E0] dark:border-[#333333] shadow-2xl space-y-4 text-[#101010] dark:text-white">
+            <h3 className="text-base font-bold text-[#101010] dark:text-white">
               {editingTodo ? 'Edit To-Do Task' : 'Add New Personal Task'}
             </h3>
 
             <form onSubmit={handleSaveTodo} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Task Title *
                 </label>
                 <input
@@ -1087,12 +1089,12 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                   onChange={(e) => setTodoTitle(e.target.value)}
                   placeholder="e.g. Complete responsive QA pass on dashboard"
                   required
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Description / Notes (Optional)
                 </label>
                 <textarea
@@ -1100,34 +1102,52 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                   value={todoDescription}
                   onChange={(e) => setTodoDescription(e.target.value)}
                   placeholder="Key deliverables or notes..."
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Due Date
-                </label>
-                <input
-                  type="date"
-                  value={todoDueDate}
-                  onChange={(e) => setTodoDueDate(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
-                />
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
+                    Priority
+                  </label>
+                  <select
+                    value={todoPriority}
+                    onChange={(e) => setTodoPriority(e.target.value as ToDoPriority)}
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white"
+                  >
+                    <option value="Urgent">Urgent</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
+                    Due Date
+                  </label>
+                  <input
+                    type="date"
+                    value={todoDueDate}
+                    onChange={(e) => setTodoDueDate(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914] font-mono"
+                  />
+                </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
                 <button
                   type="button"
                   onClick={() => setIsAddTodoModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-bold shadow-xs cursor-pointer"
                 >
                   {editingTodo ? 'Save Changes' : 'Create Task'}
                 </button>
@@ -1141,18 +1161,18 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
       {/* MODAL: ADD CALENDAR EVENT / DEADLINE                      */}
       {/* ========================================================= */}
       {isEventModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="w-full max-w-md bg-white dark:bg-[#171717] rounded-3xl p-6 border border-[#E0E0E0] dark:border-[#333333] shadow-2xl space-y-4 text-[#101010] dark:text-white">
+            <h3 className="text-base font-bold text-[#101010] dark:text-white">
               Add Calendar Event / Deadline
             </h3>
-            <p className="text-xs text-slate-500">
-              Scheduled for date: <span className="font-mono font-bold text-blue-600">{selectedDateStr}</span>
+            <p className="text-xs text-[#555555] dark:text-[#A3A3A3]">
+              Scheduled for date: <span className="font-mono font-bold text-[#E50914] dark:text-[#FFC928]">{selectedDateStr}</span>
             </p>
 
             <form onSubmit={handleCreateCalendarEvent} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Event Title *
                 </label>
                 <input
@@ -1161,13 +1181,13 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                   onChange={(e) => setNewEventTitle(e.target.value)}
                   placeholder="e.g. Sprint Retrospective Presentation"
                   required
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     Scheduled Time
                   </label>
                   <input
@@ -1175,18 +1195,18 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                     value={newEventTime}
                     onChange={(e) => setNewEventTime(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     Event Type
                   </label>
                   <select
                     value={newEventType}
                     onChange={(e) => setNewEventType(e.target.value as any)}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#101010] text-[#101010] dark:text-white"
                   >
                     <option value="personal">Personal Deadline</option>
                     <option value="meeting">Team Meeting</option>
@@ -1195,17 +1215,17 @@ export const MyWorkspaceView: React.FC<MyWorkspaceViewProps> = ({ onNavigateTab 
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
                 <button
                   type="button"
                   onClick={() => setIsEventModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-bold shadow-xs cursor-pointer"
                 >
                   Add to Calendar
                 </button>

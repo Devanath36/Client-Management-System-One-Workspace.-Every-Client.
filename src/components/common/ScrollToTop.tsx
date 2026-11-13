@@ -58,7 +58,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
       onClick={handleScrollToTop}
       aria-label="Scroll to top of page"
       title="Scroll to top"
-      className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 p-2.5 sm:p-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/30 dark:shadow-black/60 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 cursor-pointer flex items-center justify-center ${
+      className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 p-2.5 sm:p-3 rounded-full bg-[#E50914] hover:bg-[#c40812] text-white shadow-lg shadow-[#E50914]/30 dark:shadow-black/60 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FFC928] focus:ring-offset-2 dark:focus:ring-offset-[#101010] cursor-pointer flex items-center justify-center ${
         isVisible
           ? 'opacity-100 scale-100 pointer-events-auto translate-y-0'
           : 'opacity-0 scale-75 pointer-events-none translate-y-4'

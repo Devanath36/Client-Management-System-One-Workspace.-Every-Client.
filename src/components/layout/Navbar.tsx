@@ -39,9 +39,9 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/85 dark:bg-slate-900/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/95 dark:bg-[#101010]/95 border-b border-[#E0E0E0] dark:border-[#333333] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
-        {/* Brand with Glowing Icon Container */}
+        {/* Brand with Red/Orange Icon Container */}
         <button
           onClick={() => {
             setCurrentView('landing');
@@ -49,26 +49,26 @@ export const Navbar: React.FC = () => {
           }}
           className="flex items-center gap-2.5 text-left group shrink-0 cursor-pointer focus:outline-none"
         >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-700 via-blue-600 to-indigo-500 text-white flex items-center justify-center font-bold text-base shadow-sm shadow-blue-500/20 group-hover:scale-105 group-hover:shadow-blue-500/30 transition-all duration-300">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#E50914] via-[#E50914] to-[#FF7900] text-white flex items-center justify-center font-bold text-base shadow-sm shadow-[#E50914]/25 group-hover:scale-105 transition-all duration-300">
             <Shield className="w-4 h-4 text-white" />
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-xs sm:text-base font-bold tracking-tight text-slate-900 dark:text-white truncate max-w-[160px] sm:max-w-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <span className="text-xs sm:text-base font-bold tracking-tight text-[#101010] dark:text-white truncate max-w-[160px] sm:max-w-none group-hover:text-[#E50914] transition-colors">
               Client Management System
             </span>
-            <span className="hidden sm:inline-block text-[10px] text-slate-400 font-medium tracking-wide">
+            <span className="hidden sm:inline-block text-[10px] text-[#555555] dark:text-[#A3A3A3] font-medium tracking-wide">
               One Workspace. Every Client.
             </span>
           </div>
         </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden xl:flex items-center gap-0.5 2xl:gap-1 text-xs font-medium text-slate-600 dark:text-slate-300">
+        <nav className="hidden xl:flex items-center gap-0.5 2xl:gap-1 text-xs font-medium text-[#555555] dark:text-[#A3A3A3]">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleNavClick(link.id)}
-              className="px-2 2xl:px-2.5 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 transition-colors whitespace-nowrap cursor-pointer"
+              className="px-2 2xl:px-2.5 py-1.5 rounded-lg text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white hover:bg-[#F0F0F0] dark:hover:bg-[#1f1f1f] transition-colors whitespace-nowrap cursor-pointer"
             >
               {link.label}
             </button>
@@ -76,19 +76,19 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Medium-to-Large Screens Primary Links */}
-        <nav className="hidden lg:flex xl:hidden items-center gap-1 text-xs font-medium text-slate-600 dark:text-slate-300">
+        <nav className="hidden lg:flex xl:hidden items-center gap-1 text-xs font-medium text-[#555555] dark:text-[#A3A3A3]">
           {navLinks.slice(0, 7).map((link) => (
             <button
               key={link.id}
               onClick={() => handleNavClick(link.id)}
-              className="px-2 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 transition-colors whitespace-nowrap cursor-pointer"
+              className="px-2 py-1.5 rounded-lg text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white hover:bg-[#F0F0F0] dark:hover:bg-[#1f1f1f] transition-colors whitespace-nowrap cursor-pointer"
             >
               {link.label}
             </button>
           ))}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="text-blue-600 dark:text-blue-400 font-semibold px-2 py-1.5 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-lg whitespace-nowrap cursor-pointer"
+            className="text-[#FF7900] dark:text-[#FFC928] font-semibold px-2 py-1.5 hover:bg-[#F0F0F0] dark:hover:bg-[#1f1f1f] rounded-lg whitespace-nowrap cursor-pointer"
           >
             More links...
           </button>
@@ -100,10 +100,10 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('3d-universe')}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-sky-600 dark:text-sky-300 hover:text-blue-700 dark:hover:text-white bg-sky-50 dark:bg-slate-900 border border-sky-200 dark:border-sky-500/30 hover:border-sky-400 rounded-xl transition-all cursor-pointer shadow-2xs"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#FF7900] dark:text-[#FFC928] hover:text-[#101010] dark:hover:text-white bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] hover:border-[#FFC928] rounded-xl transition-all cursor-pointer shadow-2xs"
             title="Launch Interactive 3D Command Universe"
           >
-            <Sparkles className="w-3.5 h-3.5 text-sky-500" />
+            <Sparkles className="w-3.5 h-3.5 text-[#FF7900] dark:text-[#FFC928]" />
             <span>3D Universe</span>
           </button>
 
@@ -115,13 +115,13 @@ export const Navbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
-                className="relative p-2 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="relative p-2 text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white rounded-xl hover:bg-[#F0F0F0] dark:hover:bg-[#1f1f1f] transition-colors cursor-pointer"
                 aria-label="View notifications"
                 title={unreadCount > 0 ? `${unreadCount} unread notifications` : 'Notification Center'}
               >
                 <Bell className="w-4 h-4" />
                 {unreadCount > 0 && (
-                  <span className="absolute top-1 right-1 min-w-[16px] h-[16px] px-1 flex items-center justify-center rounded-full bg-blue-600 text-white font-mono text-[9px] font-bold ring-2 ring-white dark:ring-slate-900 shadow-xs">
+                  <span className="absolute top-1 right-1 min-w-[16px] h-[16px] px-1 flex items-center justify-center rounded-full bg-[#E50914] text-white font-mono text-[9px] font-bold ring-2 ring-white dark:ring-[#101010] shadow-xs">
                     {unreadCount > 99 ? '99+' : unreadCount}
                   </span>
                 )}
@@ -149,7 +149,7 @@ export const Navbar: React.FC = () => {
           {currentUser ? (
             <button
               onClick={() => setCurrentView('dashboard')}
-              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-xl shadow-xs shadow-blue-600/20 hover:shadow-blue-600/30 transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs shadow-[#E50914]/30 transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer active:scale-95"
             >
               <span>Workspace</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -157,7 +157,7 @@ export const Navbar: React.FC = () => {
           ) : (
             <button
               onClick={() => setCurrentView('login')}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-xl shadow-xs shadow-blue-600/20 hover:shadow-blue-600/30 transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs shadow-[#E50914]/30 transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer active:scale-95"
             >
               <span>Login</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -167,7 +167,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="2xl:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl cursor-pointer"
+            className="2xl:hidden p-2 text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white hover:bg-[#F0F0F0] dark:hover:bg-[#1f1f1f] rounded-xl cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -177,21 +177,21 @@ export const Navbar: React.FC = () => {
 
       {/* Responsive Drawer for mobile and smaller screens */}
       {mobileMenuOpen && (
-        <div className="2xl:hidden border-b border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md bg-white/95 dark:bg-slate-900/95 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+        <div className="2xl:hidden border-b border-[#E0E0E0] dark:border-[#333333] backdrop-blur-md bg-white/98 dark:bg-[#101010]/98 px-4 pt-3 pb-5 space-y-2 shadow-xl">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleNavClick(link.id)}
-              className="block w-full text-left py-2 px-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg hover:text-blue-600 transition-colors"
+              className="block w-full text-left py-2 px-3 text-xs font-medium text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white hover:bg-[#F0F0F0] dark:hover:bg-[#1f1f1f] rounded-lg transition-colors"
             >
               {link.label}
             </button>
           ))}
 
           {/* Mobile Theme Toggle & Actions */}
-          <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
-            <div className="flex items-center justify-between px-3 py-1 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-              <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Display Theme:</span>
+          <div className="pt-3 border-t border-[#E0E0E0] dark:border-[#333333] space-y-2.5">
+            <div className="flex items-center justify-between px-3 py-1.5 bg-[#F7F7F7] dark:bg-[#171717] rounded-xl border border-[#E0E0E0] dark:border-[#333333]">
+              <span className="text-xs font-medium text-[#555555] dark:text-[#A3A3A3]">Display Theme:</span>
               <ThemeToggle showLabel />
             </div>
 
@@ -201,10 +201,10 @@ export const Navbar: React.FC = () => {
                   setMobileMenuOpen(false);
                   setCurrentView('dashboard');
                 }}
-                className="w-full py-2 px-3 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 rounded-xl flex items-center justify-between"
+                className="w-full py-2 px-3 text-xs font-semibold text-[#FF7900] dark:text-[#FFC928] bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-xl flex items-center justify-between"
               >
                 <span>Deadline & Task Updates</span>
-                <span className="px-2 py-0.5 rounded-full bg-blue-600 text-white font-mono text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-[#E50914] text-white font-mono text-[10px] font-bold">
                   {unreadCount} New
                 </span>
               </button>
@@ -215,7 +215,7 @@ export const Navbar: React.FC = () => {
                 setMobileMenuOpen(false);
                 setCurrentView(currentUser ? 'dashboard' : 'login');
               }}
-              className="w-full py-2.5 text-center text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-xs"
+              className="w-full py-2.5 text-center text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs"
             >
               {currentUser ? 'Go to Workspace' : 'Login / Sign In'}
             </button>
@@ -225,4 +225,3 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
-

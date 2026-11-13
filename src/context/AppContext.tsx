@@ -78,7 +78,7 @@ interface AppContextType {
 
   // Navigation & Authentication
   setCurrentView: (view: 'landing' | 'login' | 'dashboard' | '3d-universe') => void;
-  login: (loginIdentifier: string, password: string, selectedRole?: UserRole) => { success: boolean; error?: string };
+  login: (loginIdentifier: string, password: string, selectedRole?: UserRole, autoNavigate?: boolean) => { success: boolean; error?: string; user?: User };
   signup: (data: SignUpFormData) => { success: boolean; error?: string; code?: string };
   verifyEmail: (email: string, code: string) => { success: boolean; error?: string };
   requestPasswordReset: (email: string) => { success: boolean; error?: string; token?: string };
@@ -410,10 +410,10 @@ if (typeof window !== 'undefined') {
 }
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Theme state
+  // Theme state: defaults to dark matte black mode
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.THEME);
-    return saved === 'dark' ? 'dark' : 'light';
+    return saved === 'light' ? 'light' : 'dark';
   });
 
   // Authenticated User with LocalStorage caching
@@ -826,8 +826,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const login = (
     loginIdentifier: string,
     pass: string,
-    selectedRole?: UserRole
-  ): { success: boolean; error?: string } => {
+    selectedRole?: UserRole,
+    autoNavigate = true
+  ): { success: boolean; error?: string; user?: User } => {
     const trimmed = loginIdentifier.trim().toLowerCase();
 
     if (!trimmed) {
@@ -909,9 +910,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     // Successful Authentication: Bind role strictly to trusted database user record
     setCurrentUser(foundUser);
-    setCurrentView('dashboard');
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(foundUser));
-    localStorage.setItem(STORAGE_KEYS.VIEW, 'dashboard');
+    
+    if (autoNavigate) {
+      setCurrentView('dashboard');
+      localStorage.setItem(STORAGE_KEYS.VIEW, 'dashboard');
+    }
+
     showToast(
       'success',
       'Authenticated Successfully',
@@ -923,7 +928,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       'auth',
       `Session established with verified role: ${foundUser.role}.`
     );
-    return { success: true };
+    return { success: true, user: foundUser };
   };
 
   const signup = (data: SignUpFormData): { success: boolean; error?: string; code?: string } => {

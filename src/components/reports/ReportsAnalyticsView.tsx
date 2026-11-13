@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Project, Task, UserRole } from '../../types';
+import { downloadProjectAnalyticsPDF } from '../../utils/pdfExport';
 import {
   BarChart3,
   PieChart as PieChartIcon,
@@ -168,33 +169,33 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
 
   // Chart 1: Project Status Distribution (Pie / Donut)
   const projectStatusData = [
-    { name: 'Completed / Done', value: completedProjectsCount, color: '#10b981' },
+    { name: 'Completed / Done', value: completedProjectsCount, color: '#FFC928' },
     {
       name: 'Ongoing / In Progress',
       value: Math.max(0, ongoingProjectsCount - delayedProjectsCount),
-      color: '#3b82f6',
+      color: '#FF7900',
     },
-    { name: 'Delayed / Overdue', value: delayedProjectsCount, color: '#f43f5e' },
+    { name: 'Delayed / Overdue', value: delayedProjectsCount, color: '#E50914' },
   ].filter((d) => d.value > 0);
 
   // Fallback if 0
   const finalProjectStatusData =
     projectStatusData.length > 0
       ? projectStatusData
-      : [{ name: 'No Projects', value: 1, color: '#94a3b8' }];
+      : [{ name: 'No Projects', value: 1, color: '#333333' }];
 
   // Chart 2: Task Completion Status
   const taskStatusData = [
-    { name: 'Completed', count: completedTasksCount, fill: '#10b981' },
+    { name: 'Completed', count: completedTasksCount, fill: '#FFC928' },
     {
       name: 'In Progress',
       count: filteredTasks.filter((t) => t.status === 'In Progress').length,
-      fill: '#3b82f6',
+      fill: '#FF7900',
     },
     {
       name: 'Pending / To Do',
       count: filteredTasks.filter((t) => t.status === 'New' || t.status === 'To Do').length,
-      fill: '#64748b',
+      fill: '#A3A3A3',
     },
   ];
 
@@ -203,7 +204,7 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
   const componentData = componentNames.map((comp) => ({
     component: comp.replace(' Development', '').replace(' & QA', ''),
     tasks: filteredTasks.filter((t) => (t.workComponent || '').toLowerCase().includes(comp.split(' ')[0].toLowerCase())).length,
-    fill: comp.includes('Frontend') ? '#3b82f6' : comp.includes('Backend') ? '#6366f1' : comp.includes('Integration') ? '#0ea5e9' : '#10b981',
+    fill: comp.includes('Frontend') ? '#E50914' : comp.includes('Backend') ? '#FF7900' : comp.includes('Integration') ? '#FFC928' : '#FFFFFF',
   }));
 
   // Chart 4: Team Workload (for Manager & Team Lead)
@@ -270,21 +271,27 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
     document.body.removeChild(link);
   };
 
-  // Export to PDF / Print view
+  // Export to PDF using high-fidelity jsPDF document generator
   const handlePrintPDF = () => {
-    window.print();
+    downloadProjectAnalyticsPDF({
+      projects: filteredProjects,
+      tasks: filteredTasks,
+      managerName: currentUser?.name || 'Authorized Lead',
+      timeframeLabel: timeframe.toUpperCase(),
+      statusFilter: selectedProjectId !== 'all' ? selectedProjectId : undefined,
+    });
   };
 
   return (
     <div className="space-y-6">
       {/* Header and Export Controls */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-[#141414] p-5 sm:p-6 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
         <div>
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
+            <span className="p-2 rounded-xl bg-[#E50914]/10 text-[#E50914] border border-[#E50914]/25">
               <BarChart3 className="w-5 h-5" />
             </span>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-base sm:text-xl font-bold text-[#101010] dark:text-white">
               {userRole === 'manager'
                 ? 'Manager Executive Reports & Analytics'
                 : userRole === 'team_lead'
@@ -294,7 +301,7 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 : 'Enterprise System Reports & Audit Analytics'}
             </h2>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-1">
             Dynamically aggregated performance statistics, milestone velocity, and export capabilities.
           </p>
         </div>
@@ -303,40 +310,40 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
         <div className="flex items-center gap-2.5 self-start md:self-auto">
           <button
             onClick={handleExportCSV}
-            className="px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+            className="px-3.5 py-2 text-xs font-semibold text-[#101010] dark:text-white bg-[#F0F0F0] hover:bg-[#E5E5E5] dark:bg-[#1e1e1e] dark:hover:bg-[#282828] rounded-xl border border-[#E0E0E0] dark:border-[#333333] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
             title="Download report data as Excel CSV"
           >
-            <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
+            <FileSpreadsheet className="w-4 h-4 text-[#FFC928]" />
             <span>Export Excel</span>
           </button>
           <button
             onClick={handlePrintPDF}
-            className="px-3.5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
-            title="Download or print report as PDF"
+            className="px-3.5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs shadow-[#E50914]/25 transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
+            title="Download formatted executive PDF report"
           >
-            <Printer className="w-4 h-4" />
-            <span>Download PDF</span>
+            <Download className="w-4 h-4" />
+            <span>Download Report (PDF)</span>
           </button>
         </div>
       </div>
 
       {/* Filter Toolbar: Timeframe & Project Selection */}
-      <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs shadow-xs">
+      <div className="bg-white dark:bg-[#141414] p-4 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] flex flex-wrap items-center justify-between gap-4 text-xs shadow-xs transition-colors">
         {/* Timeframe Chips */}
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-500 flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5 text-blue-600" />
+          <span className="font-semibold text-[#555555] dark:text-[#A3A3A3] flex items-center gap-1">
+            <Calendar className="w-3.5 h-3.5 text-[#FF7900]" />
             <span>Period:</span>
           </span>
-          <div className="inline-flex rounded-xl p-1 bg-slate-100 dark:bg-slate-800 gap-1">
+          <div className="inline-flex rounded-xl p-1 bg-[#F0F0F0] dark:bg-[#1e1e1e] gap-1">
             {(['today', 'week', 'month', 'year', 'custom'] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTimeframe(t)}
                 className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer capitalize ${
                   timeframe === t
-                    ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-bold shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-[#E50914] text-white font-bold shadow-xs'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 {t === 'today'
@@ -360,28 +367,28 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
               type="date"
               value={customStart}
               onChange={(e) => setCustomStart(e.target.value)}
-              className="px-2.5 py-1 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
+              className="px-2.5 py-1 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-lg text-[#101010] dark:text-white"
             />
-            <span className="text-slate-400">→</span>
+            <span className="text-[#888888]">→</span>
             <input
               type="date"
               value={customEnd}
               onChange={(e) => setCustomEnd(e.target.value)}
-              className="px-2.5 py-1 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
+              className="px-2.5 py-1 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-lg text-[#101010] dark:text-white"
             />
           </div>
         )}
 
         {/* Project-Wise Filter */}
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-500 flex items-center gap-1">
-            <Filter className="w-3.5 h-3.5 text-blue-600" />
+          <span className="font-semibold text-[#555555] dark:text-[#A3A3A3] flex items-center gap-1">
+            <Filter className="w-3.5 h-3.5 text-[#FF7900]" />
             <span>Project Filter:</span>
           </span>
           <select
             value={selectedProjectId}
             onChange={(e) => setSelectedProjectId(e.target.value)}
-            className="px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer max-w-xs truncate"
+            className="px-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer max-w-xs truncate"
           >
             <option value="all">All Accessible Projects ({scopedProjects.length})</option>
             {scopedProjects.map((p) => (
@@ -395,58 +402,58 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
 
       {/* KPI Cards Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+        <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">
+            <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
               {userRole === 'team_member' ? 'My Projects' : 'Total Projects'}
             </span>
-            <Briefcase className="w-4 h-4 text-blue-600" />
+            <Briefcase className="w-4 h-4 text-[#FF7900]" />
           </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
+          <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
             {totalProjectsCount}
           </p>
-          <p className="text-[11px] text-slate-500 mt-1">
+          <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">
             {completedProjectsCount} Done · {ongoingProjectsCount} Ongoing
           </p>
         </div>
 
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+        <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">
+            <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
               {userRole === 'team_member' ? 'My Total Tasks' : 'Total Tasks'}
             </span>
-            <CheckSquare className="w-4 h-4 text-indigo-600" />
+            <CheckSquare className="w-4 h-4 text-[#FFC928]" />
           </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
+          <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
             {totalTasksCount}
           </p>
-          <p className="text-[11px] text-slate-500 mt-1">
+          <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">
             {completedTasksCount} Completed · {pendingTasksCount} Pending
           </p>
         </div>
 
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+        <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Delivery Velocity</span>
-            <TrendingUp className="w-4 h-4 text-emerald-600" />
+            <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">Delivery Velocity</span>
+            <TrendingUp className="w-4 h-4 text-[#FFC928]" />
           </div>
-          <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2 font-mono tabular-nums">
+          <p className="text-2xl font-bold text-[#FFC928] mt-2 font-mono tabular-nums">
             {overallVelocity}%
           </p>
-          <p className="text-[11px] text-slate-500 mt-1">
+          <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">
             Overall task completion rate
           </p>
         </div>
 
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+        <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Delayed / Overdue</span>
-            <AlertTriangle className="w-4 h-4 text-rose-600" />
+            <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">Delayed / Overdue</span>
+            <AlertTriangle className="w-4 h-4 text-[#E50914]" />
           </div>
-          <p className="text-2xl font-bold text-rose-600 dark:text-rose-400 mt-2 font-mono tabular-nums">
+          <p className="text-2xl font-bold text-[#E50914] mt-2 font-mono tabular-nums">
             {overdueTasksCount}
           </p>
-          <p className="text-[11px] text-slate-500 mt-1">
+          <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">
             {overdueTasksCount > 0 ? 'Requires attention' : 'All milestones on schedule'}
           </p>
         </div>
@@ -455,13 +462,13 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Chart 1: Project Status Distribution */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#141414] p-5 sm:p-6 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-4 transition-colors">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <PieChartIcon className="w-4 h-4 text-blue-600" />
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white flex items-center gap-2">
+              <PieChartIcon className="w-4 h-4 text-[#FF7900]" />
               <span>Project Status Distribution</span>
             </h3>
-            <span className="text-xs text-slate-400 font-mono">{totalProjectsCount} Total</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">{totalProjectsCount} Total</span>
           </div>
 
           <div className="h-64">
@@ -482,8 +489,8 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    borderColor: '#334155',
+                    backgroundColor: '#101010',
+                    borderColor: '#333333',
                     borderRadius: '0.75rem',
                     color: '#fff',
                     fontSize: '12px',
@@ -496,13 +503,13 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
         </div>
 
         {/* Chart 2: Task Completion Status */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#141414] p-5 sm:p-6 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-4 transition-colors">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-emerald-600" />
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white flex items-center gap-2">
+              <BarChart3 className="w-4 h-4 text-[#FFC928]" />
               <span>Task Completion Breakdown</span>
             </h3>
-            <span className="text-xs text-slate-400 font-mono">{totalTasksCount} Tasks</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">{totalTasksCount} Tasks</span>
           </div>
 
           <div className="h-64">
@@ -513,8 +520,8 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 <YAxis tick={{ fontSize: 11 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    borderColor: '#334155',
+                    backgroundColor: '#101010',
+                    borderColor: '#333333',
                     borderRadius: '0.75rem',
                     color: '#fff',
                     fontSize: '12px',
@@ -531,13 +538,13 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
         </div>
 
         {/* Chart 3: Deliverable Component Distribution */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#141414] p-5 sm:p-6 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-4 transition-colors">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <CheckSquare className="w-4 h-4 text-blue-600" />
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white flex items-center gap-2">
+              <CheckSquare className="w-4 h-4 text-[#E50914]" />
               <span>Deliverable Component Breakdown</span>
             </h3>
-            <span className="text-xs text-slate-400 font-mono">By Module</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">By Module</span>
           </div>
 
           <div className="h-64">
@@ -548,8 +555,8 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 <YAxis tick={{ fontSize: 11 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    borderColor: '#334155',
+                    backgroundColor: '#101010',
+                    borderColor: '#333333',
                     borderRadius: '0.75rem',
                     color: '#fff',
                     fontSize: '12px',
@@ -566,15 +573,15 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
         </div>
 
         {/* Chart 4: Team Workload (Manager & Lead) or Personal Timeline (Member) */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#141414] p-5 sm:p-6 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-4 transition-colors">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Users className="w-4 h-4 text-indigo-600" />
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white flex items-center gap-2">
+              <Users className="w-4 h-4 text-[#FF7900]" />
               <span>
                 {userRole === 'team_member' ? 'My Workload Breakdown' : 'Team Member Workload Distribution'}
               </span>
             </h3>
-            <span className="text-xs text-slate-400 font-mono">Capacity Load</span>
+            <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">Capacity Load</span>
           </div>
 
           <div className="h-64">
@@ -588,8 +595,8 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 <YAxis tick={{ fontSize: 11 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    borderColor: '#334155',
+                    backgroundColor: '#101010',
+                    borderColor: '#333333',
                     borderRadius: '0.75rem',
                     color: '#fff',
                     fontSize: '12px',
@@ -599,14 +606,14 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 <Bar
                   dataKey="activeTasks"
                   name="Active Tasks"
-                  fill="#3b82f6"
+                  fill="#FF7900"
                   radius={[4, 4, 0, 0]}
                   maxBarSize={30}
                 />
                 <Bar
                   dataKey="completedTasks"
                   name="Completed Tasks"
-                  fill="#10b981"
+                  fill="#FFC928"
                   radius={[4, 4, 0, 0]}
                   maxBarSize={30}
                 />
@@ -617,20 +624,20 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
       </div>
 
       {/* Data Table: Projects Breakdown */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xs">
+      <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-5 sm:p-6 space-y-4 shadow-xs transition-colors">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <Briefcase className="w-4 h-4 text-blue-600" />
+          <h3 className="text-base font-bold text-[#101010] dark:text-white flex items-center gap-2">
+            <Briefcase className="w-4 h-4 text-[#E50914]" />
             <span>Project Performance Breakdown</span>
           </h3>
-          <span className="text-xs text-slate-400 font-mono">
+          <span className="text-xs text-[#555555] dark:text-[#A3A3A3] font-mono">
             {filteredProjects.length} Projects Tracked
           </span>
         </div>
 
-        <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+        <div className="overflow-x-auto border border-[#E0E0E0] dark:border-[#333333] rounded-xl">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-[#F0F0F0] dark:bg-[#1c1c1c] text-[#101010] dark:text-white font-semibold border-b border-[#E0E0E0] dark:border-[#333333]">
               <tr>
                 <th className="py-3 px-4">Client & Company</th>
                 <th className="py-3 px-4">Purpose</th>
@@ -641,10 +648,10 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                 <th className="py-3 px-4">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-[#EAEAEA] dark:divide-[#262626]">
               {filteredProjects.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-xs text-slate-400">
+                  <td colSpan={7} className="py-8 text-center text-xs text-[#555555] dark:text-[#A3A3A3]">
                     No projects found for the selected period.
                   </td>
                 </tr>
@@ -653,39 +660,39 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                   const prog = getProjectProgress(p.id);
                   const isDone = p.status === 'Done' || p.status === 'Completed' || prog.progress === 100;
                   return (
-                    <tr key={p.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
+                    <tr key={p.id} className="hover:bg-[#F9F9F9] dark:hover:bg-[#1a1a1a] transition-colors">
+                      <td className="py-3.5 px-4 font-bold text-[#101010] dark:text-white">
                         {p.clientName}
                         {p.companyName && (
-                          <span className="block text-[11px] font-normal text-slate-500">
+                          <span className="block text-[11px] font-normal text-[#555555] dark:text-[#A3A3A3]">
                             {p.companyName}
                           </span>
                         )}
                       </td>
-                      <td className="py-3.5 px-4 max-w-xs truncate text-slate-700 dark:text-slate-300">
+                      <td className="py-3.5 px-4 max-w-xs truncate text-[#101010] dark:text-white">
                         {p.purpose || p.title}
                       </td>
-                      <td className="py-3.5 px-4 font-medium text-slate-600 dark:text-slate-400">
+                      <td className="py-3.5 px-4 font-medium text-[#555555] dark:text-[#A3A3A3]">
                         {p.leadName}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-[11px]">
+                      <td className="py-3.5 px-4 font-mono text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                         {p.startDate} → {p.deadline}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-[11px]">
+                      <td className="py-3.5 px-4 font-mono text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                         {p.duration ? `${p.duration}d` : 'N/A'}
                       </td>
                       <td className="py-3.5 px-4">
                         <div className="w-28 space-y-1">
                           <div className="flex justify-between text-[11px] font-mono">
-                            <span>{prog.progress}%</span>
-                            <span className="text-slate-400">
+                            <span className="font-semibold text-[#101010] dark:text-white">{prog.progress}%</span>
+                            <span className="text-[#555555] dark:text-[#A3A3A3]">
                               {prog.completedTasks}/{prog.totalTasks}
                             </span>
                           </div>
-                          <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                          <div className="w-full bg-[#EAEAEA] dark:bg-[#262626] h-1.5 rounded-full overflow-hidden">
                             <div
-                              className={`h-full rounded-full ${
-                                isDone ? 'bg-emerald-500' : 'bg-blue-600'
+                              className={`h-full rounded-full transition-all ${
+                                isDone ? 'bg-[#FFC928]' : 'bg-[#FF7900]'
                               }`}
                               style={{ width: `${prog.progress}%` }}
                             />
@@ -694,10 +701,10 @@ export const ReportsAnalyticsView: React.FC<ReportsAnalyticsViewProps> = ({ role
                       </td>
                       <td className="py-3.5 px-4">
                         <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                          className={`inline-block px-2.5 py-0.5 rounded text-[10px] font-semibold border ${
                             isDone
-                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
-                              : 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
+                              ? 'bg-[#F0F0F0] dark:bg-[#202020] text-[#101010] dark:text-white border-[#CCCCCC] dark:border-[#444444]'
+                              : 'bg-[#FF7900]/15 text-[#FF7900] border border-[#FF7900]/30'
                           }`}
                         >
                           {isDone ? 'Done' : p.status}

@@ -71,27 +71,27 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
       >
         <div className="space-y-6">
           {/* Project Summary Banner */}
-          <div className="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700/80 space-y-3">
+          <div className="p-4 bg-[#F7F7F7] dark:bg-[#171717] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-blue-600 dark:text-blue-400">
+                  <span className="text-xs font-bold text-[#E50914]">
                     {project.clientName}
                   </span>
                   {project.companyName && (
                     <>
-                      <span className="text-slate-300 dark:text-slate-600">·</span>
-                      <span className="text-xs text-slate-500 font-medium">
+                      <span className="text-[#A3A3A3]">·</span>
+                      <span className="text-xs text-[#666666] dark:text-[#A3A3A3] font-medium">
                         {project.companyName}
                       </span>
                     </>
                   )}
                 </div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">
+                <h3 className="text-base font-bold text-[#101010] dark:text-white mt-0.5">
                   {project.purpose}
                 </h3>
                 {project.description && (
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-1 leading-relaxed">
                     {project.description}
                   </p>
                 )}
@@ -100,10 +100,10 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
               <span
                 className={`text-xs font-semibold px-2.5 py-1 rounded-lg shrink-0 self-start sm:self-auto ${
                   project.status === 'Done'
-                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                    ? 'bg-[#FFC928]/15 text-[#101010] dark:text-[#FFC928] border border-[#FFC928]/40'
                     : project.status === 'In Progress'
-                    ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
-                    : 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800'
+                    ? 'bg-[#FF7900]/15 text-[#FF7900] border border-[#FF7900]/40'
+                    : 'bg-[#E50914]/15 text-[#E50914] border border-[#E50914]/40'
                 }`}
               >
                 {project.status}
@@ -111,54 +111,54 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
             </div>
 
             {/* Attribution Meta Matrix */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-200/80 dark:border-slate-700/80 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#E0E0E0] dark:border-[#333333] text-xs">
               <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
+                <span className="text-[10px] text-[#888888] dark:text-[#A3A3A3] uppercase font-bold tracking-wider">
                   Assigned Manager
                 </span>
-                <p className="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <Briefcase className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                <p className="font-semibold text-[#101010] dark:text-white flex items-center gap-1.5">
+                  <Briefcase className="w-3.5 h-3.5 text-[#E50914] shrink-0" />
                   <span>{project.managerName || 'Operations Manager'}</span>
                 </p>
               </div>
 
               <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
+                <span className="text-[10px] text-[#888888] dark:text-[#A3A3A3] uppercase font-bold tracking-wider">
                   Assigned Team Lead
                 </span>
-                <p className="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <UserCheck className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                <p className="font-semibold text-[#101010] dark:text-white flex items-center gap-1.5">
+                  <UserCheck className="w-3.5 h-3.5 text-[#FF7900] shrink-0" />
                   <span>{project.leadName}</span>
                 </p>
               </div>
 
               <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
+                <span className="text-[10px] text-[#888888] dark:text-[#A3A3A3] uppercase font-bold tracking-wider">
                   Timeline / Duration
                 </span>
-                <p className="font-mono text-slate-800 dark:text-slate-200">
+                <p className="font-mono text-[#101010] dark:text-[#D4D4D4]">
                   {project.duration} Days
                 </p>
-                <p className="text-[10px] text-slate-400">
+                <p className="text-[10px] text-[#888888] dark:text-[#A3A3A3]">
                   {project.startDate} → {project.deadline}
                 </p>
               </div>
 
               <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
+                <span className="text-[10px] text-[#888888] dark:text-[#A3A3A3] uppercase font-bold tracking-wider">
                   Completion Progress
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono font-bold text-slate-900 dark:text-white">
+                  <span className="font-mono font-bold text-[#101010] dark:text-white">
                     {progressPercent}%
                   </span>
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-[#666666] dark:text-[#A3A3A3]">
                     ({completedCount}/{projectTasks.length} tasks)
                   </span>
                 </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-[#E0E0E0] dark:bg-[#333333] h-1.5 rounded-full overflow-hidden">
                   <div
-                    className="bg-emerald-600 h-full rounded-full transition-all"
+                    className="bg-[#FF7900] h-full rounded-full transition-all"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
@@ -166,8 +166,8 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
             </div>
 
             {isOverdue && (
-              <div className="p-2.5 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 rounded-xl text-xs text-rose-700 dark:text-rose-300 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="p-2.5 bg-[#FFF5F5] dark:bg-[#101010] border border-[#E50914]/40 rounded-xl text-xs text-[#E50914] flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-[#E50914] shrink-0" />
                 <span>This project is past its deadline ({project.deadline}). Attention required on remaining work components.</span>
               </div>
             )}
@@ -176,18 +176,18 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
           {/* Work Allocation Sub-Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <Layers className="w-4 h-4 text-blue-600" />
+              <h4 className="text-sm font-bold text-[#101010] dark:text-white flex items-center gap-2">
+                <Layers className="w-4 h-4 text-[#E50914]" />
                 <span>Allocated Work Components ({componentsMap.size})</span>
               </h4>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-[#666666] dark:text-[#A3A3A3] mt-0.5">
                 Tasks decomposed across architectural layers and assigned to registered specialists.
               </p>
             </div>
 
             <button
               onClick={() => setAddTaskOpen(true)}
-              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
+              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Allocate New Component Task</span>
@@ -201,8 +201,8 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
                 onClick={() => setSelectedComponent('all')}
                 className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
                   selectedComponent === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-[#E50914] text-white'
+                    : 'bg-[#F0F0F0] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 All Components ({projectTasks.length})
@@ -215,8 +215,8 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
                     onClick={() => setSelectedComponent(comp)}
                     className={`px-3 py-1 rounded-lg font-medium whitespace-nowrap transition-colors cursor-pointer ${
                       selectedComponent === comp
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                        ? 'bg-[#E50914] text-white'
+                        : 'bg-[#F0F0F0] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                     }`}
                   >
                     {comp} ({count})
@@ -228,12 +228,12 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
 
           {/* Tasks List */}
           {displayedTasks.length === 0 ? (
-            <div className="py-10 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl space-y-2">
-              <CheckSquare className="w-8 h-8 mx-auto text-slate-300 dark:text-slate-700" />
-              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="py-10 text-center border border-dashed border-[#D4D4D4] dark:border-[#333333] rounded-2xl space-y-2">
+              <CheckSquare className="w-8 h-8 mx-auto text-[#A3A3A3] dark:text-[#444444]" />
+              <p className="text-xs font-semibold text-[#333333] dark:text-[#D4D4D4]">
                 No tasks allocated for this project yet.
               </p>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-[#666666] dark:text-[#A3A3A3]">
                 Click &quot;Allocate New Component Task&quot; above to create and assign tasks to team members.
               </p>
             </div>
@@ -243,12 +243,12 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
                 return (
                   <div
                     key={task.id}
-                    className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 transition-colors space-y-2.5"
+                    className="p-4 border border-[#E0E0E0] dark:border-[#333333] rounded-xl bg-white dark:bg-[#141414] hover:border-[#E50914] transition-colors space-y-2.5"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 flex items-center gap-1">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#F7F7F7] dark:bg-[#171717] text-[#FF7900] border border-[#FF7900]/40 flex items-center gap-1">
                             <Tag className="w-3 h-3" />
                             <span>{task.workComponent || 'General Delivery'}</span>
                           </span>
@@ -256,32 +256,32 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
                           <span
                             className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                               task.status === 'Done' || task.status === 'Completed'
-                                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400'
+                                ? 'bg-[#FFC928]/15 text-[#101010] dark:text-[#FFC928]'
                                 : task.status === 'In Progress'
-                                ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400'
-                                : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
+                                ? 'bg-[#FF7900]/15 text-[#FF7900]'
+                                : 'bg-[#F0F0F0] text-[#555555] dark:bg-[#171717] dark:text-[#D4D4D4]'
                             }`}
                           >
                             Status: {task.status}
                           </span>
                         </div>
 
-                        <h5 className="text-xs font-bold text-slate-900 dark:text-white">
+                        <h5 className="text-xs font-bold text-[#101010] dark:text-white">
                           {task.title}
                         </h5>
-                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        <p className="text-xs text-[#555555] dark:text-[#A3A3A3] leading-relaxed">
                           {task.description}
                         </p>
                       </div>
 
                       <div className="text-right shrink-0 font-mono text-[11px]">
-                        <span className="text-slate-500">Due: </span>
-                        <strong className="text-slate-900 dark:text-white">{task.deadline}</strong>
+                        <span className="text-[#666666] dark:text-[#A3A3A3]">Due: </span>
+                        <strong className="text-[#101010] dark:text-white">{task.deadline}</strong>
                       </div>
                     </div>
 
                     {/* Assignee strip */}
-                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div className="pt-2 border-t border-[#E0E0E0] dark:border-[#333333] flex flex-wrap items-center justify-between gap-3 text-xs">
                       <div className="flex items-center gap-2">
                         {task.assigneeAvatar ? (
                           <img
@@ -291,11 +291,11 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
                             className="w-5 h-5 rounded-full object-cover"
                           />
                         ) : (
-                          <User className="w-4 h-4 text-slate-400" />
+                          <User className="w-4 h-4 text-[#888888]" />
                         )}
-                        <span className="text-slate-600 dark:text-slate-400">
+                        <span className="text-[#555555] dark:text-[#A3A3A3]">
                           Assigned Specialist:{' '}
-                          <strong className="text-slate-900 dark:text-white">
+                          <strong className="text-[#101010] dark:text-white">
                             {task.assigneeName}
                           </strong>
                         </span>
@@ -308,10 +308,10 @@ export const ProjectAllocationDetailsModal: React.FC<ProjectAllocationDetailsMod
           )}
 
           {/* Close button */}
-          <div className="flex justify-end pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex justify-end pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
             <button
               onClick={onClose}
-              className="px-5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer"
+              className="px-5 py-2 text-xs font-semibold text-[#333333] dark:text-[#D4D4D4] bg-[#F0F0F0] dark:bg-[#171717] hover:bg-[#E0E0E0] dark:hover:bg-[#202020] rounded-xl transition-colors cursor-pointer"
             >
               Close Inspector
             </button>

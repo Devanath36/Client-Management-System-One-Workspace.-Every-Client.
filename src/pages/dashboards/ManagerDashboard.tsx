@@ -20,6 +20,7 @@ import {
   ArrowRight,
   Eye,
   Filter,
+  Download,
 } from 'lucide-react';
 import { CreateProjectModal } from '../../components/modals/CreateProjectModal';
 import { AddClientModal } from '../../components/modals/AddClientModal';
@@ -31,6 +32,8 @@ import { MyWorkspaceView } from '../../components/workspace/MyWorkspaceView';
 import { MeetingsManagementView } from '../../components/meetings/MeetingsManagementView';
 import { ActivityLogsView } from '../../components/activity/ActivityLogsView';
 import { NotificationSettingsView } from '../../components/settings/NotificationSettingsView';
+import { ReportsAnalyticsView } from '../../components/reports/ReportsAnalyticsView';
+import { downloadProjectAnalyticsPDF } from '../../utils/pdfExport';
 
 interface ManagerDashboardProps {
   activeTab: string;
@@ -47,7 +50,28 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
     currentUser,
     getProjectProgress,
     getMemberWorkload,
+    showToast,
   } = useApp();
+
+  const handleDownloadReport = () => {
+    try {
+      showToast('info', 'Generating PDF Report...', 'Compiling currently viewed project analytics and deliverable summary.');
+      downloadProjectAnalyticsPDF({
+        projects: filteredProjects,
+        tasks: filteredTasks,
+        clients,
+        users,
+        managerName: currentUser?.name || 'Operations Manager',
+        statusFilter: projectStatusFilter,
+      });
+      setTimeout(() => {
+        showToast('success', 'Report Download Complete', 'Project analytics PDF has been saved to your device.');
+      }, 500);
+    } catch (err) {
+      console.error('PDF download error:', err);
+      showToast('error', 'Download Failed', 'Could not generate PDF report.');
+    }
+  };
 
   const [createProjectOpen, setCreateProjectOpen] = useState(false);
   const [addClientOpen, setAddClientOpen] = useState(false);
@@ -192,74 +216,118 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
         <NotificationSettingsView />
       )}
 
-      {/* Top Header Summary Strip (for operational tabs) */}
+      {/* Top Header Summary Strip & Download Report Action (for operational tabs) */}
       {activeTab !== 'workspace' &&
         activeTab !== 'meetings' &&
         activeTab !== 'activity-logs' &&
         activeTab !== 'settings' &&
         activeTab !== 'notification-settings' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  Total Managed Projects
-                </span>
-                <Briefcase className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+          <div className="space-y-4">
+            <div className="bg-white dark:bg-[#141414] p-4 sm:p-5 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs transition-colors">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="p-1.5 rounded-lg bg-[#E50914]/10 text-[#E50914] border border-[#E50914]/25">
+                    <Briefcase className="w-4 h-4" />
+                  </span>
+                  <h1 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white">
+                    Operations & Project Oversight
+                  </h1>
+                </div>
+                <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-1">
+                  Centralized cross-team performance metrics, client initiatives, and SLA milestones.
+                </p>
               </div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
-                {totalProjects}
-              </p>
-              <p className="text-[11px] text-slate-500 mt-1 font-mono">
-                {activeProjects} Active · {completedProjects} Completed
-              </p>
+
+              {/* Action Controls: Download PDF Report & Create Project */}
+              <div className="flex flex-wrap items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={handleDownloadReport}
+                  className="px-3.5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs shadow-[#E50914]/30 transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+                  title="Download comprehensive PDF report of currently viewed project analytics"
+                >
+                  <Download className="w-4 h-4 text-white" />
+                  <span>Download Report</span>
+                  <span className="px-1.5 py-0.2 rounded bg-black/30 text-[10px] font-mono uppercase tracking-wide">
+                    PDF
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setCreateProjectOpen(true)}
+                  className="px-3.5 py-2 text-xs font-bold text-[#101010] dark:text-white bg-[#F0F0F0] dark:bg-[#202020] hover:bg-[#E5E5E5] dark:hover:bg-[#2a2a2a] border border-[#E0E0E0] dark:border-[#333333] rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
+                >
+                  <Plus className="w-4 h-4 text-[#FF7900]" />
+                  <span>Create Project</span>
+                </button>
+              </div>
             </div>
 
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  Deliverable Progress
-                </span>
-                <BarChart3 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            {/* Metric KPI Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
+                    Total Managed Projects
+                  </span>
+                  <Briefcase className="w-4 h-4 text-[#FF7900]" />
+                </div>
+                <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
+                  {totalProjects}
+                </p>
+                <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1 font-mono">
+                  {activeProjects} Active · {completedProjects} Completed
+                </p>
               </div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
-                {overallProgress}%
-              </p>
-              <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                <div
-                  className="bg-emerald-600 h-full rounded-full transition-all"
-                  style={{ width: `${overallProgress}%` }}
-                />
-              </div>
-            </div>
 
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  Active Task Queue
-                </span>
-                <CheckSquare className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
+                    Deliverable Progress
+                  </span>
+                  <BarChart3 className="w-4 h-4 text-[#FFC928]" />
+                </div>
+                <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
+                  {overallProgress}%
+                </p>
+                <div className="w-full bg-[#EAEAEA] dark:bg-[#262626] h-1.5 rounded-full mt-2 overflow-hidden">
+                  <div
+                    className="bg-[#FFC928] h-full rounded-full transition-all"
+                    style={{ width: `${overallProgress}%` }}
+                  />
+                </div>
               </div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
-                {pendingTasks}
-              </p>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {completedTasks} tasks done across initiatives
-              </p>
-            </div>
 
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  Overdue Tasks & Alerts
-                </span>
-                <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+              <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
+                    Active Task Queue
+                  </span>
+                  <CheckSquare className="w-4 h-4 text-[#FF7900]" />
+                </div>
+                <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
+                  {pendingTasks}
+                </p>
+                <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">
+                  {completedTasks} tasks completed across initiatives
+                </p>
               </div>
-              <p className="text-2xl font-bold text-rose-600 dark:text-rose-400 mt-2 font-mono tabular-nums">
-                {overdueTasksCount}
-              </p>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {overdueTasksCount > 0 ? 'Requires manager attention' : 'All milestones on schedule'}
-              </p>
+
+              <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
+                    Overdue Tasks & Alerts
+                  </span>
+                  <AlertTriangle className="w-4 h-4 text-[#E50914]" />
+                </div>
+                <p className="text-2xl font-bold text-[#E50914] mt-2 font-mono tabular-nums">
+                  {overdueTasksCount}
+                </p>
+                <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">
+                  {overdueTasksCount > 0 ? 'Requires manager attention' : 'All milestones on schedule'}
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -270,25 +338,38 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
       {activeTab === 'projects' && (
         <div className="space-y-6">
           {/* Centralized Overview Header */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5">
+          <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-5 sm:p-6 space-y-5 shadow-xs transition-colors">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <Briefcase className="w-5 h-5 text-blue-600" />
+                <h2 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-[#E50914]" />
                   <span>Centralized Project Overview</span>
                 </h2>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
                   Consolidated multi-manager visibility across Manager 1, Manager 2, Manager 3, and all assigned Team Leads.
                 </p>
               </div>
-              {/* Primary Action: Create Project */}
-              <button
-                onClick={() => setCreateProjectOpen(true)}
-                className="px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Create & Assign Project</span>
-              </button>
+
+              {/* Primary Actions: Download Report & Create Project */}
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={handleDownloadReport}
+                  className="px-3.5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs shadow-[#E50914]/25 transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
+                  title="Download PDF report of current project analytics"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download Report</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCreateProjectOpen(true)}
+                  className="px-3.5 py-2 text-xs font-bold text-[#101010] dark:text-white bg-[#F0F0F0] dark:bg-[#202020] hover:bg-[#E5E5E5] dark:hover:bg-[#2a2a2a] border border-[#E0E0E0] dark:border-[#333333] rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
+                >
+                  <Plus className="w-4 h-4 text-[#FF7900]" />
+                  <span>Create Project</span>
+                </button>
+              </div>
             </div>
 
             {/* Manager-Wise Project Breakdown Quick-Filter Cards */}
@@ -297,20 +378,20 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                 onClick={() => setManagerFilter('all')}
                 className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                   managerFilter === 'all'
-                    ? 'bg-blue-50/70 border-blue-400 dark:bg-blue-950/60 dark:border-blue-700'
-                    : 'bg-slate-50/60 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                    ? 'bg-[#E50914]/10 border-[#E50914] text-[#E50914]'
+                    : 'bg-[#F9F9F9] dark:bg-[#1a1a1a] border-[#E0E0E0] dark:border-[#333333] hover:border-[#FF7900]'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                  <span className="text-[11px] font-semibold text-[#555555] dark:text-[#A3A3A3]">
                     All Managers
                   </span>
-                  <Briefcase className="w-3.5 h-3.5 text-blue-600" />
+                  <Briefcase className="w-3.5 h-3.5 text-[#FF7900]" />
                 </div>
-                <p className="text-xl font-bold font-mono text-slate-900 dark:text-white mt-1">
+                <p className="text-xl font-bold font-mono text-[#101010] dark:text-white mt-1">
                   {totalProjects}
                 </p>
-                <span className="text-[10px] text-slate-400">
+                <span className="text-[10px] text-[#777777] dark:text-[#888888]">
                   {activeProjects} Active · {completedProjects} Done
                 </span>
               </div>
@@ -319,32 +400,26 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                 const mgrProjects = projects.filter((p) => p.managerId === mgr.id || p.managerName === mgr.name);
                 const isSelected = managerFilter === mgr.id || managerFilter === mgr.name;
 
-                const badgeColor = mgr.name.includes('1')
-                  ? 'text-blue-600'
-                  : mgr.name.includes('2')
-                  ? 'text-purple-600'
-                  : 'text-emerald-600';
-
                 return (
                   <div
                     key={mgr.id}
                     onClick={() => setManagerFilter(isSelected ? 'all' : mgr.id)}
                     className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-blue-50/70 border-blue-400 dark:bg-blue-950/60 dark:border-blue-700'
-                        : 'bg-slate-50/60 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                        ? 'bg-[#E50914]/10 border-[#E50914] text-[#E50914]'
+                        : 'bg-[#F9F9F9] dark:bg-[#1a1a1a] border-[#E0E0E0] dark:border-[#333333] hover:border-[#FF7900]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+                      <span className="text-[11px] font-semibold text-[#101010] dark:text-white">
                         {mgr.name}
                       </span>
-                      <UserCheck className={`w-3.5 h-3.5 ${badgeColor}`} />
+                      <UserCheck className="w-3.5 h-3.5 text-[#FF7900]" />
                     </div>
-                    <p className="text-xl font-bold font-mono text-slate-900 dark:text-white mt-1">
+                    <p className="text-xl font-bold font-mono text-[#101010] dark:text-white mt-1">
                       {mgrProjects.length}
                     </p>
-                    <span className="text-[10px] text-slate-400">
+                    <span className="text-[10px] text-[#777777] dark:text-[#888888]">
                       {mgrProjects.filter((p) => p.status === 'In Progress' || p.status === 'New').length} Active
                     </span>
                   </div>
@@ -353,17 +428,17 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
             </div>
 
             {/* Search & Comprehensive Filters Toolbar */}
-            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-3">
+            <div className="pt-2 border-t border-[#E0E0E0] dark:border-[#333333] space-y-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
                 {/* Search */}
                 <div className="relative sm:col-span-2 lg:col-span-1">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                  <Search className="w-3.5 h-3.5 text-[#888888] absolute left-3 top-2.5" />
                   <input
                     type="text"
                     value={projectSearch}
                     onChange={(e) => setProjectSearch(e.target.value)}
                     placeholder="Search client, purpose, lead..."
-                    className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
                   />
                 </div>
 
@@ -372,7 +447,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   <select
                     value={managerFilter}
                     onChange={(e) => setManagerFilter(e.target.value)}
-                    className="w-full px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer"
+                    className="w-full px-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer"
                   >
                     <option value="all">All Assigning Managers</option>
                     {managers.map((mgr) => (
@@ -388,7 +463,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   <select
                     value={leadFilter}
                     onChange={(e) => setLeadFilter(e.target.value)}
-                    className="w-full px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer"
+                    className="w-full px-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer"
                   >
                     <option value="all">All Team Leads</option>
                     {teamLeads.map((lead) => (
@@ -404,7 +479,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   <select
                     value={projectStatusFilter}
                     onChange={(e) => setProjectStatusFilter(e.target.value)}
-                    className="w-full px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer"
+                    className="w-full px-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer"
                   >
                     <option value="all">All Statuses</option>
                     <option value="New">New</option>
@@ -418,7 +493,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   <select
                     value={timelineFilter}
                     onChange={(e) => setTimelineFilter(e.target.value)}
-                    className="w-full px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer"
+                    className="w-full px-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer"
                   >
                     <option value="all">All Deadlines</option>
                     <option value="overdue">Overdue / At-Risk</option>
@@ -429,7 +504,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
               </div>
 
               {(managerFilter !== 'all' || leadFilter !== 'all' || projectStatusFilter !== 'all' || timelineFilter !== 'all' || projectSearch) && (
-                <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+                <div className="flex items-center justify-between text-xs text-[#555555] dark:text-[#A3A3A3] pt-1">
                   <span>
                     Showing <strong>{filteredProjects.length}</strong> of {totalProjects} projects
                   </span>
@@ -441,7 +516,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                       setTimelineFilter('all');
                       setProjectSearch('');
                     }}
-                    className="text-blue-600 hover:text-blue-700 font-medium cursor-pointer"
+                    className="text-[#E50914] hover:text-[#c40812] font-semibold cursor-pointer"
                   >
                     Clear All Filters
                   </button>
@@ -450,9 +525,9 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
             </div>
 
             {/* Centralized Projects Table */}
-            <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+            <div className="overflow-x-auto border border-[#E0E0E0] dark:border-[#333333] rounded-xl">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-800">
+                <thead className="bg-[#F0F0F0] dark:bg-[#1c1c1c] text-[#101010] dark:text-white font-semibold border-b border-[#E0E0E0] dark:border-[#333333]">
                   <tr>
                     <th className="py-3 px-4">Client & Project Purpose</th>
                     <th className="py-3 px-4">Assigned Manager</th>
@@ -463,12 +538,12 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                     <th className="py-3 px-4 text-right">Work Allocation</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody className="divide-y divide-[#EAEAEA] dark:divide-[#262626]">
                   {filteredProjects.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="py-12 text-center text-xs text-slate-500 dark:text-slate-400">
-                        <Briefcase className="w-8 h-8 mx-auto text-slate-300 dark:text-slate-700 mb-2" />
-                        <p className="font-semibold text-slate-700 dark:text-slate-300">No Projects Found</p>
+                      <td colSpan={7} className="py-12 text-center text-xs text-[#555555] dark:text-[#A3A3A3]">
+                        <Briefcase className="w-8 h-8 mx-auto text-[#CCCCCC] dark:text-[#444444] mb-2" />
+                        <p className="font-semibold text-[#101010] dark:text-white">No Projects Found</p>
                         <p className="mt-1">Try adjusting your filters or click &quot;Create & Assign Project&quot; above.</p>
                       </td>
                     </tr>
@@ -479,57 +554,48 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                       const isInProgress = p.status === 'In Progress' || (progressData.progress > 0 && !isDone);
                       const isOverdue = !isDone && new Date(p.deadline).getTime() < nowTime;
 
-                      // Distinct badge color per assigning manager
-                      const managerBadgeStyle = p.managerName?.includes('1')
-                        ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border-blue-200 dark:border-blue-800'
-                        : p.managerName?.includes('2')
-                        ? 'bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border-purple-200 dark:border-purple-800'
-                        : p.managerName?.includes('3')
-                        ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
-                        : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700';
-
                       return (
-                        <tr key={p.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <tr key={p.id} className="hover:bg-[#F9F9F9] dark:hover:bg-[#1a1a1a] transition-colors">
                           <td className="py-3.5 px-4 max-w-xs">
                             <div className="flex items-center gap-1.5">
-                              <span className="font-bold text-slate-900 dark:text-white">{p.clientName}</span>
+                              <span className="font-bold text-[#101010] dark:text-white">{p.clientName}</span>
                               {p.companyName && (
-                                <span className="text-[11px] text-slate-400 truncate">({p.companyName})</span>
+                                <span className="text-[11px] text-[#777777] dark:text-[#888888] truncate">({p.companyName})</span>
                               )}
                             </div>
-                            <p className="font-medium text-slate-800 dark:text-slate-200 leading-snug mt-0.5 truncate">
+                            <p className="font-medium text-[#222222] dark:text-[#E0E0E0] leading-snug mt-0.5 truncate">
                               {p.purpose}
                             </p>
                             {p.description && (
-                              <p className="text-[11px] text-slate-500 truncate mt-0.5">{p.description}</p>
+                              <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] truncate mt-0.5">{p.description}</p>
                             )}
                           </td>
 
-                          {/* Assigned Manager (Clearly Distinguished) */}
+                          {/* Assigned Manager */}
                           <td className="py-3.5 px-4 whitespace-nowrap">
-                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border ${managerBadgeStyle}`}>
-                              <Briefcase className="w-3.5 h-3.5 shrink-0" />
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border bg-[#F0F0F0] dark:bg-[#202020] text-[#101010] dark:text-white border-[#E0E0E0] dark:border-[#333333]">
+                              <Briefcase className="w-3.5 h-3.5 text-[#FF7900] shrink-0" />
                               <span>{p.managerName || 'Manager 1'}</span>
                             </span>
                           </td>
 
                           {/* Assigned Team Lead */}
                           <td className="py-3.5 px-4 whitespace-nowrap">
-                            <div className="flex items-center gap-1.5 font-medium text-slate-800 dark:text-slate-200">
-                              <UserCheck className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                            <div className="flex items-center gap-1.5 font-medium text-[#101010] dark:text-white">
+                              <UserCheck className="w-3.5 h-3.5 text-[#FFC928] shrink-0" />
                               <span>{p.leadName}</span>
                             </div>
                           </td>
 
                           {/* Dates & Duration */}
-                          <td className="py-3.5 px-4 font-mono text-[11px] text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                          <td className="py-3.5 px-4 font-mono text-[11px] text-[#555555] dark:text-[#A3A3A3] whitespace-nowrap">
                             <div>{p.startDate} → {p.deadline}</div>
                             <div className="flex items-center gap-1.5 mt-0.5">
-                              <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400">
+                              <span className="text-[10px] font-bold text-[#FF7900] dark:text-[#FFC928]">
                                 {p.duration || 'N/A'} Days
                               </span>
                               {isOverdue && (
-                                <span className="text-[10px] font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-1.5 py-0.2 rounded border border-rose-200 dark:border-rose-900">
+                                <span className="text-[10px] font-semibold text-[#E50914] bg-[#E50914]/10 px-1.5 py-0.2 rounded border border-[#E50914]/30">
                                   Overdue
                                 </span>
                               )}
@@ -540,15 +606,15 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                           <td className="py-3.5 px-4">
                             <div className="w-28 space-y-1">
                               <div className="flex justify-between text-[11px] font-mono tabular-nums">
-                                <span className="font-semibold text-slate-900 dark:text-white">{progressData.progress}%</span>
-                                <span className="text-slate-400">
+                                <span className="font-semibold text-[#101010] dark:text-white">{progressData.progress}%</span>
+                                <span className="text-[#777777] dark:text-[#888888]">
                                   {progressData.completedTasks}/{progressData.totalTasks} Done
                                 </span>
                               </div>
-                              <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                              <div className="w-full bg-[#EAEAEA] dark:bg-[#2a2a2a] h-1.5 rounded-full overflow-hidden">
                                 <div
                                   className={`h-full rounded-full transition-all ${
-                                    isDone ? 'bg-emerald-600' : 'bg-blue-600'
+                                    isDone ? 'bg-[#FFC928]' : isOverdue ? 'bg-[#E50914]' : 'bg-[#FF7900]'
                                   }`}
                                   style={{ width: `${progressData.progress}%` }}
                                 />
@@ -559,12 +625,12 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                           {/* Status */}
                           <td className="py-3.5 px-4 whitespace-nowrap">
                             <span
-                              className={`inline-block px-2 py-0.5 rounded text-[11px] font-semibold ${
+                              className={`inline-block px-2.5 py-0.5 rounded text-[11px] font-semibold border ${
                                 isDone
-                                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400'
+                                  ? 'bg-[#F0F0F0] dark:bg-[#202020] text-[#101010] dark:text-white border-[#CCCCCC] dark:border-[#444444]'
                                   : isInProgress
-                                  ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
-                                  : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400'
+                                  ? 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/30'
+                                  : 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/30'
                               }`}
                             >
                               {isDone ? 'Done' : isInProgress ? 'In Progress' : 'New'}
@@ -575,9 +641,9 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                           <td className="py-3.5 px-4 text-right whitespace-nowrap">
                             <button
                               onClick={() => setInspectingProject(p)}
-                              className="px-3 py-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                              className="px-3 py-1.5 text-xs font-semibold text-[#101010] dark:text-white bg-[#F0F0F0] dark:bg-[#202020] hover:bg-[#E5E5E5] dark:hover:bg-[#2a2a2a] border border-[#E0E0E0] dark:border-[#333333] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
                             >
-                              <Eye className="w-3.5 h-3.5" />
+                              <Eye className="w-3.5 h-3.5 text-[#FF7900]" />
                               <span>Inspect Allocation</span>
                             </button>
                           </td>
@@ -596,36 +662,36 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
       {/* TAB: TEAM ALLOCATION & AVAILABILITY TRACKING              */}
       {/* ========================================================= */}
       {activeTab === 'team' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-6">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-5 sm:p-6 space-y-6 shadow-xs transition-colors">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white">
               Flexible Team Allocation & Real-Time Availability
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
               Availability tracked based on current active task assignments, deadlines, and active workload (not merely completed tasks).
             </p>
           </div>
 
           {/* Teams Overview Strip (Flexible Team Sizes: e.g. 10, 5, 2 members) */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white">
               Configured Delivery Teams
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {teams.map((tm) => (
                 <div
                   key={tm.id}
-                  className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-2"
+                  className="p-4 rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F9F9F9] dark:bg-[#1a1a1a] space-y-2"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-slate-900 dark:text-white">{tm.name}</span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300">
+                    <span className="font-bold text-sm text-[#101010] dark:text-white">{tm.name}</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#FF7900]/15 text-[#FF7900] border border-[#FF7900]/30">
                       {tm.memberIds.length} Members
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{tm.description}</p>
-                  <div className="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500">
-                    <span>Lead: <strong className="text-slate-800 dark:text-slate-200">{tm.leadName}</strong></span>
+                  <p className="text-xs text-[#555555] dark:text-[#A3A3A3]">{tm.description}</p>
+                  <div className="pt-2 border-t border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between text-xs text-[#555555] dark:text-[#A3A3A3]">
+                    <span>Lead: <strong className="text-[#101010] dark:text-white">{tm.leadName}</strong></span>
                   </div>
                 </div>
               ))}
@@ -633,8 +699,8 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
           </div>
 
           {/* Member Workload & Availability Cards */}
-          <div className="space-y-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+          <div className="space-y-3 pt-4 border-t border-[#E0E0E0] dark:border-[#333333]">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white">
               Team Member Workload & Capacity Roster
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -644,16 +710,16 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   const workload = getMemberWorkload(member.id);
 
                   const availabilityBadgeColor = {
-                    Available: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
-                    Moderate: 'bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 border-sky-200 dark:border-sky-800',
-                    Busy: 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border-amber-200 dark:border-amber-800',
-                    Unavailable: 'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border-rose-200 dark:border-rose-900',
+                    Available: 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/40',
+                    Moderate: 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/40',
+                    Busy: 'bg-[#FF7900]/25 text-[#FF7900] border-[#FF7900]/50 font-bold',
+                    Unavailable: 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/40 font-bold',
                   }[workload.availabilityStatus];
 
                   return (
                     <div
                       key={member.id}
-                      className="p-5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50/50 dark:bg-slate-800/30 space-y-3"
+                      className="p-5 border border-[#E0E0E0] dark:border-[#333333] rounded-xl bg-[#F9F9F9] dark:bg-[#1a1a1a] space-y-3"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5 min-w-0">
@@ -661,13 +727,13 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                             src={member.avatar}
                             alt={member.name}
                             referrerPolicy="no-referrer"
-                            className="w-9 h-9 rounded-full object-cover border border-slate-200 dark:border-slate-700 shrink-0"
+                            className="w-9 h-9 rounded-full object-cover border border-[#E0E0E0] dark:border-[#333333] shrink-0"
                           />
                           <div className="min-w-0">
-                            <p className="font-bold text-slate-900 dark:text-white truncate">
+                            <p className="font-bold text-[#101010] dark:text-white truncate">
                               {member.name}
                             </p>
-                            <p className="text-[11px] text-slate-500 font-mono truncate">{member.loginId}</p>
+                            <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] font-mono truncate">{member.loginId}</p>
                           </div>
                         </div>
 
@@ -677,28 +743,28 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                       </div>
 
                       {/* Workload breakdown */}
-                      <div className="p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 space-y-1.5 text-xs">
-                        <div className="flex justify-between text-slate-600 dark:text-slate-300">
+                      <div className="p-2.5 rounded-lg bg-white dark:bg-[#202020] border border-[#E0E0E0] dark:border-[#333333] space-y-1.5 text-xs">
+                        <div className="flex justify-between text-[#555555] dark:text-[#A3A3A3]">
                           <span>Active Tasks:</span>
-                          <strong className="text-slate-900 dark:text-white font-mono">{workload.activeTasksCount}</strong>
+                          <strong className="text-[#101010] dark:text-white font-mono">{workload.activeTasksCount}</strong>
                         </div>
-                        <div className="flex justify-between text-slate-600 dark:text-slate-300">
+                        <div className="flex justify-between text-[#555555] dark:text-[#A3A3A3]">
                           <span>Completed Tasks:</span>
-                          <strong className="text-slate-900 dark:text-white font-mono">{workload.completedTasksCount}</strong>
+                          <strong className="text-[#101010] dark:text-white font-mono">{workload.completedTasksCount}</strong>
                         </div>
                         {workload.overdueTasksCount > 0 && (
-                          <div className="flex justify-between text-rose-600 dark:text-rose-400 font-semibold">
+                          <div className="flex justify-between text-[#E50914] font-semibold">
                             <span>Overdue Tasks:</span>
                             <span className="font-mono">{workload.overdueTasksCount}</span>
                           </div>
                         )}
-                        <div className="flex justify-between text-slate-600 dark:text-slate-300">
+                        <div className="flex justify-between text-[#555555] dark:text-[#A3A3A3]">
                           <span>Upcoming (3d):</span>
-                          <span className="font-mono">{workload.upcomingDeadlinesCount}</span>
+                          <span className="font-mono text-[#101010] dark:text-white">{workload.upcomingDeadlinesCount}</span>
                         </div>
                       </div>
 
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                      <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                         {workload.availabilityLabel}
                       </p>
                     </div>
@@ -713,19 +779,19 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
       {/* TAB: CLIENT DIRECTORY                                     */}
       {/* ========================================================= */}
       {activeTab === 'clients' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-5 sm:p-6 space-y-5 shadow-xs transition-colors">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h2 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white">
                 Client Directory
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
                 Overview of client records and assigned delivery architects.
               </p>
             </div>
             <button
               onClick={() => setAddClientOpen(true)}
-              className="px-3.5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
+              className="px-3.5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Add New Client</span>
@@ -735,22 +801,22 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
           {/* Search & Filters */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="relative flex-1 max-w-sm">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-[#888888] absolute left-3 top-2.5" />
               <input
                 type="text"
                 value={clientSearch}
                 onChange={(e) => setClientSearch(e.target.value)}
                 placeholder="Search clients..."
-                className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white"
+                className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
               />
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-500">Status:</span>
+              <span className="text-xs text-[#555555] dark:text-[#A3A3A3]">Status:</span>
               <select
                 value={clientStatusFilter}
                 onChange={(e) => setClientStatusFilter(e.target.value)}
-                className="px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer"
+                className="px-3 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#1f1f1f] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer"
               >
                 <option value="all">All Statuses</option>
                 <option value="Active">Active</option>
@@ -761,9 +827,9 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
           </div>
 
           {/* Client Table */}
-          <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+          <div className="overflow-x-auto border border-[#E0E0E0] dark:border-[#333333] rounded-xl">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-[#F0F0F0] dark:bg-[#1c1c1c] text-[#101010] dark:text-white font-semibold border-b border-[#E0E0E0] dark:border-[#333333]">
                 <tr>
                   <th className="py-3 px-4">Client Name</th>
                   <th className="py-3 px-4">Industry / Domain</th>
@@ -772,10 +838,10 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tbody className="divide-y divide-[#EAEAEA] dark:divide-[#262626]">
                 {filteredClients.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+                    <td colSpan={5} className="py-8 text-center text-xs text-[#555555] dark:text-[#A3A3A3]">
                       No clients added yet. Click &quot;Add New Client&quot; to register a client record.
                     </td>
                   </tr>
@@ -783,29 +849,35 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   filteredClients.map((client) => (
                     <tr
                       key={client.id}
-                      className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors cursor-pointer"
+                      className="hover:bg-[#F9F9F9] dark:hover:bg-[#1a1a1a] transition-colors cursor-pointer"
                       onClick={() => setSelectedClient(client)}
                     >
-                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
+                      <td className="py-3.5 px-4 font-bold text-[#101010] dark:text-white">
                         {client.name}
                       </td>
-                      <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
+                      <td className="py-3.5 px-4 text-[#555555] dark:text-[#A3A3A3]">
                         {client.industry}
                       </td>
                       <td className="py-3.5 px-4">
-                        <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                        <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-[#F0F0F0] dark:bg-[#202020] text-[#101010] dark:text-white border border-[#E0E0E0] dark:border-[#333333]">
                           {client.tier}
                         </span>
                       </td>
                       <td className="py-3.5 px-4">
-                        <span className="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+                        <span className={`inline-block px-2.5 py-0.5 rounded text-[11px] font-semibold border ${
+                          client.status === 'Completed'
+                            ? 'bg-[#F0F0F0] dark:bg-[#202020] text-[#101010] dark:text-white border-[#CCCCCC] dark:border-[#444444]'
+                            : client.status === 'Active'
+                            ? 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/30'
+                            : 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/30'
+                        }`}>
                           {client.status}
                         </span>
                       </td>
                       <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => setSelectedClient(client)}
-                          className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                          className="text-xs font-semibold text-[#E50914] hover:text-[#c40812] cursor-pointer"
                         >
                           View Details
                         </button>
@@ -823,28 +895,28 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
       {/* TAB: TASK ASSIGNMENTS                                     */}
       {/* ========================================================= */}
       {activeTab === 'tasks' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-5 sm:p-6 space-y-5 shadow-xs transition-colors">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h2 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white">
                 Project Task Registry
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
                 Centralized monitoring of deliverable tasks, assignees, and progress status.
               </p>
             </div>
             <button
               onClick={() => setAddTaskOpen(true)}
-              className="px-3.5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
+              className="px-3.5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Assign New Task</span>
             </button>
           </div>
 
-          <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+          <div className="overflow-x-auto border border-[#E0E0E0] dark:border-[#333333] rounded-xl">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-[#F0F0F0] dark:bg-[#1c1c1c] text-[#101010] dark:text-white font-semibold border-b border-[#E0E0E0] dark:border-[#333333]">
                 <tr>
                   <th className="py-3 px-4">Task Name</th>
                   <th className="py-3 px-4">Project</th>
@@ -853,10 +925,10 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   <th className="py-3 px-4">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tbody className="divide-y divide-[#EAEAEA] dark:divide-[#262626]">
                 {filteredTasks.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+                    <td colSpan={5} className="py-8 text-center text-xs text-[#555555] dark:text-[#A3A3A3]">
                       No tasks assigned yet.
                     </td>
                   </tr>
@@ -864,29 +936,29 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                   filteredTasks.map((t) => (
                     <tr
                       key={t.id}
-                      className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors cursor-pointer"
+                      className="hover:bg-[#F9F9F9] dark:hover:bg-[#1a1a1a] transition-colors cursor-pointer"
                       onClick={() => setSelectedTask(t)}
                     >
-                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
+                      <td className="py-3.5 px-4 font-bold text-[#101010] dark:text-white">
                         {t.title}
                       </td>
-                      <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
+                      <td className="py-3.5 px-4 text-[#555555] dark:text-[#A3A3A3]">
                         {t.projectTitle}
                       </td>
-                      <td className="py-3.5 px-4 text-slate-800 dark:text-slate-200 font-medium">
+                      <td className="py-3.5 px-4 text-[#101010] dark:text-white font-medium">
                         {t.assigneeName}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-slate-600 dark:text-slate-400">
+                      <td className="py-3.5 px-4 font-mono text-[#555555] dark:text-[#A3A3A3]">
                         {t.deadline}
                       </td>
                       <td className="py-3.5 px-4">
                         <span
-                          className={`inline-block px-2 py-0.5 rounded text-[11px] font-semibold ${
+                          className={`inline-block px-2.5 py-0.5 rounded text-[11px] font-semibold border ${
                             t.status === 'Done' || t.status === 'Completed'
-                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400'
+                              ? 'bg-[#F0F0F0] dark:bg-[#202020] text-[#101010] dark:text-white border-[#CCCCCC] dark:border-[#444444]'
                               : t.status === 'In Progress'
-                              ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
-                              : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400'
+                              ? 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/30'
+                              : 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/30'
                           }`}
                         >
                           {t.status}
@@ -905,22 +977,22 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
       {/* TAB: DEADLINE & SLA ALERTS                                */}
       {/* ========================================================= */}
       {activeTab === 'deadline-alerts' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-6">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-5 sm:p-6 space-y-6 shadow-xs transition-colors">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white">
               Project & Task Deadline Alerts
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
               Live tracking of approaching deadlines and overdue items across all initiatives.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white">
               Project Milestone Alerts
             </h3>
             {projectDeadlineAlerts.length === 0 ? (
-              <div className="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-xl text-xs text-slate-500 text-center">
+              <div className="p-6 bg-[#F9F9F9] dark:bg-[#1a1a1a] rounded-xl text-xs text-[#555555] dark:text-[#A3A3A3] text-center border border-[#E0E0E0] dark:border-[#333333]">
                 All projects are comfortably within their scheduled target deadlines.
               </div>
             ) : (
@@ -930,8 +1002,8 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                     key={alert.id}
                     className={`p-4 rounded-xl border flex items-start gap-3 ${
                       alert.isOverdue
-                        ? 'bg-rose-50/60 dark:bg-rose-950/30 border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300'
-                        : 'bg-amber-50/60 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-300'
+                        ? 'bg-[#E50914]/10 border-[#E50914]/30 text-[#E50914]'
+                        : 'bg-[#FF7900]/10 border-[#FF7900]/30 text-[#FF7900]'
                     }`}
                   >
                     <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
@@ -941,7 +1013,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                         <span className="text-[10px] font-mono font-bold">{alert.daysText}</span>
                       </div>
                       <p className="text-xs leading-relaxed">{alert.purpose}</p>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                      <div className="text-[11px] opacity-80">
                         Lead: {alert.lead} · Target: {alert.deadline}
                       </div>
                     </div>
@@ -950,11 +1022,11 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
               </div>
             )}
 
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 pt-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white pt-4">
               Urgent Task Alerts
             </h3>
             {taskDeadlineAlerts.length === 0 ? (
-              <div className="p-6 bg-slate-50 dark:bg-slate-800/40 rounded-xl text-xs text-slate-500 text-center">
+              <div className="p-6 bg-[#F9F9F9] dark:bg-[#1a1a1a] rounded-xl text-xs text-[#555555] dark:text-[#A3A3A3] text-center border border-[#E0E0E0] dark:border-[#333333]">
                 No critical or approaching task deadlines found.
               </div>
             ) : (
@@ -964,8 +1036,8 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                     key={alert.id}
                     className={`p-4 rounded-xl border flex items-start gap-3 ${
                       alert.isOverdue
-                        ? 'bg-rose-50/60 dark:bg-rose-950/30 border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300'
-                        : 'bg-amber-50/60 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-300'
+                        ? 'bg-[#E50914]/10 border-[#E50914]/30 text-[#E50914]'
+                        : 'bg-[#FF7900]/10 border-[#FF7900]/30 text-[#FF7900]'
                     }`}
                   >
                     <Clock className="w-5 h-5 shrink-0 mt-0.5" />
@@ -975,7 +1047,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
                         <span className="text-[10px] font-mono font-bold">{alert.daysText}</span>
                       </div>
                       <p className="text-xs leading-relaxed">Project: {alert.purpose}</p>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                      <div className="text-[11px] opacity-80">
                         Assignee: {alert.lead} · Due: {alert.deadline}
                       </div>
                     </div>
@@ -991,69 +1063,7 @@ export const ManagerDashboard: React.FC<ManagerDashboardProps> = ({ activeTab, o
       {/* TAB: REPORTS & ANALYTICS                                  */}
       {/* ========================================================= */}
       {(activeTab === 'analytics' || activeTab === 'reports') && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-6">
-          <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              Project Performance & Delivery Reports
-            </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Comprehensive report of project completion, task statuses, and team velocities.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 space-y-2">
-              <span className="text-xs text-slate-500 font-semibold uppercase">Total Projects</span>
-              <p className="text-3xl font-bold font-mono text-slate-900 dark:text-white">{totalProjects}</p>
-              <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-2 border-t border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between">
-                  <span>Active / In Progress:</span>
-                  <span className="font-bold">{activeProjects}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Completed / Done:</span>
-                  <span className="font-bold text-emerald-600">{completedProjects}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 space-y-2">
-              <span className="text-xs text-slate-500 font-semibold uppercase">Task Completion</span>
-              <p className="text-3xl font-bold font-mono text-slate-900 dark:text-white">{overallProgress}%</p>
-              <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-2 border-t border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between">
-                  <span>Total Tasks:</span>
-                  <span className="font-bold">{totalTasks}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Tasks Completed:</span>
-                  <span className="font-bold text-emerald-600">{completedTasks}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Pending Tasks:</span>
-                  <span className="font-bold text-blue-600">{pendingTasks}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 space-y-2">
-              <span className="text-xs text-slate-500 font-semibold uppercase">Deadline Adherence</span>
-              <p className="text-3xl font-bold font-mono text-slate-900 dark:text-white">
-                {totalTasks > 0 ? `${Math.round(((totalTasks - overdueTasksCount) / totalTasks) * 100)}%` : '100%'}
-              </p>
-              <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-2 border-t border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between">
-                  <span>On-time Tasks:</span>
-                  <span className="font-bold text-emerald-600">{totalTasks - overdueTasksCount}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Overdue Tasks:</span>
-                  <span className="font-bold text-rose-600">{overdueTasksCount}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ReportsAnalyticsView role="manager" />
       )}
 
       {/* Modals */}

@@ -122,8 +122,8 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3.5 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 rounded-xl text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-500" />
+          <div className="p-3.5 bg-[#FFF5F5] dark:bg-[#171717] border border-[#E50914]/40 rounded-xl text-xs text-[#E50914] flex items-start gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-[#E50914]" />
             <span>{error}</span>
           </div>
         )}
@@ -131,7 +131,7 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
         {/* 1. Client Name (required) & 2. Company Name (optional) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4]">
               Client Name *
             </label>
             <input
@@ -139,12 +139,12 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="e.g. John Doe / Apex Solutions"
-              className="w-full px-3.5 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white"
+              className="w-full px-3.5 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4]">
               Company Name (Optional)
             </label>
             <input
@@ -152,7 +152,7 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="e.g. Apex Global Corp"
-              className="w-full px-3.5 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white"
+              className="w-full px-3.5 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white"
             />
           </div>
         </div>
@@ -160,23 +160,23 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
         {/* 3. Project Purpose (required, free-text input) */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4]">
               Project Purpose *
             </label>
-            <span className="text-[10px] text-slate-400">Accepts manually entered text</span>
+            <span className="text-[10px] text-[#888888] dark:text-[#A3A3A3]">Accepts manually entered text</span>
           </div>
           <input
             type="text"
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
             placeholder="Enter custom project purpose..."
-            className="w-full px-3.5 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white"
+            className="w-full px-3.5 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white"
           />
         </div>
 
         {/* 4. Project Description (optional text area) */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4]">
             Project Description (Optional)
           </label>
           <textarea
@@ -184,60 +184,60 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
             placeholder="Provide optional project details or scope..."
-            className="w-full px-3.5 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white resize-none"
+            className="w-full px-3.5 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white resize-none"
           />
         </div>
 
         {/* 5. Start Date, 6. Deadline, 7. Project Duration */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-blue-600" />
+            <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#FF7900]" />
               <span>Project Start Date *</span>
             </label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="w-full px-3 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white"
+              className="w-full px-3 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-rose-600" />
+            <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#E50914]" />
               <span>Project Deadline *</span>
             </label>
             <input
               type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
-              className="w-full px-3 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white"
+              className="w-full px-3 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-emerald-600" />
+            <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-[#FFC928]" />
               <span>Project Duration</span>
             </label>
-            <div className="px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white flex items-center justify-between">
+            <div className="px-3.5 py-2 text-xs font-mono font-bold rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white flex items-center justify-between">
               <span>{durationDays >= 0 ? `${durationDays} Days` : 'Invalid Range'}</span>
-              <span className="text-[10px] text-slate-400 font-sans font-normal">Auto-calculated</span>
+              <span className="text-[10px] text-[#888888] dark:text-[#A3A3A3] font-sans font-normal">Auto-calculated</span>
             </div>
           </div>
         </div>
 
         {/* 8. Assign Team Lead (dropdown showing the five registered Team Leads) */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-            <UserCheck className="w-3.5 h-3.5 text-indigo-600" />
+          <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] flex items-center gap-1.5">
+            <UserCheck className="w-3.5 h-3.5 text-[#FF7900]" />
             <span>Assign Team Lead *</span>
           </label>
           <select
             value={leadId}
             onChange={(e) => setLeadId(e.target.value)}
-            className="w-full px-3.5 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white cursor-pointer"
+            className="w-full px-3.5 py-2 text-xs bg-white dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#333333] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E50914] text-[#101010] dark:text-white cursor-pointer"
           >
             <option value="">Select one of the 5 registered Team Leads...</option>
             {teamLeads.map((lead) => (
@@ -246,23 +246,23 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose 
               </option>
             ))}
           </select>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-[#888888] dark:text-[#A3A3A3]">
             Assigned project will appear directly in this Team Lead&apos;s dashboard.
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] rounded-xl transition-colors cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors cursor-pointer"
+            className="px-5 py-2 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl shadow-xs transition-colors cursor-pointer"
           >
             Create & Assign Project
           </button>

@@ -128,37 +128,37 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   const getTypeIcon = (type: NotificationType, cat: NotificationCategory) => {
     switch (cat) {
       case 'project':
-        return <Briefcase className="w-4 h-4 text-sky-600 dark:text-sky-400" />;
+        return <Briefcase className="w-4 h-4 text-[#FF7900]" />;
       case 'task':
         if (type === 'task_completed' || type === 'task_proof_approved') {
-          return <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />;
+          return <CheckCircle2 className="w-4 h-4 text-[#FFC928]" />;
         }
         if (type === 'task_overdue' || type === 'task_deadline') {
-          return <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400" />;
+          return <AlertTriangle className="w-4 h-4 text-[#E50914]" />;
         }
-        return <CheckSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />;
+        return <CheckSquare className="w-4 h-4 text-[#FFC928]" />;
       case 'meeting':
-        return <Video className="w-4 h-4 text-purple-600 dark:text-purple-400" />;
+        return <Video className="w-4 h-4 text-[#FF7900]" />;
       case 'system':
       default:
         if (type === 'security_alert') {
-          return <Shield className="w-4 h-4 text-amber-600 dark:text-amber-400" />;
+          return <Shield className="w-4 h-4 text-[#E50914]" />;
         }
-        return <Bell className="w-4 h-4 text-blue-600 dark:text-blue-400" />;
+        return <Bell className="w-4 h-4 text-[#FFC928]" />;
     }
   };
 
   const getCategoryBadge = (cat: NotificationCategory) => {
     switch (cat) {
       case 'project':
-        return 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300 border-sky-200 dark:border-sky-800';
+        return 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/40';
       case 'task':
-        return 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 border-blue-200 dark:border-blue-800';
+        return 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/40';
       case 'meeting':
-        return 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 border-purple-200 dark:border-purple-800';
+        return 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/40';
       case 'system':
       default:
-        return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700';
+        return 'bg-[#101010] text-[#A3A3A3] border-[#333333]';
     }
   };
 
@@ -263,40 +263,40 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       title: 'Project Assignments & Milestones',
       description: 'Notifications when new projects are created, assigned, or reach milestones.',
       icon: Briefcase,
-      color: 'text-sky-600 dark:text-sky-400',
-      bg: 'bg-sky-50 dark:bg-sky-950/60',
+      color: 'text-[#FFC928]',
+      bg: 'bg-[#171717] border border-[#333333]',
     },
     {
       key: 'taskNotifications' as const,
       title: 'Task Distribution & Workflows',
       description: 'Alerts when tasks are allocated, updated, or marked completed.',
       icon: CheckSquare,
-      color: 'text-blue-600 dark:text-blue-400',
-      bg: 'bg-blue-50 dark:bg-blue-950/60',
+      color: 'text-[#FF7900]',
+      bg: 'bg-[#171717] border border-[#333333]',
     },
     {
       key: 'deadlineReminders' as const,
       title: 'Deadline Reminders & Overdue Warnings',
       description: 'Automated 24h reminders, same-day notices, and overdue SLA breach alerts.',
       icon: AlertTriangle,
-      color: 'text-rose-600 dark:text-rose-400',
-      bg: 'bg-rose-50 dark:bg-rose-950/60',
+      color: 'text-[#E50914]',
+      bg: 'bg-[#171717] border border-[#333333]',
     },
     {
       key: 'meetingNotifications' as const,
       title: 'Meeting Scheduling & Reschedule Alerts',
       description: 'Notices for client syncs, video call links, and rescheduling broadcasts.',
       icon: Video,
-      color: 'text-purple-600 dark:text-purple-400',
-      bg: 'bg-purple-50 dark:bg-purple-950/60',
+      color: 'text-[#FFC928]',
+      bg: 'bg-[#171717] border border-[#333333]',
     },
     {
       key: 'systemAnnouncements' as const,
       title: 'System & Security Announcements',
       description: 'Administrative alerts, role permissions, and platform notifications.',
       icon: Shield,
-      color: 'text-emerald-600 dark:text-emerald-400',
-      bg: 'bg-emerald-50 dark:bg-emerald-950/60',
+      color: 'text-white',
+      bg: 'bg-[#171717] border border-[#333333]',
     },
   ];
 
@@ -312,7 +312,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       >
         {/* Backdrop Overlay */}
         <div
-          className="fixed inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-black/80 backdrop-blur-xs transition-opacity"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -323,35 +323,35 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           aria-modal="true"
           aria-labelledby="notification-center-title"
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-2xl max-h-[calc(100dvh-32px)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl flex flex-col min-h-0 overflow-hidden z-10 transition-all animate-in fade-in zoom-in-95 duration-150"
+          className="relative w-full max-w-2xl max-h-[calc(100dvh-32px)] bg-[#141414] border border-[#333333] rounded-3xl shadow-2xl flex flex-col min-h-0 overflow-hidden z-10 transition-all animate-in fade-in zoom-in-95 duration-150 text-white"
         >
           {/* ========================================================= */}
-          {/* 1. HEADER (Completely visible, separate container)         */}
+          {/* 1. HEADER                                                 */}
           {/* ========================================================= */}
-          <div className="shrink-0 p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-3 z-10">
+          <div className="shrink-0 p-4 sm:p-5 border-b border-[#333333] bg-[#141414] flex items-center justify-between gap-3 z-10">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="p-2.5 bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 rounded-2xl shrink-0">
+              <div className="p-2.5 bg-[#101010] border border-[#333333] text-[#FFC928] rounded-2xl shrink-0">
                 <Bell className="w-5 h-5" />
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h2
                     id="notification-center-title"
-                    className="text-base font-bold text-slate-900 dark:text-white truncate"
+                    className="text-base font-bold text-white truncate"
                   >
                     Notification Center
                   </h2>
                   {unreadCount > 0 ? (
-                    <span className="px-2 py-0.5 text-[10px] font-mono font-bold bg-blue-600 text-white rounded-full shrink-0">
+                    <span className="px-2 py-0.5 text-[10px] font-mono font-bold bg-[#E50914] text-white rounded-full shrink-0">
                       {unreadCount} new
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full shrink-0">
+                    <span className="px-2 py-0.5 text-[10px] font-bold bg-[#101010] text-[#A3A3A3] border border-[#333333] rounded-full shrink-0">
                       Up to date
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                <p className="text-xs text-[#A3A3A3] truncate">
                   Real-time workspace activity, milestones, and alerts
                 </p>
               </div>
@@ -363,7 +363,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 <button
                   type="button"
                   onClick={() => setSendModalOpen(true)}
-                  className="min-h-[40px] px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  className="min-h-[40px] px-3 py-1.5 text-xs font-bold text-white bg-[#E50914] hover:bg-[#c40812] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
                   title="Dispatch organization announcement"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -377,8 +377,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 onClick={() => setActiveMode(activeMode === 'preferences' ? 'list' : 'preferences')}
                 className={`min-h-[40px] min-w-[40px] flex items-center justify-center rounded-xl transition-colors cursor-pointer ${
                   activeMode === 'preferences'
-                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
-                    : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    ? 'bg-[#171717] text-[#FFC928] border border-[#333333]'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white hover:bg-[#F0F0F0] dark:hover:bg-[#202020]'
                 }`}
                 title={activeMode === 'preferences' ? 'Back to notifications' : 'Notification Preferences'}
                 aria-label={activeMode === 'preferences' ? 'Back to notifications' : 'Notification Preferences'}
@@ -390,7 +390,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="min-h-[40px] min-w-[40px] flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="min-h-[40px] min-w-[40px] flex items-center justify-center text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white rounded-xl hover:bg-[#F0F0F0] dark:hover:bg-[#202020] transition-colors cursor-pointer"
                 title="Close notification center"
                 aria-label="Close notification center"
               >
@@ -402,20 +402,20 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           {/* ========================================================= */}
           {/* SUB-HEADER / MODE SELECTOR STRIP                          */}
           {/* ========================================================= */}
-          <div className="shrink-0 px-4 py-2 border-b border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/40 flex items-center justify-between gap-2">
+          <div className="shrink-0 px-4 py-2 border-b border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] flex items-center justify-between gap-2">
             <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => setActiveMode('list')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                   activeMode === 'list'
-                    ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs border border-slate-200 dark:border-slate-700'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-[#E50914] text-white shadow-xs'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 <span>Alerts</span>
                 {unreadCount > 0 && (
-                  <span className="text-[10px] px-1.5 py-0.2 rounded-full font-mono bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400">
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${activeMode === 'list' ? 'bg-white text-[#E50914]' : 'bg-[#E50914] text-white'}`}>
                     {unreadCount}
                   </span>
                 )}
@@ -425,8 +425,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 onClick={() => setActiveMode('preferences')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                   activeMode === 'preferences'
-                    ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs border border-slate-200 dark:border-slate-700'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-[#E50914] text-white shadow-xs'
+                    : 'text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white'
                 }`}
               >
                 <Sliders className="w-3.5 h-3.5" />
@@ -438,7 +438,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               <button
                 type="button"
                 onClick={markAllNotificationsRead}
-                className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer flex items-center gap-1"
+                className="text-xs font-medium text-[#E50914] hover:underline cursor-pointer flex items-center gap-1"
               >
                 <Check className="w-3.5 h-3.5" />
                 <span>Mark All Read</span>
@@ -453,7 +453,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
             {activeMode === 'list' ? (
               <div>
                 {/* Category Filter Tabs */}
-                <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
+                <div className="px-3 py-2 border-b border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7]/60 dark:bg-[#101010]">
                   <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
                     {filterTabs.map((tab) => {
                       const isActive = activeFilter === tab.id;
@@ -469,8 +469,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                           onClick={() => setActiveFilter(tab.id)}
                           className={`min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                             isActive
-                              ? 'bg-blue-600 text-white shadow-2xs'
-                              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                              ? 'bg-[#E50914] text-white shadow-xs'
+                              : 'text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] hover:text-[#101010] dark:hover:text-white'
                           }`}
                         >
                           <span>{tab.label}</span>
@@ -479,7 +479,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                               className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
                                 isActive
                                   ? 'bg-white/20 text-white'
-                                  : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                                  : 'bg-[#E0E0E0] dark:bg-[#262626] text-[#101010] dark:text-white'
                               }`}
                             >
                               {count}
@@ -492,14 +492,14 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 </div>
 
                 {/* Notifications List */}
-                <div className="divide-y divide-slate-100 dark:divide-slate-800/80">
+                <div className="divide-y divide-[#333333]">
                   {filteredNotifs.length === 0 ? (
-                    <div className="p-10 text-center text-xs text-slate-400 space-y-2">
-                      <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 mx-auto flex items-center justify-center">
-                        <CheckCircle2 className="w-6 h-6 text-slate-300 dark:text-slate-600" />
+                    <div className="p-10 text-center text-xs text-[#A3A3A3] space-y-2">
+                      <div className="w-12 h-12 rounded-2xl bg-[#171717] border border-[#333333] text-[#FFC928] mx-auto flex items-center justify-center">
+                        <CheckCircle2 className="w-6 h-6 text-[#FFC928]" />
                       </div>
-                      <p className="font-bold text-slate-700 dark:text-slate-300 text-sm">All caught up!</p>
-                      <p className="max-w-xs mx-auto text-slate-500">
+                      <p className="font-bold text-white text-sm">All caught up!</p>
+                      <p className="max-w-xs mx-auto text-[#A3A3A3]">
                         No notifications found in the <strong>{activeFilter}</strong> category. New dispatches will appear here instantly.
                       </p>
                     </div>
@@ -515,16 +515,16 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                         <div
                           key={notif.id}
                           onClick={() => handleNotificationClick(notif)}
-                          className={`p-4 text-xs transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer space-y-2 relative ${
+                          className={`p-4 text-xs transition-colors hover:bg-[#F7F7F7] dark:hover:bg-[#1a1a1a] cursor-pointer space-y-2 relative ${
                             isUnread
-                              ? 'bg-blue-50/50 dark:bg-blue-950/20 border-l-4 border-l-blue-600'
+                              ? 'bg-[#F7F7F7] dark:bg-[#171717] border-l-4 border-l-[#E50914]'
                               : 'border-l-4 border-l-transparent'
                           }`}
                         >
                           {/* Top line: Category badge, timestamp, and actions */}
                           <div className="flex items-start justify-between gap-2">
                             <div className="flex items-center gap-2 min-w-0 flex-wrap">
-                              <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 shrink-0">
+                              <div className="p-1.5 rounded-lg bg-[#F0F0F0] dark:bg-[#1f1f1f] shrink-0">
                                 {getTypeIcon(notif.type, cat)}
                               </div>
                               <span
@@ -541,7 +541,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                               className="flex items-center gap-1.5 shrink-0"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <span className="text-[11px] font-mono text-slate-400">
+                              <span className="text-[11px] font-mono text-[#555555] dark:text-[#A3A3A3]">
                                 {notif.timestamp}
                               </span>
 
@@ -555,7 +555,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                                     markNotificationRead(notif.id);
                                   }
                                 }}
-                                className="min-h-[32px] min-w-[32px] flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="min-h-[32px] min-w-[32px] flex items-center justify-center text-[#555555] dark:text-[#A3A3A3] hover:text-[#E50914] rounded-lg hover:bg-[#F0F0F0] dark:hover:bg-[#202020] transition-colors cursor-pointer"
                                 title={notif.read ? 'Mark as unread' : 'Mark as read'}
                                 aria-label={notif.read ? 'Mark as unread' : 'Mark as read'}
                               >
@@ -570,7 +570,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                               <button
                                 type="button"
                                 onClick={() => deleteNotification(notif.id)}
-                                className="min-h-[32px] min-w-[32px] flex items-center justify-center text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="min-h-[32px] min-w-[32px] flex items-center justify-center text-[#555555] dark:text-[#A3A3A3] hover:text-[#E50914] rounded-lg hover:bg-[#F0F0F0] dark:hover:bg-[#202020] transition-colors cursor-pointer"
                                 title="Delete notification"
                                 aria-label="Delete notification"
                               >
@@ -581,25 +581,25 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
                           {/* Title & Message */}
                           <div>
-                            <h4 className="font-bold text-slate-900 dark:text-white text-xs leading-snug">
+                            <h4 className="font-bold text-[#101010] dark:text-white text-xs leading-snug">
                               {notif.title}
                             </h4>
-                            <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed mt-1">
+                            <p className="text-[#555555] dark:text-[#A3A3A3] text-[11px] leading-relaxed mt-1">
                               {notif.message}
                             </p>
                           </div>
 
                           {/* Footer Line: Sender and Action link */}
-                          <div className="flex items-center justify-between pt-1 text-[11px] text-slate-400">
+                          <div className="flex items-center justify-between pt-1 text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                             <span>
                               Sender:{' '}
-                              <strong className="font-medium text-slate-700 dark:text-slate-300">
+                              <strong className="font-medium text-[#101010] dark:text-white">
                                 {notif.senderName}
                               </strong>
                             </span>
 
                             {hasActionLink && (
-                              <span className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+                              <span className="inline-flex items-center gap-1 text-[#E50914] font-semibold hover:underline">
                                 <span>View Details</span>
                                 <ArrowRight className="w-3 h-3" />
                               </span>
@@ -617,31 +617,31 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               /* ========================================================= */
               <div className="p-5 sm:p-6 space-y-6">
                 {/* Heading positioned properly below the header with dedicated spacing */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E0E0E0] dark:border-[#333333] gap-3">
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-base font-bold text-[#101010] dark:text-white">
                       Notification Center & Preferences
                     </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
                       Customize automated alerts, delivery channels, and category filters.
                     </p>
                   </div>
-                  <span className="self-start sm:self-auto px-2.5 py-1 text-[10px] font-bold uppercase rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 shrink-0">
+                  <span className="self-start sm:self-auto px-2.5 py-1 text-[10px] font-bold uppercase rounded-full bg-[#171717] text-[#FFC928] border border-[#333333] shrink-0">
                     {currentUser?.role.replace('_', ' ').toUpperCase()} SETTINGS
                   </span>
                 </div>
 
                 {/* Master Switch */}
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-4">
+                <div className="p-4 rounded-2xl bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400">
+                    <div className="p-2 rounded-xl bg-[#EFEFEF] dark:bg-[#101010] text-[#E50914] border border-[#E0E0E0] dark:border-[#333333]">
                       <Bell className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-900 dark:text-white">
+                      <p className="text-xs font-bold text-[#101010] dark:text-white">
                         All Notifications Master Switch
                       </p>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                      <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                         {localPrefs.allEnabled
                           ? 'Active — Workspace alerts and notifications are enabled.'
                           : 'Muted — Non-critical alerts are paused.'}
@@ -655,51 +655,51 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       onChange={() => handleTogglePreference('allEnabled')}
                       className="sr-only peer"
                     />
-                    <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    <div className="w-11 h-6 bg-[#E0E0E0] dark:bg-[#262626] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-[#CCCCCC] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#E50914]"></div>
                   </label>
                 </div>
 
                 {/* Delivery Channels */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#555555] dark:text-[#A3A3A3]">
                     Delivery Channels
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* Push / In-App */}
-                    <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between">
+                    <div className="p-3.5 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] bg-white dark:bg-[#171717] flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                        <div className="p-2 rounded-xl bg-[#F7F7F7] dark:bg-[#101010] text-[#FF7900] border border-[#E0E0E0] dark:border-[#333333]">
                           <Smartphone className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-slate-900 dark:text-white">In-App & Push</p>
-                          <p className="text-[10px] text-slate-400">Real-time badges</p>
+                          <p className="text-xs font-bold text-[#101010] dark:text-white">In-App & Push</p>
+                          <p className="text-[10px] text-[#555555] dark:text-[#A3A3A3]">Real-time badges</p>
                         </div>
                       </div>
                       <input
                         type="checkbox"
                         checked={localPrefs.pushNotifications}
                         onChange={() => handleTogglePreference('pushNotifications')}
-                        className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500 cursor-pointer"
+                        className="w-4 h-4 accent-[#E50914] rounded cursor-pointer"
                       />
                     </div>
 
                     {/* Email Notices */}
-                    <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between">
+                    <div className="p-3.5 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] bg-white dark:bg-[#171717] flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400">
+                        <div className="p-2 rounded-xl bg-[#F7F7F7] dark:bg-[#101010] text-[#FFC928] border border-[#E0E0E0] dark:border-[#333333]">
                           <Mail className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-slate-900 dark:text-white">Email Digest</p>
-                          <p className="text-[10px] text-slate-400">Daily summary</p>
+                          <p className="text-xs font-bold text-[#101010] dark:text-white">Email Digest</p>
+                          <p className="text-[10px] text-[#555555] dark:text-[#A3A3A3]">Daily summary</p>
                         </div>
                       </div>
                       <input
                         type="checkbox"
                         checked={localPrefs.emailNotifications}
                         onChange={() => handleTogglePreference('emailNotifications')}
-                        className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500 cursor-pointer"
+                        className="w-4 h-4 accent-[#E50914] rounded cursor-pointer"
                       />
                     </div>
                   </div>
@@ -707,7 +707,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
                 {/* Category Preferences */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#555555] dark:text-[#A3A3A3]">
                     Category Subscriptions
                   </h4>
                   <div className="space-y-2.5">
@@ -717,17 +717,17 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       return (
                         <div
                           key={cat.key}
-                          className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-start justify-between gap-3"
+                          className="p-3.5 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] bg-white dark:bg-[#171717] flex items-start justify-between gap-3"
                         >
                           <div className="flex items-start gap-3 min-w-0">
                             <div className={`p-2 rounded-xl ${cat.bg} ${cat.color} shrink-0 mt-0.5`}>
                               <Icon className="w-4 h-4" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-xs font-bold text-slate-900 dark:text-white">
+                              <p className="text-xs font-bold text-[#101010] dark:text-white">
                                 {cat.title}
                               </p>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5">
+                              <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] leading-relaxed mt-0.5">
                                 {cat.description}
                               </p>
                             </div>
@@ -739,7 +739,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                               onChange={() => handleTogglePreference(cat.key)}
                               className="sr-only peer"
                             />
-                            <div className="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div className="w-9 h-5 bg-[#E0E0E0] dark:bg-[#262626] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-[#CCCCCC] after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#E50914]"></div>
                           </label>
                         </div>
                       );
@@ -748,11 +748,11 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 </div>
 
                 {/* Action Controls for Preferences */}
-                <div className="pt-2 flex items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-800">
+                <div className="pt-2 flex items-center justify-between gap-3 border-t border-[#E0E0E0] dark:border-[#333333]">
                   <button
                     type="button"
                     onClick={handleResetPreferences}
-                    className="min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                    className="min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] bg-[#F7F7F7] dark:bg-[#171717] hover:bg-[#EFEFEF] dark:hover:bg-[#202020] border border-[#E0E0E0] dark:border-[#333333] transition-colors inline-flex items-center gap-1.5 cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Reset Defaults</span>
@@ -762,7 +762,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveMode('list')}
-                      className="min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                      className="min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F7F7F7] dark:hover:bg-[#171717] transition-colors cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -771,8 +771,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       onClick={handleSavePreferences}
                       className={`min-h-[40px] px-5 py-2 rounded-xl text-xs font-semibold text-white transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-xs ${
                         isDirty
-                          ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/20'
-                          : 'bg-blue-600 hover:bg-blue-700'
+                          ? 'bg-[#E50914] hover:bg-[#c40812]'
+                          : 'bg-[#E50914] hover:bg-[#c40812]'
                       }`}
                     >
                       <Check className="w-3.5 h-3.5" />
@@ -787,19 +787,19 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           {/* ========================================================= */}
           {/* 3. FOOTER (Fixed/Sticky bottom, separate container)       */}
           {/* ========================================================= */}
-          <div className="shrink-0 p-3 sm:p-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+          <div className="shrink-0 p-3 sm:p-4 bg-[#F7F7F7] dark:bg-[#101010] border-t border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between text-xs">
             {activeMode === 'list' ? (
               <>
                 <button
                   type="button"
                   onClick={() => setActiveMode('preferences')}
-                  className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium inline-flex items-center gap-1.5 cursor-pointer"
+                  className="text-[#555555] dark:text-[#A3A3A3] hover:text-[#E50914] font-medium inline-flex items-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <Settings className="w-3.5 h-3.5" />
                   <span>Customize alert preferences</span>
                 </button>
 
-                <span className="text-[11px] text-slate-400">
+                <span className="text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                   {userNotifications.length} items stored
                 </span>
               </>
@@ -808,7 +808,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveMode('list')}
-                  className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium inline-flex items-center gap-1.5 cursor-pointer"
+                  className="text-[#555555] dark:text-[#A3A3A3] hover:text-[#E50914] font-medium inline-flex items-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                   <span>Return to Notifications List</span>
@@ -821,7 +821,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       onNavigateTab('settings');
                       onClose();
                     }}
-                    className="text-blue-600 dark:text-blue-400 hover:underline text-[11px] font-medium cursor-pointer"
+                    className="text-[#E50914] hover:underline text-[11px] font-medium cursor-pointer"
                   >
                     Open Full Settings View →
                   </button>

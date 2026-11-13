@@ -37,7 +37,7 @@ const MainApp: React.FC = () => {
   }, [currentView, currentUser, setCurrentView]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#101010] text-[#101010] dark:text-white selection:bg-[#E50914] selection:text-white transition-colors duration-200">
       {/* View: Full-Bleed Interactive 3D Command Universe (Three.js PBR Studio Scene) */}
       {currentView === '3d-universe' && (
         <main className="w-screen h-screen overflow-hidden">

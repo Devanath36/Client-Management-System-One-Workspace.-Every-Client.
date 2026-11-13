@@ -33,7 +33,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           className="peer sr-only"
           {...props}
         />
-        <div className="w-4 h-4 rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 peer-checked:bg-blue-600 peer-checked:border-blue-600 peer-focus:ring-2 peer-focus:ring-blue-500/30 transition-all flex items-center justify-center text-white">
+        <div className="w-4 h-4 rounded-md border border-[#E0E0E0] dark:border-[#333333] bg-white dark:bg-[#171717] peer-checked:bg-[#E50914] peer-checked:border-[#E50914] peer-focus:ring-2 peer-focus:ring-[#E50914]/30 transition-all flex items-center justify-center text-white">
           <Check className="w-3 h-3 stroke-[3] opacity-0 peer-checked:opacity-100 transition-opacity" />
         </div>
       </div>
@@ -41,12 +41,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       {(label || description) && (
         <div className="text-xs">
           {label && (
-            <span className="font-medium text-slate-800 dark:text-slate-200 block">
+            <span className="font-medium text-[#101010] dark:text-white block">
               {label}
             </span>
           )}
           {description && (
-            <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
+            <span className="text-[11px] text-[#555555] dark:text-[#A3A3A3] block mt-0.5">
               {description}
             </span>
           )}

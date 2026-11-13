@@ -142,14 +142,14 @@ export const TeamProfilesManagementView: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400">
+            <div className="p-2 rounded-xl bg-[#F7F7F7] dark:bg-[#171717] text-[#E50914] border border-[#E0E0E0] dark:border-[#333333]">
               <ShieldCheck className="w-5 h-5" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#101010] dark:text-white">
               Team Profile Management (Administrator-Only)
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#666666] dark:text-[#A3A3A3] mt-1">
             Centralized administrator portal for editing verified team profiles (Devanath N, Shiva
             Shankar P, Bhuvaneswaran K). Changes sync instantly to homepage cards & detailed profile
             modals.
@@ -158,7 +158,7 @@ export const TeamProfilesManagementView: React.FC = () => {
 
         <button
           onClick={resetTeamProfiles}
-          className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shrink-0"
+          className="px-4 py-2 rounded-xl border border-[#D4D4D4] dark:border-[#333333] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] text-[#333333] dark:text-[#D4D4D4] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shrink-0"
           title="Restore official initial team member data"
         >
           <RotateCcw className="w-3.5 h-3.5" />
@@ -171,7 +171,7 @@ export const TeamProfilesManagementView: React.FC = () => {
         {teamProfiles.map((member) => (
           <div
             key={member.id || member.name}
-            className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4 hover:border-blue-400 transition-all"
+            className="bg-white dark:bg-[#141414] rounded-3xl p-6 border border-[#E0E0E0] dark:border-[#333333] shadow-sm flex flex-col justify-between space-y-4 hover:border-[#E50914] transition-all"
           >
             <div className="space-y-4">
               {/* Photo & Identity */}
@@ -181,44 +181,44 @@ export const TeamProfilesManagementView: React.FC = () => {
                     <img
                       src={member.photoUrl}
                       alt={member.name}
-                      className="w-16 h-16 rounded-2xl object-cover object-center border-2 border-slate-200 dark:border-slate-700 shadow-xs"
+                      className="w-16 h-16 rounded-2xl object-cover object-center border-2 border-[#E0E0E0] dark:border-[#333333] shadow-xs"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold text-lg flex items-center justify-center font-mono">
+                    <div className="w-16 h-16 rounded-2xl bg-[#FFF5F5] dark:bg-[#171717] text-[#E50914] border border-[#E50914]/30 font-bold text-lg flex items-center justify-center font-mono">
                       {member.initials}
                     </div>
                   )}
-                  <span className="absolute -bottom-1 -right-1 p-1 rounded-full bg-emerald-500 text-white shadow-xs">
+                  <span className="absolute -bottom-1 -right-1 p-1 rounded-full bg-[#FFC928] text-[#101010] shadow-xs">
                     <ShieldCheck className="w-3 h-3" />
                   </span>
                 </div>
 
                 <div className="min-w-0">
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white truncate">
+                  <h3 className="text-base font-bold text-[#101010] dark:text-white truncate">
                     {member.name}
                   </h3>
-                  <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 line-clamp-1">
+                  <p className="text-xs font-semibold text-[#FF7900] line-clamp-1">
                     {member.title}
                   </p>
-                  <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+                  <p className="text-[11px] text-[#888888] dark:text-[#A3A3A3] font-mono mt-0.5">
                     ID: {member.id || 'custom'}
                   </p>
                 </div>
               </div>
 
               {/* Bio snippet */}
-              <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+              <p className="text-xs text-[#555555] dark:text-[#A3A3A3] line-clamp-3 leading-relaxed">
                 {member.bio}
               </p>
 
               {/* Counts Badge strip */}
-              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500">
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#E0E0E0] dark:border-[#333333] text-[11px] text-[#666666] dark:text-[#A3A3A3]">
                 <div className="flex items-center gap-1 font-mono">
-                  <GraduationCap className="w-3.5 h-3.5 text-blue-600" />
+                  <GraduationCap className="w-3.5 h-3.5 text-[#E50914]" />
                   <span>{member.education.length} Degree(s)</span>
                 </div>
                 <div className="flex items-center gap-1 font-mono">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7900]" />
                   <span>{member.contributions.length} Contribution(s)</span>
                 </div>
               </div>
@@ -226,13 +226,13 @@ export const TeamProfilesManagementView: React.FC = () => {
               {/* Portfolio and Contact pill */}
               <div className="space-y-1 text-xs">
                 {member.portfolio?.url && (
-                  <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 truncate">
+                  <div className="flex items-center gap-1.5 text-[#E50914] truncate">
                     <Globe className="w-3.5 h-3.5 shrink-0" />
                     <span className="font-mono text-[11px] truncate">{member.portfolio.url}</span>
                   </div>
                 )}
                 {member.contact.email && (
-                  <div className="flex items-center gap-1.5 text-slate-500 truncate">
+                  <div className="flex items-center gap-1.5 text-[#666666] dark:text-[#A3A3A3] truncate">
                     <Mail className="w-3.5 h-3.5 shrink-0" />
                     <span className="font-mono text-[11px] truncate">{member.contact.email}</span>
                   </div>
@@ -241,10 +241,10 @@ export const TeamProfilesManagementView: React.FC = () => {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+            <div className="pt-3 border-t border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between gap-2">
               <button
                 onClick={() => handlePreview(member)}
-                className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-xl border border-[#D4D4D4] dark:border-[#333333] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] text-[#333333] dark:text-[#D4D4D4] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Eye className="w-3.5 h-3.5" />
                 <span>Live Preview</span>
@@ -252,7 +252,7 @@ export const TeamProfilesManagementView: React.FC = () => {
 
               <button
                 onClick={() => handleOpenEdit(member)}
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
               >
                 <Edit3 className="w-3.5 h-3.5" />
                 <span>Edit Profile</span>
@@ -266,12 +266,12 @@ export const TeamProfilesManagementView: React.FC = () => {
       {/* FULL MODAL / DRAWER: EDIT TEAM MEMBER PROFILE             */}
       {/* ========================================================= */}
       {editingProfile && formData && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xs overflow-y-auto">
-          <div className="w-full max-w-3xl my-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs overflow-y-auto">
+          <div className="w-full max-w-3xl my-6 bg-white dark:bg-[#141414] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
             {/* Header */}
-            <div className="p-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 text-white flex items-center justify-between">
+            <div className="p-6 bg-gradient-to-r from-[#101010] via-[#E50914] to-[#FF7900] text-white flex items-center justify-between">
               <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-blue-200">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#FFC928]">
                   Administrator Profile Editor
                 </span>
                 <h3 className="text-xl font-bold">Edit Profile: {formData.name}</h3>
@@ -288,12 +288,12 @@ export const TeamProfilesManagementView: React.FC = () => {
             <form onSubmit={handleSave} className="p-6 overflow-y-auto space-y-6 flex-1">
               {/* Basic Details */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#666666] dark:text-[#A3A3A3]">
                   General Profile Identity
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                       Full Name *
                     </label>
                     <input
@@ -301,12 +301,12 @@ export const TeamProfilesManagementView: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                       Professional Title *
                     </label>
                     <input
@@ -314,19 +314,19 @@ export const TeamProfilesManagementView: React.FC = () => {
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       required
-                      className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                     />
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                       Profile Photograph Asset Path / URL
                     </label>
                     <input
                       type="text"
                       value={formData.photoUrl || ''}
                       onChange={(e) => setFormData({ ...formData, photoUrl: e.target.value })}
-                      className="w-full px-3.5 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                      className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                     />
                   </div>
                 </div>
@@ -334,7 +334,7 @@ export const TeamProfilesManagementView: React.FC = () => {
 
               {/* Biography */}
               <div className="space-y-1">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#666666] dark:text-[#A3A3A3] mb-1">
                   About / Biography *
                 </label>
                 <textarea
@@ -342,19 +342,19 @@ export const TeamProfilesManagementView: React.FC = () => {
                   value={formData.bio}
                   onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                   required
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white leading-relaxed"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                 />
               </div>
 
               {/* Portfolio Settings */}
-              <div className="space-y-3 p-4 rounded-2xl bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300 flex items-center gap-1.5">
+              <div className="space-y-3 p-4 rounded-2xl bg-[#FFF5F5] dark:bg-[#171717] border border-[#E50914]/30">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#E50914] flex items-center gap-1.5">
                   <Globe className="w-4 h-4" />
                   <span>Personal Portfolio Settings</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-xs font-medium text-[#555555] dark:text-[#A3A3A3] mb-1">
                       Portfolio Website URL
                     </label>
                     <input
@@ -372,12 +372,12 @@ export const TeamProfilesManagementView: React.FC = () => {
                         })
                       }
                       placeholder="https://..."
-                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-mono"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white font-mono"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-xs font-medium text-[#555555] dark:text-[#A3A3A3] mb-1">
                       Button Label
                     </label>
                     <input
@@ -391,7 +391,7 @@ export const TeamProfilesManagementView: React.FC = () => {
                             : undefined,
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white"
                     />
                   </div>
                 </div>
@@ -399,12 +399,12 @@ export const TeamProfilesManagementView: React.FC = () => {
 
               {/* Contacts */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#666666] dark:text-[#A3A3A3]">
                   Verified Contact Details
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-xs font-medium text-[#555555] dark:text-[#A3A3A3] mb-1">
                       Email Address
                     </label>
                     <input
@@ -416,11 +416,11 @@ export const TeamProfilesManagementView: React.FC = () => {
                           contact: { ...formData.contact, email: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-mono"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-xs font-medium text-[#555555] dark:text-[#A3A3A3] mb-1">
                       LinkedIn URL
                     </label>
                     <input
@@ -432,11 +432,11 @@ export const TeamProfilesManagementView: React.FC = () => {
                           contact: { ...formData.contact, linkedin: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-mono"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-xs font-medium text-[#555555] dark:text-[#A3A3A3] mb-1">
                       GitHub URL
                     </label>
                     <input
@@ -448,7 +448,7 @@ export const TeamProfilesManagementView: React.FC = () => {
                           contact: { ...formData.contact, github: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-mono"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                     />
                   </div>
                 </div>
@@ -457,14 +457,14 @@ export const TeamProfilesManagementView: React.FC = () => {
               {/* Education list */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                    <GraduationCap className="w-4 h-4 text-blue-600" />
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#666666] dark:text-[#A3A3A3] flex items-center gap-1.5">
+                    <GraduationCap className="w-4 h-4 text-[#E50914]" />
                     <span>Education Credentials</span>
                   </h4>
                   <button
                     type="button"
                     onClick={addEducation}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-semibold text-[#E50914] hover:text-[#c40812] flex items-center gap-1 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Degree</span>
@@ -475,12 +475,12 @@ export const TeamProfilesManagementView: React.FC = () => {
                   {formData.education.map((edu, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2 relative"
+                      className="p-3.5 rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] space-y-2 relative"
                     >
                       <button
                         type="button"
                         onClick={() => removeEducation(idx)}
-                        className="absolute top-3 right-3 text-rose-500 hover:text-rose-700 p-1"
+                        className="absolute top-3 right-3 text-[#E50914] hover:text-[#c40812] p-1 cursor-pointer"
                         title="Remove degree"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -488,7 +488,7 @@ export const TeamProfilesManagementView: React.FC = () => {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pr-8">
                         <div>
-                          <label className="text-[11px] font-semibold text-slate-500">Degree</label>
+                          <label className="text-[11px] font-semibold text-[#666666] dark:text-[#A3A3A3]">Degree</label>
                           <input
                             type="text"
                             value={edu.degree}
@@ -497,11 +497,11 @@ export const TeamProfilesManagementView: React.FC = () => {
                               updated[idx].degree = e.target.value;
                               setFormData({ ...formData, education: updated });
                             }}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-xs"
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white text-xs"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-semibold text-slate-500">Institution</label>
+                          <label className="text-[11px] font-semibold text-[#666666] dark:text-[#A3A3A3]">Institution</label>
                           <input
                             type="text"
                             value={edu.institution}
@@ -510,11 +510,11 @@ export const TeamProfilesManagementView: React.FC = () => {
                               updated[idx].institution = e.target.value;
                               setFormData({ ...formData, education: updated });
                             }}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-xs"
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white text-xs"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-semibold text-slate-500">Period / Years</label>
+                          <label className="text-[11px] font-semibold text-[#666666] dark:text-[#A3A3A3]">Period / Years</label>
                           <input
                             type="text"
                             value={edu.period || ''}
@@ -523,11 +523,11 @@ export const TeamProfilesManagementView: React.FC = () => {
                               updated[idx].period = e.target.value;
                               setFormData({ ...formData, education: updated });
                             }}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-xs"
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white text-xs"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-semibold text-slate-500">Status</label>
+                          <label className="text-[11px] font-semibold text-[#666666] dark:text-[#A3A3A3]">Status</label>
                           <input
                             type="text"
                             value={edu.status}
@@ -536,7 +536,7 @@ export const TeamProfilesManagementView: React.FC = () => {
                               updated[idx].status = e.target.value;
                               setFormData({ ...formData, education: updated });
                             }}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-xs"
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white text-xs"
                           />
                         </div>
                       </div>
@@ -548,14 +548,14 @@ export const TeamProfilesManagementView: React.FC = () => {
               {/* Contributions list */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600" />
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#666666] dark:text-[#A3A3A3] flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-[#FF7900]" />
                     <span>Project Contributions</span>
                   </h4>
                   <button
                     type="button"
                     onClick={addContribution}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-semibold text-[#E50914] hover:text-[#c40812] flex items-center gap-1 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Contribution</span>
@@ -566,12 +566,12 @@ export const TeamProfilesManagementView: React.FC = () => {
                   {formData.contributions.map((contrib, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2 relative"
+                      className="p-3.5 rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] space-y-2 relative"
                     >
                       <button
                         type="button"
                         onClick={() => removeContribution(idx)}
-                        className="absolute top-3 right-3 text-rose-500 hover:text-rose-700 p-1"
+                        className="absolute top-3 right-3 text-[#E50914] hover:text-[#c40812] p-1 cursor-pointer"
                         title="Remove contribution"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -579,7 +579,7 @@ export const TeamProfilesManagementView: React.FC = () => {
 
                       <div className="pr-8 space-y-2">
                         <div>
-                          <label className="text-[11px] font-semibold text-slate-500">Title</label>
+                          <label className="text-[11px] font-semibold text-[#666666] dark:text-[#A3A3A3]">Title</label>
                           <input
                             type="text"
                             value={contrib.title}
@@ -588,11 +588,11 @@ export const TeamProfilesManagementView: React.FC = () => {
                               updated[idx].title = e.target.value;
                               setFormData({ ...formData, contributions: updated });
                             }}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-xs font-bold"
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white text-xs font-bold"
                           />
                         </div>
                         <div>
-                          <label className="text-[11px] font-semibold text-slate-500">Description</label>
+                          <label className="text-[11px] font-semibold text-[#666666] dark:text-[#A3A3A3]">Description</label>
                           <textarea
                             rows={2}
                             value={contrib.description || ''}
@@ -601,7 +601,7 @@ export const TeamProfilesManagementView: React.FC = () => {
                               updated[idx].description = e.target.value;
                               setFormData({ ...formData, contributions: updated });
                             }}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-xs"
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D4D4D4] dark:border-[#333333] bg-white dark:bg-[#141414] text-[#101010] dark:text-white text-xs"
                           />
                         </div>
                       </div>
@@ -611,17 +611,17 @@ export const TeamProfilesManagementView: React.FC = () => {
               </div>
 
               {/* Bottom Form Actions */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E0E0E0] dark:border-[#333333]">
                 <button
                   type="button"
                   onClick={handleCloseEdit}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-2 shadow-md shadow-blue-500/20 cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-semibold flex items-center gap-2 shadow-md cursor-pointer"
                 >
                   <Save className="w-4 h-4" />
                   <span>Save Profile Updates</span>

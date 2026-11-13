@@ -14,18 +14,18 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', showLa
     <button
       type="button"
       onClick={toggleTheme}
-      className={`p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${className}`}
-      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      className={`p-2 rounded-xl text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white hover:bg-[#EAEAEA] dark:hover:bg-[#1f1f1f] transition-all cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-[#E50914]/40 ${className}`}
+      aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >
       {theme === 'dark' ? (
-        <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
+        <Sun className="w-4 h-4 text-[#FFC928] hover:rotate-45 transition-transform shrink-0" />
       ) : (
-        <Moon className="w-4 h-4 text-slate-600 hover:-rotate-12 transition-transform" />
+        <Moon className="w-4 h-4 text-[#101010] hover:-rotate-12 transition-transform shrink-0" />
       )}
       {showLabel && (
-        <span className="text-xs font-medium text-slate-600 dark:text-slate-300">
-          {theme === 'dark' ? 'Light' : 'Dark'}
+        <span className="text-xs font-semibold text-[#101010] dark:text-white">
+          {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </span>
       )}
     </button>

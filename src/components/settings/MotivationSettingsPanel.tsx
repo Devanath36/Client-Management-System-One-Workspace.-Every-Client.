@@ -83,15 +83,15 @@ export const MotivationSettingsPanel: React.FC = () => {
     <div className="space-y-6">
       <form onSubmit={handleSave} className="space-y-6">
         {/* 1. Master Enable/Disable Toggle */}
-        <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
+        <div className="p-6 bg-white dark:bg-[#171717] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+              <Sparkles className="w-5 h-5 text-[#E50914]" />
+              <h3 className="text-sm font-bold text-[#101010] dark:text-white uppercase tracking-wider">
                 Enable Daily Motivation System
               </h3>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-[#666666] dark:text-[#A3A3A3]">
               When enabled, a personalized, role-aware quotation, weekly theme, and achievement reflection are presented on your workspace cockpit.
             </p>
           </div>
@@ -105,17 +105,17 @@ export const MotivationSettingsPanel: React.FC = () => {
               }}
               className="sr-only peer"
             />
-            <div className="w-12 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <div className="w-12 h-6 bg-[#D4D4D4] peer-focus:outline-none rounded-full peer dark:bg-[#333333] peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-[#E0E0E0] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#E50914]"></div>
           </label>
         </div>
 
         {/* 2. Preferred Language Selection */}
-        <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
+        <div className="p-6 bg-white dark:bg-[#171717] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-3">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white uppercase tracking-wider">
               Language Delivery Setting
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-[#666666] dark:text-[#A3A3A3] mt-0.5">
               Select whether you prefer author quotes in English, authentic Tamil literature & translations (தமிழ்), or an interactive bilingual toggle.
             </p>
           </div>
@@ -129,12 +129,12 @@ export const MotivationSettingsPanel: React.FC = () => {
               }}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                 prefs.language === 'en'
-                  ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 ring-2 ring-blue-500/20'
-                  : 'border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                  ? 'border-[#E50914] bg-[#E50914]/10 text-[#E50914] dark:text-white ring-2 ring-[#E50914]/20'
+                  : 'border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] text-[#333333] dark:text-[#D4D4D4] hover:border-[#A3A3A3]'
               }`}
             >
               <div className="text-xs font-bold">English (Original Attributions)</div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-[11px] text-[#666666] dark:text-[#A3A3A3] mt-1">
                 Quotes presented in verified English language text with source authors.
               </p>
             </button>
@@ -147,12 +147,12 @@ export const MotivationSettingsPanel: React.FC = () => {
               }}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                 prefs.language === 'ta'
-                  ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 ring-2 ring-blue-500/20'
-                  : 'border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                  ? 'border-[#E50914] bg-[#E50914]/10 text-[#E50914] dark:text-white ring-2 ring-[#E50914]/20'
+                  : 'border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] text-[#333333] dark:text-[#D4D4D4] hover:border-[#A3A3A3]'
               }`}
             >
               <div className="text-xs font-bold">தமிழ் (Tamil Only)</div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-[11px] text-[#666666] dark:text-[#A3A3A3] mt-1">
                 திருக்குறள், பாரதியார் மற்றும் சரிபார்க்கப்பட்ட தமிழ் மொழிபெயர்ப்புகள்.
               </p>
             </button>
@@ -165,12 +165,12 @@ export const MotivationSettingsPanel: React.FC = () => {
               }}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                 prefs.language === 'both'
-                  ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 ring-2 ring-blue-500/20'
-                  : 'border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                  ? 'border-[#E50914] bg-[#E50914]/10 text-[#E50914] dark:text-white ring-2 ring-[#E50914]/20'
+                  : 'border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] text-[#333333] dark:text-[#D4D4D4] hover:border-[#A3A3A3]'
               }`}
             >
               <div className="text-xs font-bold">Bilingual Switcher (Recommended)</div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-[11px] text-[#666666] dark:text-[#A3A3A3] mt-1">
                 Display 1-tap EN ↔ தமிழ் button directly on your workspace card.
               </p>
             </button>
@@ -178,18 +178,18 @@ export const MotivationSettingsPanel: React.FC = () => {
         </div>
 
         {/* 3. Preferred Categories */}
-        <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
+        <div className="p-6 bg-white dark:bg-[#171717] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white uppercase tracking-wider">
               Category Focus Areas ({currentUser?.role.replace('_', ' ').toUpperCase()})
             </h3>
-            <span className="text-xs text-slate-500 font-mono">
+            <span className="text-xs text-[#666666] dark:text-[#A3A3A3] font-mono">
               {prefs.preferredCategories.length === 0
                 ? 'All categories active'
                 : `${prefs.preferredCategories.length} selected`}
             </span>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-[#666666] dark:text-[#A3A3A3]">
             Tailor motivation entries to specific competencies matching your system role.
           </p>
 
@@ -203,12 +203,12 @@ export const MotivationSettingsPanel: React.FC = () => {
                   onClick={() => toggleCategory(cat.name)}
                   className={`p-3 rounded-xl border text-xs font-medium flex items-center justify-between transition-all cursor-pointer ${
                     selected
-                      ? 'border-blue-500 bg-blue-50/60 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 shadow-xs'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                      ? 'border-[#E50914] bg-[#E50914]/10 text-[#E50914] dark:text-white shadow-xs'
+                      : 'border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] text-[#333333] dark:text-[#D4D4D4] hover:border-[#A3A3A3]'
                   }`}
                 >
                   <span className="truncate">{cat.name}</span>
-                  {selected && <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 ml-1" />}
+                  {selected && <Check className="w-3.5 h-3.5 text-[#E50914] shrink-0 ml-1" />}
                 </button>
               );
             })}
@@ -216,11 +216,11 @@ export const MotivationSettingsPanel: React.FC = () => {
         </div>
 
         {/* 4. Weekly Theme Preference */}
-        <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
-          <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+        <div className="p-6 bg-white dark:bg-[#171717] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-3">
+          <h3 className="text-sm font-bold text-[#101010] dark:text-white uppercase tracking-wider">
             Weekly Theme Synchronization
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-[#666666] dark:text-[#A3A3A3]">
             Choose whether to automatically synchronize with the organization's published weekly schedule, or lock into a specific theme.
           </p>
           <select
@@ -232,7 +232,7 @@ export const MotivationSettingsPanel: React.FC = () => {
               });
               setIsDirty(true);
             }}
-            className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3.5 py-2.5 text-xs bg-[#F7F7F7] dark:bg-[#101010] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E50914]"
           >
             <option value="auto">Automatic (Follow Organization Scheduled Calendar Week)</option>
             {weeklyThemes.map((th) => (
@@ -244,13 +244,13 @@ export const MotivationSettingsPanel: React.FC = () => {
         </div>
 
         {/* 5 & 6. Task Progress & Campaign Toggles */}
-        <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+        <div className="p-6 bg-white dark:bg-[#171717] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-4">
+          <h3 className="text-sm font-bold text-[#101010] dark:text-white uppercase tracking-wider">
             Contextual Intelligence & Delivery
           </h3>
 
           <div className="space-y-3">
-            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 cursor-pointer">
+            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#F7F7F7] dark:bg-[#101010] border border-[#E0E0E0] dark:border-[#333333] cursor-pointer">
               <input
                 type="checkbox"
                 checked={prefs.taskProgressMotivation}
@@ -258,20 +258,20 @@ export const MotivationSettingsPanel: React.FC = () => {
                   setPrefs({ ...prefs, taskProgressMotivation: e.target.checked });
                   setIsDirty(true);
                 }}
-                className="mt-0.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                className="mt-0.5 rounded border-[#E0E0E0] dark:border-[#333333] accent-[#E50914] focus:ring-[#E50914]"
               />
               <div className="text-xs">
-                <span className="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <Target className="w-4 h-4 text-emerald-500" />
+                <span className="font-semibold text-[#101010] dark:text-white flex items-center gap-1.5">
+                  <Target className="w-4 h-4 text-[#FF7900]" />
                   <span>Task-Progress-Based Motivation</span>
                 </span>
-                <p className="text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-[#666666] dark:text-[#A3A3A3] mt-1 leading-relaxed">
                   Evaluate actual project milestone completions, sprint deliverable approvals, and workload consistency from the database to present milestone banners with matching quotes.
                 </p>
               </div>
             </label>
 
-            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 cursor-pointer">
+            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#F7F7F7] dark:bg-[#101010] border border-[#E0E0E0] dark:border-[#333333] cursor-pointer">
               <input
                 type="checkbox"
                 checked={prefs.campaignParticipation}
@@ -279,21 +279,21 @@ export const MotivationSettingsPanel: React.FC = () => {
                   setPrefs({ ...prefs, campaignParticipation: e.target.checked });
                   setIsDirty(true);
                 }}
-                className="mt-0.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                className="mt-0.5 rounded border-[#E0E0E0] dark:border-[#333333] accent-[#E50914] focus:ring-[#E50914]"
               />
               <div className="text-xs">
-                <span className="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <Megaphone className="w-4 h-4 text-indigo-500" />
+                <span className="font-semibold text-[#101010] dark:text-white flex items-center gap-1.5">
+                  <Megaphone className="w-4 h-4 text-[#E50914]" />
                   <span>Participate in Enterprise Motivation Campaigns</span>
                 </span>
-                <p className="text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-[#666666] dark:text-[#A3A3A3] mt-1 leading-relaxed">
                   Allow Administrator-scheduled strategic initiatives to appear on your workspace motivation cockpit during sprint campaigns.
                 </p>
               </div>
             </label>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <label className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 cursor-pointer">
+              <label className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F7F7F7] dark:bg-[#101010] border border-[#E0E0E0] dark:border-[#333333] cursor-pointer">
                 <input
                   type="checkbox"
                   checked={prefs.autoDailyRefresh}
@@ -301,14 +301,14 @@ export const MotivationSettingsPanel: React.FC = () => {
                     setPrefs({ ...prefs, autoDailyRefresh: e.target.checked });
                     setIsDirty(true);
                   }}
-                  className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  className="rounded border-[#E0E0E0] dark:border-[#333333] accent-[#E50914] focus:ring-[#E50914]"
                 />
-                <span className="text-xs text-slate-800 dark:text-slate-200 font-medium">
+                <span className="text-xs text-[#333333] dark:text-[#D4D4D4] font-medium">
                   Automatic Daily Selection
                 </span>
               </label>
 
-              <label className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 cursor-pointer">
+              <label className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F7F7F7] dark:bg-[#101010] border border-[#E0E0E0] dark:border-[#333333] cursor-pointer">
                 <input
                   type="checkbox"
                   checked={prefs.manualRefreshAllowed}
@@ -316,9 +316,9 @@ export const MotivationSettingsPanel: React.FC = () => {
                     setPrefs({ ...prefs, manualRefreshAllowed: e.target.checked });
                     setIsDirty(true);
                   }}
-                  className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  className="rounded border-[#E0E0E0] dark:border-[#333333] accent-[#E50914] focus:ring-[#E50914]"
                 />
-                <span className="text-xs text-slate-800 dark:text-slate-200 font-medium">
+                <span className="text-xs text-[#333333] dark:text-[#D4D4D4] font-medium">
                   Enable Manual Shuffle Button
                 </span>
               </label>
@@ -327,12 +327,12 @@ export const MotivationSettingsPanel: React.FC = () => {
         </div>
 
         {/* 9 & 10. Favorites & History Access Panels */}
-        <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-6 bg-white dark:bg-[#171717] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-[#101010] dark:text-white uppercase tracking-wider">
               Private Quotes & Engagement History
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-[#666666] dark:text-[#A3A3A3] mt-0.5">
               Access your private collection of saved favorite quotes or review your historical timeline of viewed reflections.
             </p>
           </div>
@@ -341,29 +341,29 @@ export const MotivationSettingsPanel: React.FC = () => {
             <button
               type="button"
               onClick={() => setFavoritesOpen(true)}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 text-xs font-semibold inline-flex items-center gap-2 cursor-pointer"
+              className="px-4 py-2 rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] text-[#333333] dark:text-[#D4D4D4] hover:bg-[#EBEBEB] dark:hover:bg-[#202020] text-xs font-semibold inline-flex items-center gap-2 cursor-pointer"
             >
-              <Bookmark className="w-4 h-4 text-amber-500" />
+              <Bookmark className="w-4 h-4 text-[#FFC928]" />
               <span>Saved Favorites ({currentUserFavorites.length})</span>
             </button>
 
             <button
               type="button"
               onClick={() => setHistoryOpen(true)}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 text-xs font-semibold inline-flex items-center gap-2 cursor-pointer"
+              className="px-4 py-2 rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#101010] text-[#333333] dark:text-[#D4D4D4] hover:bg-[#EBEBEB] dark:hover:bg-[#202020] text-xs font-semibold inline-flex items-center gap-2 cursor-pointer"
             >
-              <History className="w-4 h-4 text-blue-500" />
+              <History className="w-4 h-4 text-[#E50914]" />
               <span>History Timeline ({currentUserHistory.length})</span>
             </button>
           </div>
         </div>
 
         {/* Form Action Controls */}
-        <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
+        <div className="p-4 bg-white dark:bg-[#171717] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs flex items-center justify-between">
           <button
             type="button"
             onClick={handleResetDefaults}
-            className="px-3.5 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 rounded-xl inline-flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white rounded-xl inline-flex items-center gap-1.5 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Defaults</span>
@@ -374,8 +374,8 @@ export const MotivationSettingsPanel: React.FC = () => {
             disabled={!isDirty}
             className={`px-5 py-2.5 text-xs font-semibold text-white rounded-xl shadow-xs transition-all inline-flex items-center gap-2 cursor-pointer ${
               isDirty
-                ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/20'
-                : 'bg-slate-400 dark:bg-slate-700 opacity-60 cursor-not-allowed'
+                ? 'bg-[#E50914] hover:bg-[#b80710] shadow-[#E50914]/20'
+                : 'bg-[#A3A3A3] dark:bg-[#333333] opacity-60 cursor-not-allowed'
             }`}
           >
             <Save className="w-4 h-4" />

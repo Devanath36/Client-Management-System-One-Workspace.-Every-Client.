@@ -218,35 +218,35 @@ export const ActivityLogsView: React.FC = () => {
     switch (category) {
       case 'auth':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#171717] text-[#FFC928] border border-[#333333]">
             <Lock className="w-2.5 h-2.5" />
             Auth
           </span>
         );
       case 'project':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#171717] text-[#FF7900] border border-[#333333]">
             <Briefcase className="w-2.5 h-2.5" />
             Project
           </span>
         );
       case 'task':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#171717] text-white border border-[#333333]">
             <CheckSquare className="w-2.5 h-2.5" />
             Task
           </span>
         );
       case 'security':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#E50914]/15 text-[#E50914] border border-[#E50914]/40">
             <Shield className="w-2.5 h-2.5" />
             Security
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#F7F7F7] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] border border-[#E0E0E0] dark:border-[#333333]">
             <Clock className="w-2.5 h-2.5" />
             System
           </span>
@@ -257,32 +257,32 @@ export const ActivityLogsView: React.FC = () => {
   const getRoleBadge = (role: UserRole) => {
     switch (role) {
       case 'admin':
-        return 'bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border-purple-200 dark:border-purple-800';
+        return 'bg-[#171717] text-[#E50914] border border-[#E50914]/40';
       case 'manager':
-        return 'bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border-blue-200 dark:border-blue-800';
+        return 'bg-[#171717] text-[#FFC928] border border-[#FFC928]/40';
       case 'team_lead':
-        return 'bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 border-sky-200 dark:border-sky-800';
+        return 'bg-[#171717] text-[#FF7900] border border-[#FF7900]/40';
       case 'team_member':
-        return 'bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300 border-teal-200 dark:border-teal-800';
+        return 'bg-[#171717] text-white border border-[#333333]';
       default:
-        return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700';
+        return 'bg-[#F7F7F7] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] border border-[#E0E0E0] dark:border-[#333333]';
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Top Banner / Summary Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#141414] p-5 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
         <div>
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-blue-50 dark:bg-blue-950/50 rounded-xl text-blue-600 dark:text-blue-400">
+            <div className="p-2 bg-[#F7F7F7] dark:bg-[#171717] rounded-xl text-[#E50914] border border-[#E0E0E0] dark:border-[#333333]">
               <Clock className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h2 className="text-lg font-bold text-[#101010] dark:text-white">
                 Activity Logs & Audit History
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-[#555555] dark:text-[#A3A3A3]">
                 Tamper-evident trail tracking project lifecycle, task states, approvals, and authorization events.
               </p>
             </div>
@@ -292,26 +292,26 @@ export const ActivityLogsView: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60 rounded-xl transition-all shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-[#101010] dark:text-white bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] hover:border-[#E50914] rounded-xl transition-all shadow-xs cursor-pointer"
           >
-            <Download className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <Download className="w-3.5 h-3.5 text-[#E50914]" />
             <span>Export CSV</span>
           </button>
         </div>
       </div>
 
       {/* Filter Toolbar */}
-      <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
+      <div className="bg-white dark:bg-[#141414] p-4 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs space-y-3">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {/* Search Query */}
           <div className="relative md:col-span-2">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+            <Search className="w-4 h-4 text-[#555555] dark:text-[#A3A3A3] absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search by action, user, project, task, or details..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full pl-9 pr-3 py-2 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
             />
           </div>
 
@@ -320,7 +320,7 @@ export const ActivityLogsView: React.FC = () => {
             <select
               value={selectedRole}
               onChange={(e) => setSelectedRole(e.target.value)}
-              className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
             >
               <option value="all">All Roles</option>
               <option value="admin">Administrator</option>
@@ -335,7 +335,7 @@ export const ActivityLogsView: React.FC = () => {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-xl text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
             >
               <option value="all">All Categories</option>
               <option value="auth">Authentication & Sessions</option>
@@ -348,9 +348,9 @@ export const ActivityLogsView: React.FC = () => {
         </div>
 
         {/* Date Filter & Sort */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#E0E0E0] dark:border-[#333333]">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-[#555555] dark:text-[#A3A3A3] uppercase tracking-wider">
               Timeframe:
             </span>
             {(['all', 'today', 'week', 'month', 'custom'] as const).map((filter) => (
@@ -359,8 +359,8 @@ export const ActivityLogsView: React.FC = () => {
                 onClick={() => setDateFilter(filter)}
                 className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-colors capitalize cursor-pointer ${
                   dateFilter === filter
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    ? 'bg-[#E50914] text-white shadow-xs'
+                    : 'bg-[#F7F7F7] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] hover:bg-[#EFEFEF] dark:hover:bg-[#222222] border border-[#E0E0E0] dark:border-[#333333]'
                 }`}
               >
                 {filter === 'all' ? 'All Time' : filter}
@@ -373,25 +373,25 @@ export const ActivityLogsView: React.FC = () => {
                   type="date"
                   value={customStartDate}
                   onChange={(e) => setCustomStartDate(e.target.value)}
-                  className="px-2 py-1 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
+                  className="px-2 py-1 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-lg text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
                 />
-                <span className="text-xs text-slate-400">to</span>
+                <span className="text-xs text-[#555555] dark:text-[#A3A3A3]">to</span>
                 <input
                   type="date"
                   value={customEndDate}
                   onChange={(e) => setCustomEndDate(e.target.value)}
-                  className="px-2 py-1 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
+                  className="px-2 py-1 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-lg text-[#101010] dark:text-white focus:outline-none focus:ring-1 focus:ring-[#E50914]"
                 />
               </div>
             )}
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 text-xs text-slate-500">
+            <div className="flex items-center gap-1.5 text-xs text-[#555555] dark:text-[#A3A3A3]">
               <span>Sort:</span>
               <button
                 onClick={() => setSortOrder((prev) => (prev === 'newest' ? 'oldest' : 'newest'))}
-                className="font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                className="font-semibold text-[#E50914] hover:underline cursor-pointer"
               >
                 {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
               </button>
@@ -400,7 +400,7 @@ export const ActivityLogsView: React.FC = () => {
             {(searchQuery || selectedRole !== 'all' || selectedCategory !== 'all' || dateFilter !== 'all') && (
               <button
                 onClick={handleResetFilters}
-                className="inline-flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 text-xs text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span>Reset</span>
@@ -411,20 +411,20 @@ export const ActivityLogsView: React.FC = () => {
       </div>
 
       {/* Audit Log Entries Table / List */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
-        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+      <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs overflow-hidden">
+        <div className="p-4 border-b border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between text-xs text-[#555555] dark:text-[#A3A3A3]">
           <span>
-            Displaying <strong className="text-slate-900 dark:text-white">{filteredLogs.length}</strong> logged event(s)
+            Displaying <strong className="text-[#101010] dark:text-white">{filteredLogs.length}</strong> logged event(s)
           </span>
-          <span className="text-[11px] text-slate-400">
+          <span className="text-[11px] text-[#555555] dark:text-[#A3A3A3]">
             Immutable Audit Trail • RBAC Enforced
           </span>
         </div>
 
         {filteredLogs.length === 0 ? (
-          <div className="py-16 text-center text-slate-400 space-y-2">
-            <Clock className="w-10 h-10 mx-auto text-slate-300 dark:text-slate-700 mb-2" />
-            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <div className="py-16 text-center text-[#555555] dark:text-[#A3A3A3] space-y-2">
+            <Clock className="w-10 h-10 mx-auto text-[#555555] dark:text-[#A3A3A3] mb-2" />
+            <p className="text-sm font-semibold text-[#101010] dark:text-white">
               No matching activity events found
             </p>
             <p className="text-xs">
@@ -432,48 +432,48 @@ export const ActivityLogsView: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
+          <div className="divide-y divide-[#E0E0E0] dark:divide-[#333333]">
             {filteredLogs.map((log) => (
               <div
                 key={log.id}
-                className="p-4 hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors space-y-2 text-xs"
+                className="p-4 hover:bg-[#F7F7F7] dark:hover:bg-[#1a1a1a] transition-colors space-y-2 text-xs"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex flex-wrap items-center gap-2">
                     {getCategoryBadge(log.category)}
-                    <span className="font-bold text-slate-900 dark:text-white text-sm">
+                    <span className="font-bold text-[#101010] dark:text-white text-sm">
                       {log.action}
                     </span>
-                    <span className="text-slate-400">•</span>
-                    <span className="text-slate-600 dark:text-slate-300 font-medium">
-                      Target: <span className="font-mono text-slate-800 dark:text-slate-200">{log.target}</span>
+                    <span className="text-[#737373]">•</span>
+                    <span className="text-[#555555] dark:text-[#A3A3A3] font-medium">
+                      Target: <span className="font-mono text-[#101010] dark:text-white">{log.target}</span>
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[11px] font-mono text-[#555555] dark:text-[#A3A3A3]">
                       {log.timestamp}
                     </span>
                   </div>
                 </div>
 
                 {/* Details line */}
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-[#555555] dark:text-[#A3A3A3] leading-relaxed">
                   {log.details}
                 </p>
 
                 {/* State Transition Diff (previousValue -> updatedValue) */}
                 {(log.previousValue || log.updatedValue) && (
-                  <div className="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/60 dark:border-slate-700/60 flex flex-wrap items-center gap-2 text-xs font-mono">
-                    <span className="text-slate-400 font-sans text-[11px]">Value Transition:</span>
+                  <div className="p-2.5 bg-[#F7F7F7] dark:bg-[#171717] rounded-xl border border-[#E0E0E0] dark:border-[#333333] flex flex-wrap items-center gap-2 text-xs font-mono">
+                    <span className="text-[#555555] dark:text-[#A3A3A3] font-sans text-[11px]">Value Transition:</span>
                     {log.previousValue && (
-                      <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                      <span className="px-2 py-0.5 rounded bg-[#E50914]/15 text-[#E50914] border border-[#E50914]/40">
                         {log.previousValue}
                       </span>
                     )}
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#555555] dark:text-[#A3A3A3]" />
                     {log.updatedValue && (
-                      <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-semibold">
+                      <span className="px-2 py-0.5 rounded bg-[#171717] text-[#FFC928] border border-[#FFC928]/40 font-semibold">
                         {log.updatedValue}
                       </span>
                     )}
@@ -481,12 +481,12 @@ export const ActivityLogsView: React.FC = () => {
                 )}
 
                 {/* Metadata Row: Actor, Login ID, Role, Project/Task tags */}
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-100/60 dark:border-slate-800/40 text-[11px] text-slate-400">
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#E0E0E0] dark:border-[#333333] text-[11px] text-[#555555] dark:text-[#A3A3A3]">
                   <div className="flex flex-wrap items-center gap-2">
                     <span>
-                      Performed by: <strong className="text-slate-700 dark:text-slate-300 font-medium">{log.actorName}</strong>
+                      Performed by: <strong className="text-[#101010] dark:text-white font-medium">{log.actorName}</strong>
                       {log.actorLoginId && (
-                        <span className="font-mono text-slate-400 ml-1">({log.actorLoginId})</span>
+                        <span className="font-mono text-[#555555] dark:text-[#A3A3A3] ml-1">({log.actorLoginId})</span>
                       )}
                     </span>
                     <span className={`px-1.5 py-0.2 rounded border text-[10px] font-semibold ${getRoleBadge(log.actorRole)}`}>
@@ -496,12 +496,12 @@ export const ActivityLogsView: React.FC = () => {
 
                   <div className="flex items-center gap-2 font-mono text-[10px]">
                     {log.projectName && (
-                      <span className="px-2 py-0.5 rounded bg-blue-50/60 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800">
+                      <span className="px-2 py-0.5 rounded bg-[#171717] text-[#FF7900] border border-[#333333]">
                         Proj: {log.projectName}
                       </span>
                     )}
                     {log.taskTitle && (
-                      <span className="px-2 py-0.5 rounded bg-indigo-50/60 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800">
+                      <span className="px-2 py-0.5 rounded bg-[#171717] text-white border border-[#333333]">
                         Task: {log.taskTitle}
                       </span>
                     )}

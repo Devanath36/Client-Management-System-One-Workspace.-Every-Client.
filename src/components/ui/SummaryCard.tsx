@@ -29,23 +29,23 @@ export const SummaryCard: React.FC<SummaryCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs transition-all duration-150 ${
-        onClick ? 'cursor-pointer hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-sm' : ''
+      className={`p-5 bg-[#171717] rounded-2xl border border-[#333333] shadow-xs transition-all duration-150 ${
+        onClick ? 'cursor-pointer hover:border-[#E50914] hover:shadow-md' : ''
       } ${className}`}
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-tight">
+        <span className="text-xs font-semibold text-[#A3A3A3] tracking-tight">
           {title}
         </span>
         {icon && (
-          <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-[#101010] border border-[#333333] text-[#FFC928] flex items-center justify-center shrink-0">
             {icon}
           </div>
         )}
       </div>
 
       <div className="mt-3 flex items-baseline justify-between gap-2 flex-wrap">
-        <span className="text-2xl font-bold text-slate-900 dark:text-white font-mono tracking-tight tabular-nums">
+        <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
           {value}
         </span>
 
@@ -53,15 +53,15 @@ export const SummaryCard: React.FC<SummaryCardProps> = ({
       </div>
 
       {(subtitle || trend) && (
-        <div className="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2 flex-wrap pt-1 border-t border-slate-100 dark:border-slate-800/80">
+        <div className="mt-2 flex items-center justify-between text-xs text-[#A3A3A3] gap-2 flex-wrap pt-2 border-t border-[#333333]">
           {subtitle && <span className="truncate">{subtitle}</span>}
 
           {trend && (
             <span
-              className={`inline-flex items-center gap-1 font-semibold ml-auto text-[11px] ${
+              className={`inline-flex items-center gap-1 font-bold ml-auto text-[11px] ${
                 trend.isPositive
-                  ? 'text-emerald-600 dark:text-emerald-400'
-                  : 'text-rose-600 dark:text-rose-400'
+                  ? 'text-[#FFC928]'
+                  : 'text-[#E50914]'
               }`}
             >
               {trend.isPositive ? (
@@ -70,7 +70,7 @@ export const SummaryCard: React.FC<SummaryCardProps> = ({
                 <ArrowDownRight className="w-3.5 h-3.5" />
               )}
               <span>{trend.value}</span>
-              {trend.label && <span className="text-slate-400 font-normal">({trend.label})</span>}
+              {trend.label && <span className="text-[#A3A3A3] font-normal">({trend.label})</span>}
             </span>
           )}
         </div>

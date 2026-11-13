@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type BadgeVariant = 'blue' | 'emerald' | 'amber' | 'rose' | 'slate' | 'indigo' | 'purple';
+export type BadgeVariant = 'red' | 'yellow' | 'orange' | 'white' | 'black' | 'blue' | 'emerald' | 'amber' | 'rose' | 'slate' | 'indigo' | 'purple';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
@@ -9,43 +9,64 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'blue',
+  variant = 'red',
   dot = false,
   className = '',
   ...props
 }) => {
-  const variantStyles: Record<BadgeVariant, { bg: string; dot: string }> = {
+  const variantStyles: Record<string, { bg: string; dot: string }> = {
+    red: {
+      bg: 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/40',
+      dot: 'bg-[#E50914]',
+    },
+    yellow: {
+      bg: 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/40',
+      dot: 'bg-[#FFC928]',
+    },
+    orange: {
+      bg: 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/40',
+      dot: 'bg-[#FF7900]',
+    },
+    white: {
+      bg: 'bg-white/10 text-white border-[#333333]',
+      dot: 'bg-white',
+    },
+    black: {
+      bg: 'bg-[#101010] text-[#A3A3A3] border-[#333333]',
+      dot: 'bg-[#A3A3A3]',
+    },
+    // Aliases ensuring zero blue
     blue: {
-      bg: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/50 dark:text-blue-300 dark:border-blue-800/60',
-      dot: 'bg-blue-500',
-    },
-    emerald: {
-      bg: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/60',
-      dot: 'bg-emerald-500',
-    },
-    amber: {
-      bg: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/60',
-      dot: 'bg-amber-500',
-    },
-    rose: {
-      bg: 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800/60',
-      dot: 'bg-rose-500',
-    },
-    slate: {
-      bg: 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700',
-      dot: 'bg-slate-400',
+      bg: 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/40',
+      dot: 'bg-[#E50914]',
     },
     indigo: {
-      bg: 'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/50 dark:text-indigo-300 dark:border-indigo-800/60',
-      dot: 'bg-indigo-500',
+      bg: 'bg-[#FF7900]/15 text-[#FF7900] border-[#FF7900]/40',
+      dot: 'bg-[#FF7900]',
     },
     purple: {
-      bg: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800/60',
-      dot: 'bg-purple-500',
+      bg: 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/40',
+      dot: 'bg-[#E50914]',
+    },
+    amber: {
+      bg: 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/40',
+      dot: 'bg-[#FFC928]',
+    },
+    emerald: {
+      bg: 'bg-[#FFC928]/15 text-[#FFC928] border-[#FFC928]/40',
+      dot: 'bg-[#FFC928]',
+    },
+    rose: {
+      bg: 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/40',
+      dot: 'bg-[#E50914]',
+    },
+    slate: {
+      bg: 'bg-[#101010] text-[#A3A3A3] border-[#333333]',
+      dot: 'bg-[#A3A3A3]',
     },
   };
 
-  const style = variantStyles[variant] || variantStyles.blue;
+  const style = variantStyles[variant] || variantStyles.red;
 
   return (
     <span

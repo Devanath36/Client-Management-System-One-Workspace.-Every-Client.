@@ -14,11 +14,9 @@ import {
 import { Project, Task } from '../../types';
 import {
   BarChart3,
-  Calendar,
   Clock,
   CheckCircle2,
   AlertTriangle,
-  TrendingUp,
   Filter,
 } from 'lucide-react';
 
@@ -85,7 +83,6 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
       health = 'Behind';
     }
 
-    // Display label: truncated Client & Purpose
     const shortLabel =
       p.clientName.length > 14
         ? p.clientName.substring(0, 12) + '...'
@@ -116,7 +113,6 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
     return true;
   });
 
-  // Aggregate metrics
   const totalProjects = chartData.length;
   const onTrackCount = chartData.filter(
     (c) => c.health === 'On Track' || c.health === 'Completed'
@@ -128,49 +124,47 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-slate-900 text-white p-3.5 rounded-xl border border-slate-700 shadow-xl text-xs space-y-2 max-w-xs">
+        <div className="bg-[#101010] text-white p-3.5 rounded-2xl border border-[#333333] shadow-2xl text-xs space-y-2 max-w-xs">
           <div>
-            <p className="font-bold text-sm text-blue-400">{data.fullName}</p>
-            <p className="text-[11px] text-slate-300 italic mt-0.5">&ldquo;{data.purpose}&rdquo;</p>
+            <p className="font-bold text-sm text-[#FFC928]">{data.fullName}</p>
+            <p className="text-[11px] text-[#A3A3A3] italic mt-0.5">&ldquo;{data.purpose}&rdquo;</p>
           </div>
 
-          <div className="pt-1.5 border-t border-slate-800 grid grid-cols-2 gap-2 font-mono text-[11px]">
+          <div className="pt-1.5 border-t border-[#333333] grid grid-cols-2 gap-2 font-mono text-[11px]">
             <div>
-              <span className="text-slate-400 block font-sans text-[10px]">Actual Progress</span>
-              <span className="font-bold text-emerald-400">{data.actualProgress}%</span>
-              <span className="text-slate-500 text-[10px] block">
+              <span className="text-[#A3A3A3] block font-sans text-[10px]">Actual Progress</span>
+              <span className="font-bold text-[#E50914]">{data.actualProgress}%</span>
+              <span className="text-[#A3A3A3] text-[10px] block">
                 ({data.completedTasks}/{data.totalTasks} Tasks)
               </span>
             </div>
             <div>
-              <span className="text-slate-400 block font-sans text-[10px]">Timeline Elapsed</span>
-              <span className="font-bold text-sky-300">{data.scheduleElapsed}%</span>
-              <span className="text-slate-500 text-[10px] block">Duration: {data.duration}d</span>
+              <span className="text-[#A3A3A3] block font-sans text-[10px]">Timeline Elapsed</span>
+              <span className="font-bold text-[#FFC928]">{data.scheduleElapsed}%</span>
+              <span className="text-[#A3A3A3] text-[10px] block">Duration: {data.duration}d</span>
             </div>
           </div>
 
-          <div className="pt-1.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
-            <span className="text-slate-400">Deadline:</span>
-            <span className={`font-mono font-bold ${data.isOverdue ? 'text-rose-400' : 'text-slate-200'}`}>
+          <div className="pt-1.5 border-t border-[#333333] flex items-center justify-between text-[11px]">
+            <span className="text-[#A3A3A3]">Deadline:</span>
+            <span className={`font-mono font-bold ${data.isOverdue ? 'text-[#E50914]' : 'text-white'}`}>
               {data.deadline} ({data.daysRemaining >= 0 ? `${data.daysRemaining}d left` : `${Math.abs(data.daysRemaining)}d overdue`})
             </span>
           </div>
 
           <div className="flex items-center justify-between text-[11px]">
-            <span className="text-slate-400">Assigned Lead:</span>
-            <span className="text-slate-200 font-medium">{data.leadName}</span>
+            <span className="text-[#A3A3A3]">Assigned Lead:</span>
+            <span className="text-white font-medium">{data.leadName}</span>
           </div>
 
           <div className="pt-1">
             <span
               className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${
-                data.health === 'Completed'
-                  ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
-                  : data.health === 'On Track'
-                  ? 'bg-blue-950 text-blue-300 border border-blue-800'
+                data.health === 'Completed' || data.health === 'On Track'
+                  ? 'bg-[#FFC928]/20 text-[#FFC928] border border-[#FFC928]/40'
                   : data.health === 'Behind'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-800'
-                  : 'bg-rose-950 text-rose-300 border border-rose-800'
+                  ? 'bg-[#FF7900]/20 text-[#FF7900] border border-[#FF7900]/40'
+                  : 'bg-[#E50914]/20 text-[#E50914] border border-[#E50914]/40'
               }`}
             >
               Milestone Status: {data.health}
@@ -183,50 +177,50 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-6 shadow-xs">
+    <div className="bg-[#171717] rounded-3xl border border-[#333333] p-6 space-y-6 shadow-xs text-white">
       {/* Chart Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <h3 className="text-base font-bold text-white flex items-center gap-2">
+            <BarChart3 className="w-5 h-5 text-[#E50914]" />
             <span>{title}</span>
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>
+          <p className="text-xs text-[#A3A3A3] mt-0.5">{subtitle}</p>
         </div>
 
         {/* Filter controls */}
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="text-xs text-slate-400 flex items-center gap-1">
+          <span className="text-xs text-[#A3A3A3] flex items-center gap-1">
             <Filter className="w-3 h-3" />
             <span>Filter:</span>
           </span>
-          <div className="inline-flex rounded-lg p-0.5 bg-slate-100 dark:bg-slate-800 text-xs font-medium">
+          <div className="inline-flex rounded-xl p-0.5 bg-[#101010] border border-[#333333] text-xs font-medium">
             <button
               onClick={() => setFilter('all')}
-              className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                 filter === 'all'
-                  ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
-                  : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#E50914] text-white shadow-xs font-bold'
+                  : 'text-[#A3A3A3] hover:text-white'
               }`}
             >
               All ({totalProjects})
             </button>
             <button
               onClick={() => setFilter('active')}
-              className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                 filter === 'active'
-                  ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
-                  : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#E50914] text-white shadow-xs font-bold'
+                  : 'text-[#A3A3A3] hover:text-white'
               }`}
             >
               Active
             </button>
             <button
               onClick={() => setFilter('behind')}
-              className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                 filter === 'behind'
-                  ? 'bg-white dark:bg-slate-700 text-rose-600 dark:text-rose-400 shadow-xs font-semibold'
-                  : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#E50914] text-white shadow-xs font-bold'
+                  : 'text-[#A3A3A3] hover:text-white'
               }`}
             >
               Behind / Alert ({behindCount + overdueCount})
@@ -237,36 +231,36 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
 
       {/* KPI Chips */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
-        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <span className="text-slate-500 font-sans">Total Tracked</span>
-          <strong className="text-slate-900 dark:text-white font-bold text-sm">
+        <div className="p-3 rounded-2xl bg-[#101010] border border-[#333333] flex items-center justify-between">
+          <span className="text-[#A3A3A3] font-sans">Total Tracked</span>
+          <strong className="text-white font-bold text-sm">
             {totalProjects}
           </strong>
         </div>
-        <div className="p-3 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/40 flex items-center justify-between">
-          <span className="text-emerald-700 dark:text-emerald-400 font-sans flex items-center gap-1">
+        <div className="p-3 rounded-2xl bg-[#101010] border border-[#333333] flex items-center justify-between">
+          <span className="text-[#FFC928] font-sans flex items-center gap-1">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>On Track</span>
           </span>
-          <strong className="text-emerald-700 dark:text-emerald-300 font-bold text-sm">
+          <strong className="text-[#FFC928] font-bold text-sm">
             {onTrackCount}
           </strong>
         </div>
-        <div className="p-3 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900/40 flex items-center justify-between">
-          <span className="text-amber-700 dark:text-amber-400 font-sans flex items-center gap-1">
+        <div className="p-3 rounded-2xl bg-[#101010] border border-[#333333] flex items-center justify-between">
+          <span className="text-[#FF7900] font-sans flex items-center gap-1">
             <Clock className="w-3.5 h-3.5" />
             <span>Behind Sched.</span>
           </span>
-          <strong className="text-amber-700 dark:text-amber-300 font-bold text-sm">
+          <strong className="text-[#FF7900] font-bold text-sm">
             {behindCount}
           </strong>
         </div>
-        <div className="p-3 rounded-xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-100 dark:border-rose-900/40 flex items-center justify-between">
-          <span className="text-rose-700 dark:text-rose-400 font-sans flex items-center gap-1">
+        <div className="p-3 rounded-2xl bg-[#101010] border border-[#333333] flex items-center justify-between">
+          <span className="text-[#E50914] font-sans flex items-center gap-1">
             <AlertTriangle className="w-3.5 h-3.5" />
             <span>Overdue</span>
           </span>
-          <strong className="text-rose-700 dark:text-rose-300 font-bold text-sm">
+          <strong className="text-[#E50914] font-bold text-sm">
             {overdueCount}
           </strong>
         </div>
@@ -274,12 +268,12 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
 
       {/* Main Recharts Visualization */}
       {filteredData.length === 0 ? (
-        <div className="p-12 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl space-y-2">
-          <BarChart3 className="w-8 h-8 text-slate-400 mx-auto" />
-          <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+        <div className="p-12 text-center border border-dashed border-[#333333] rounded-2xl space-y-2">
+          <BarChart3 className="w-8 h-8 text-[#A3A3A3] mx-auto" />
+          <p className="text-xs font-bold text-white">
             No projects to visualize
           </p>
-          <p className="text-[11px] text-slate-500">
+          <p className="text-[11px] text-[#A3A3A3]">
             {filter === 'behind'
               ? 'All projects are currently on track with their milestone deadlines!'
               : 'Create or assign projects to start tracking milestone completion.'}
@@ -292,19 +286,19 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
               data={filteredData}
               margin={{ top: 20, right: 20, bottom: 25, left: -10 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.15} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#333333" opacity={0.6} />
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 11, fill: '#64748b' }}
+                tick={{ fontSize: 11, fill: '#A3A3A3' }}
                 tickLine={false}
-                axisLine={{ stroke: '#cbd5e1' }}
+                axisLine={{ stroke: '#333333' }}
               />
               <YAxis
                 unit="%"
                 domain={[0, 100]}
-                tick={{ fontSize: 11, fill: '#64748b' }}
+                tick={{ fontSize: 11, fill: '#A3A3A3' }}
                 tickLine={false}
-                axisLine={{ stroke: '#cbd5e1' }}
+                axisLine={{ stroke: '#333333' }}
               />
               <Tooltip content={<CustomTooltip />} />
               <Legend
@@ -314,28 +308,28 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
               />
               <ReferenceLine
                 y={100}
-                stroke="#10b981"
+                stroke="#FFC928"
                 strokeDasharray="4 4"
-                label={{ value: '100% Target', position: 'top', fill: '#10b981', fontSize: 10 }}
+                label={{ value: '100% Target', position: 'top', fill: '#FFC928', fontSize: 10 }}
               />
 
-              {/* Bar: Actual Milestone Progress */}
+              {/* Bar: Actual Milestone Progress in Primary Red */}
               <Bar
                 dataKey="actualProgress"
                 name="Milestone Progress (%)"
-                fill="#2563eb"
+                fill="#E50914"
                 radius={[6, 6, 0, 0]}
                 maxBarSize={40}
               />
 
-              {/* Line: Schedule Timeline Elapsed */}
+              {/* Line: Schedule Timeline Elapsed in Yellow */}
               <Line
                 type="monotone"
                 dataKey="scheduleElapsed"
                 name="Timeline Elapsed (%)"
-                stroke="#f59e0b"
+                stroke="#FFC928"
                 strokeWidth={3}
-                dot={{ r: 4, fill: '#f59e0b' }}
+                dot={{ r: 4, fill: '#FFC928' }}
                 activeDot={{ r: 6 }}
               />
             </ComposedChart>
@@ -344,18 +338,18 @@ export const MilestoneProgressChart: React.FC<MilestoneProgressChartProps> = ({
       )}
 
       {/* Legend & Guidance Note */}
-      <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+      <div className="pt-2 border-t border-[#333333] flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#A3A3A3]">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="w-3 h-3 bg-blue-600 rounded-xs inline-block" />
-            <span>Blue Bar: Completed Deliverables & Milestone Work</span>
+            <span className="w-3 h-3 bg-[#E50914] rounded-xs inline-block" />
+            <span className="text-white">Red Bar: Completed Deliverables & Milestone Work</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 bg-amber-500 inline-block" />
-            <span>Amber Line: Timeline Elapsed Toward Deadline</span>
+            <span className="w-3 h-0.5 bg-[#FFC928] inline-block" />
+            <span className="text-white">Yellow Line: Timeline Elapsed Toward Deadline</span>
           </span>
         </div>
-        <span className="italic">
+        <span className="italic text-[#A3A3A3]">
           Tip: Progress exceeding Timeline Elapsed indicates ahead of deadline schedule.
         </span>
       </div>

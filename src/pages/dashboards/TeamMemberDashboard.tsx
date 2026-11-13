@@ -93,69 +93,69 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
         activeTab !== 'settings' &&
         activeTab !== 'notification-settings' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+            <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
                   Active Focus Tasks
                 </span>
-                <CheckSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <CheckSquare className="w-4 h-4 text-[#E50914]" />
               </div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
+              <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
                 {activeCount}
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">Pending & active queue</p>
+              <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">Pending & active queue</p>
             </div>
 
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+            <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
                   Tasks In Progress
                 </span>
-                <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <Clock className="w-4 h-4 text-[#FF7900]" />
               </div>
-              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-2 font-mono tabular-nums">
+              <p className="text-2xl font-bold text-[#FF7900] mt-2 font-mono tabular-nums">
                 {inProgressCount}
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">Currently being worked on</p>
+              <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">Currently being worked on</p>
             </div>
 
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+            <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
                   Completed Tasks
                 </span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-[#FFC928]" />
               </div>
-              <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2 font-mono tabular-nums">
+              <p className="text-2xl font-bold text-[#FFC928] mt-2 font-mono tabular-nums">
                 {completedCount}
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">Finished deliverables</p>
+              <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">Finished deliverables</p>
             </div>
 
-            <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+            <div className="p-5 bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-semibold text-[#555555] dark:text-[#A3A3A3]">
                   Logged Time
                 </span>
-                <Clock className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <Clock className="w-4 h-4 text-[#FF7900]" />
               </div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white mt-2 font-mono tabular-nums">
+              <p className="text-2xl font-bold text-[#101010] dark:text-white mt-2 font-mono tabular-nums">
                 {totalLogged} Hours
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">Recorded engineering time</p>
+              <p className="text-[11px] text-[#555555] dark:text-[#A3A3A3] mt-1">Recorded engineering time</p>
             </div>
           </div>
         )}
 
       {/* Tab: My Tasks */}
       {activeTab === 'my-tasks' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-6 space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h2 className="text-lg font-bold text-[#101010] dark:text-white">
                 My Assigned Deliverable Tasks
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
                 Execute client deliverables and update live operational task progress.
               </p>
             </div>
@@ -164,23 +164,23 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
           {/* Search & Filters */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="relative flex-1 max-w-sm">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3" />
+              <Search className="w-3.5 h-3.5 text-[#555555] dark:text-[#A3A3A3] absolute left-3 top-3" />
               <input
                 type="text"
                 value={taskSearch}
                 onChange={(e) => setTaskSearch(e.target.value)}
                 placeholder="Search assigned deliverables..."
-                className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
+                className="w-full pl-9 pr-3 py-2 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-lg text-[#101010] dark:text-white focus:outline-none focus:border-[#E50914]"
               />
             </div>
 
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs text-slate-500">Status:</span>
+                <span className="text-xs text-[#555555] dark:text-[#A3A3A3]">Status:</span>
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
+                  className="px-2.5 py-1.5 text-xs bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] rounded-lg text-[#101010] dark:text-white focus:outline-none focus:border-[#E50914]"
                 >
                   <option value="all">All</option>
                   <option value="To Do">To Do</option>
@@ -194,84 +194,84 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
           {/* Tasks List */}
           <div className="space-y-3">
             {filteredTasks.length === 0 ? (
-              <p className="text-center py-8 text-xs text-slate-400 border border-dashed rounded-xl">
+              <p className="text-center py-8 text-xs text-[#555555] dark:text-[#A3A3A3] border border-dashed border-[#E0E0E0] dark:border-[#333333] rounded-xl">
                 No matching tasks found.
               </p>
             ) : (
               filteredTasks.map((t) => (
                 <div
                   key={t.id}
-                    className="p-5 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-300 dark:hover:border-slate-700 transition-colors bg-white dark:bg-slate-900 space-y-3"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-2 text-xs text-slate-500 flex-wrap">
-                          <span className="font-semibold text-blue-600 dark:text-blue-400">
-                            {t.clientName}
+                  className="p-5 border border-[#E0E0E0] dark:border-[#333333] rounded-xl hover:border-[#E50914] transition-colors bg-white dark:bg-[#171717] space-y-3"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs text-[#555555] dark:text-[#A3A3A3] flex-wrap">
+                        <span className="font-semibold text-[#E50914]">
+                          {t.clientName}
+                        </span>
+                        <span aria-hidden="true">·</span>
+                        <span className="font-medium text-[#101010] dark:text-white">{t.projectTitle}</span>
+                        {t.workComponent && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#F7F7F7] dark:bg-[#141414] text-[#101010] dark:text-white border border-[#E0E0E0] dark:border-[#333333]">
+                            <Tag className="w-2.5 h-2.5" />
+                            <span>{t.workComponent}</span>
                           </span>
-                          <span aria-hidden="true">·</span>
-                          <span className="font-medium text-slate-700 dark:text-slate-300">{t.projectTitle}</span>
-                          {t.workComponent && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
-                              <Tag className="w-2.5 h-2.5" />
-                              <span>{t.workComponent}</span>
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-1">
-                          {t.title}
-                        </h3>
-                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-                          {t.description}
-                        </p>
+                        )}
                       </div>
-
-                      <div className="text-right shrink-0">
-                        <p className="text-xs font-mono font-medium text-slate-900 dark:text-white tabular-nums">
-                          Due: {t.deadline}
-                        </p>
-                      </div>
+                      <h3 className="text-sm font-bold text-[#101010] dark:text-white mt-1">
+                        {t.title}
+                      </h3>
+                      <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-1 leading-relaxed">
+                        {t.description}
+                      </p>
                     </div>
 
-                    {/* Interactive Action Controls */}
-                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
-                      <div className="flex items-center gap-3 text-slate-500 font-mono text-[11px]">
-                        <span>Status: <strong className="text-slate-900 dark:text-white font-medium">{t.status}</strong></span>
-                        <span>·</span>
-                        <span>Logged: {t.loggedHours}h</span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setDetailsTask(t)}
-                          className="px-3 py-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium cursor-pointer"
-                        >
-                          Inspect Details
-                        </button>
-
-                        {t.status === 'To Do' && (
-                          <button
-                            onClick={() => updateTaskStatus(t.id, 'In Progress')}
-                            className="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 dark:bg-blue-950 hover:bg-blue-100 rounded-lg flex items-center gap-1 cursor-pointer"
-                          >
-                            <Play className="w-3 h-3" />
-                            <span>Start Work</span>
-                          </button>
-                        )}
-
-                        {t.status === 'In Progress' && (
-                          <button
-                            onClick={() => updateTaskStatus(t.id, 'Completed')}
-                            className="px-3.5 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 rounded-lg border border-emerald-200 dark:border-emerald-800 flex items-center gap-1 cursor-pointer"
-                          >
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            <span>Mark Completed ✓</span>
-                          </button>
-                        )}
-                      </div>
+                    <div className="text-right shrink-0">
+                      <p className="text-xs font-mono font-medium text-[#101010] dark:text-white tabular-nums">
+                        Due: {t.deadline}
+                      </p>
                     </div>
                   </div>
-                ))
+
+                  {/* Interactive Action Controls */}
+                  <div className="pt-2 border-t border-[#E0E0E0] dark:border-[#333333] flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div className="flex items-center gap-3 text-[#555555] dark:text-[#A3A3A3] font-mono text-[11px]">
+                      <span>Status: <strong className="text-[#101010] dark:text-white font-medium">{t.status}</strong></span>
+                      <span>·</span>
+                      <span>Logged: {t.loggedHours}h</span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setDetailsTask(t)}
+                        className="px-3 py-1.5 text-[#555555] dark:text-[#A3A3A3] hover:text-[#101010] dark:hover:text-white font-medium cursor-pointer transition-colors"
+                      >
+                        Inspect Details
+                      </button>
+
+                      {t.status === 'To Do' && (
+                        <button
+                          onClick={() => updateTaskStatus(t.id, 'In Progress')}
+                          className="px-3 py-1.5 text-xs font-semibold text-[#101010] dark:text-white bg-[#F0F0F0] dark:bg-[#202020] hover:bg-[#E50914] hover:text-white rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                        >
+                          <Play className="w-3 h-3" />
+                          <span>Start Work</span>
+                        </button>
+                      )}
+
+                      {t.status === 'In Progress' && (
+                        <button
+                          onClick={() => updateTaskStatus(t.id, 'Completed')}
+                          className="px-3.5 py-1.5 text-xs font-semibold text-[#101010] dark:text-white bg-[#F0F0F0] dark:bg-[#202020] hover:bg-[#FFC928] hover:text-[#101010] rounded-lg border border-[#E0E0E0] dark:border-[#333333] flex items-center gap-1 cursor-pointer transition-colors"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>Mark Completed ✓</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))
             )}
           </div>
         </div>
@@ -279,20 +279,20 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
 
       {/* Tab: Upcoming Deadlines */}
       {activeTab === 'deadlines' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-6 space-y-5">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-blue-600" />
+            <h2 className="text-lg font-bold text-[#101010] dark:text-white flex items-center gap-2">
+              <Clock className="w-5 h-5 text-[#FF7900]" />
               <span>Upcoming Delivery Deadlines</span>
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
               Live progress and countdown timeline for all assigned deliverables.
             </p>
           </div>
 
           <div className="space-y-3">
             {myTasks.length === 0 ? (
-              <p className="p-8 text-center text-xs text-slate-400 border border-dashed rounded-xl">
+              <p className="p-8 text-center text-xs text-[#555555] dark:text-[#A3A3A3] border border-dashed border-[#E0E0E0] dark:border-[#333333] rounded-xl">
                 No active deadline tasks assigned.
               </p>
             ) : (
@@ -312,27 +312,27 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
                 }
 
                 const statusStyles = {
-                  'Completed': 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800',
-                  'In Progress': 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400 border-blue-200 dark:border-blue-800',
-                  'Overdue': 'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400 border-rose-200 dark:border-rose-800',
-                  'Pending': 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 border-amber-200 dark:border-amber-800',
+                  'Completed': 'bg-[#171717] text-[#FFC928] border-[#FFC928]/40',
+                  'In Progress': 'bg-[#171717] text-[#FF7900] border-[#FF7900]/40',
+                  'Overdue': 'bg-[#E50914]/15 text-[#E50914] border-[#E50914]/40',
+                  'Pending': 'bg-[#F7F7F7] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] border-[#E0E0E0] dark:border-[#333333]',
                 }[displayStatus];
 
                 return (
                   <div
                     key={t.id}
                     onClick={() => setDetailsTask(t)}
-                    className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs bg-slate-50/40 dark:bg-slate-800/20 hover:border-blue-300 dark:hover:border-blue-700 transition-colors cursor-pointer"
+                    className="p-4 border border-[#E0E0E0] dark:border-[#333333] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs bg-[#F7F7F7] dark:bg-[#171717] hover:border-[#E50914] transition-colors cursor-pointer"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold">{t.clientName}</span>
-                        <span className="text-slate-300 dark:text-slate-600">·</span>
-                        <span className="text-[11px] text-slate-500 font-medium">{t.projectTitle}</span>
+                        <span className="text-[11px] text-[#E50914] font-semibold">{t.clientName}</span>
+                        <span className="text-[#737373]">·</span>
+                        <span className="text-[11px] text-[#555555] dark:text-[#A3A3A3] font-medium">{t.projectTitle}</span>
                       </div>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">{t.title}</p>
-                      <p className="text-slate-500 text-[11px]">
-                        Assigned Specialist: <span className="font-semibold text-slate-700 dark:text-slate-300">{t.assigneeName}</span>
+                      <p className="text-sm font-bold text-[#101010] dark:text-white mt-0.5">{t.title}</p>
+                      <p className="text-[#555555] dark:text-[#A3A3A3] text-[11px]">
+                        Assigned Specialist: <span className="font-semibold text-[#101010] dark:text-white">{t.assigneeName}</span>
                       </p>
                     </div>
 
@@ -341,7 +341,7 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
                         {displayStatus}
                       </span>
                       <div className="text-right">
-                        <span className="font-mono text-xs font-semibold text-slate-700 dark:text-slate-300 block">
+                        <span className="font-mono text-xs font-semibold text-[#101010] dark:text-white block">
                           Deadline: {t.deadline}
                         </span>
                       </div>
@@ -356,24 +356,24 @@ export const TeamMemberDashboard: React.FC<TeamMemberDashboardProps> = ({ active
 
       {/* Tab: Feedback & Notifications Log */}
       {activeTab === 'notifications-log' && (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4">
+        <div className="bg-white dark:bg-[#141414] rounded-2xl border border-[#E0E0E0] dark:border-[#333333] p-6 space-y-4">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-lg font-bold text-[#101010] dark:text-white">
               Lead Remarks & Review Feedback
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#555555] dark:text-[#A3A3A3] mt-0.5">
               Direct notifications regarding your deliverable tasks.
             </p>
           </div>
 
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
+          <div className="divide-y divide-[#E0E0E0] dark:divide-[#333333]">
             {notifications.map((notif) => (
               <div key={notif.id} className="py-3 text-xs space-y-1">
                 <div className="flex items-center justify-between">
-                  <p className="font-semibold text-slate-900 dark:text-white">{notif.title}</p>
-                  <span className="text-[10px] text-slate-400 font-mono">{notif.timestamp}</span>
+                  <p className="font-semibold text-[#101010] dark:text-white">{notif.title}</p>
+                  <span className="text-[10px] text-[#555555] dark:text-[#A3A3A3] font-mono">{notif.timestamp}</span>
                 </div>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{notif.message}</p>
+                <p className="text-[#555555] dark:text-[#A3A3A3] leading-relaxed">{notif.message}</p>
               </div>
             ))}
           </div>

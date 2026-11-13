@@ -166,18 +166,18 @@ export const MeetingsManagementView: React.FC = () => {
   };
 
   const platformBadge = {
-    'Google Meet': 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
-    'Microsoft Teams': 'bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800',
-    Zoom: 'bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
-    'In-Person': 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700',
+    'Google Meet': 'bg-[#171717] text-[#FFC928] border border-[#333333]',
+    'Microsoft Teams': 'bg-[#171717] text-[#FF7900] border border-[#333333]',
+    Zoom: 'bg-[#171717] text-white border border-[#333333]',
+    'In-Person': 'bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white border border-[#E0E0E0] dark:border-[#333333]',
   };
 
   const statusBadge = {
-    Scheduled: 'bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
-    'In Progress': 'bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 animate-pulse',
-    Completed: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700',
-    Postponed: 'bg-amber-50 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800 font-bold',
-    Cancelled: 'bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800',
+    Scheduled: 'bg-[#171717] text-[#FF7900] border border-[#FF7900]/40',
+    'In Progress': 'bg-[#171717] text-[#FFC928] border border-[#FFC928]/40 animate-pulse',
+    Completed: 'bg-[#F7F7F7] dark:bg-[#171717] text-[#555555] dark:text-[#A3A3A3] border border-[#E0E0E0] dark:border-[#333333]',
+    Postponed: 'bg-[#171717] text-[#FFC928] border border-[#FFC928]/40 font-bold',
+    Cancelled: 'bg-[#E50914]/15 text-[#E50914] border border-[#E50914]/40',
   };
 
   return (
@@ -186,14 +186,14 @@ export const MeetingsManagementView: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400">
+            <div className="p-2 rounded-xl bg-[#F7F7F7] dark:bg-[#171717] text-[#E50914] border border-[#E0E0E0] dark:border-[#333333]">
               <Video className="w-5 h-5" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#101010] dark:text-white">
               Meeting Management System
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#555555] dark:text-[#A3A3A3] mt-1">
             Coordinate virtual calls, 1-click video links, rescheduling audits, and attendee
             dispatch.
           </p>
@@ -204,7 +204,7 @@ export const MeetingsManagementView: React.FC = () => {
             setSelectedAttendeeIds(users.slice(0, 3).map((u) => u.id));
             setIsScheduleModalOpen(true);
           }}
-          className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+          className="px-4 py-2.5 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-semibold shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>Schedule Meeting</span>
@@ -212,15 +212,15 @@ export const MeetingsManagementView: React.FC = () => {
       </div>
 
       {/* Filter Tabs & Search Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-[#141414] p-4 rounded-2xl border border-[#E0E0E0] dark:border-[#333333] shadow-2xs">
         {/* Status Tab buttons */}
         <div className="flex flex-wrap items-center gap-1">
           <button
             onClick={() => setActiveTab('upcoming')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
               activeTab === 'upcoming'
-                ? 'bg-blue-600 text-white shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                ? 'bg-[#E50914] text-white shadow-xs'
+                : 'text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020]'
             }`}
           >
             Upcoming
@@ -229,8 +229,8 @@ export const MeetingsManagementView: React.FC = () => {
             onClick={() => setActiveTab('today')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
               activeTab === 'today'
-                ? 'bg-blue-600 text-white shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                ? 'bg-[#E50914] text-white shadow-xs'
+                : 'text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020]'
             }`}
           >
             Today's Meetings
@@ -239,8 +239,8 @@ export const MeetingsManagementView: React.FC = () => {
             onClick={() => setActiveTab('postponed')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
               activeTab === 'postponed'
-                ? 'bg-amber-600 text-white shadow-xs'
-                : 'text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40'
+                ? 'bg-[#E50914] text-white shadow-xs'
+                : 'text-[#FFC928] hover:bg-[#F0F0F0] dark:hover:bg-[#202020]'
             }`}
           >
             Postponed
@@ -249,8 +249,8 @@ export const MeetingsManagementView: React.FC = () => {
             onClick={() => setActiveTab('completed')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
               activeTab === 'completed'
-                ? 'bg-blue-600 text-white shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                ? 'bg-[#E50914] text-white shadow-xs'
+                : 'text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020]'
             }`}
           >
             Completed
@@ -259,8 +259,8 @@ export const MeetingsManagementView: React.FC = () => {
             onClick={() => setActiveTab('all')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
               activeTab === 'all'
-                ? 'bg-blue-600 text-white shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                ? 'bg-[#E50914] text-white shadow-xs'
+                : 'text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020]'
             }`}
           >
             All ({meetings.length})
@@ -270,20 +270,20 @@ export const MeetingsManagementView: React.FC = () => {
         {/* Search & Platform Filter */}
         <div className="flex items-center gap-2">
           <div className="relative flex-1 sm:w-48">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-[#888888] absolute left-3 top-2.5" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search meetings..."
-              className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none"
+              className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
             />
           </div>
 
           <select
             value={platformFilter}
             onChange={(e) => setPlatformFilter(e.target.value)}
-            className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 focus:outline-none"
+            className="px-2.5 py-1.5 rounded-xl bg-[#F7F7F7] dark:bg-[#171717] border border-[#E0E0E0] dark:border-[#333333] text-xs text-[#333333] dark:text-[#D4D4D4] focus:outline-none"
           >
             <option value="all">All Platforms</option>
             <option value="Google Meet">Google Meet</option>
@@ -297,12 +297,12 @@ export const MeetingsManagementView: React.FC = () => {
       {/* Meeting Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredMeetings.length === 0 ? (
-          <div className="col-span-full py-16 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 text-center space-y-2">
-            <Video className="w-10 h-10 text-slate-300 dark:text-slate-700 mx-auto" />
-            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <div className="col-span-full py-16 bg-white dark:bg-[#141414] rounded-3xl border border-[#E0E0E0] dark:border-[#333333] text-center space-y-2">
+            <Video className="w-10 h-10 text-[#A3A3A3] dark:text-[#444444] mx-auto" />
+            <p className="text-sm font-semibold text-[#333333] dark:text-[#D4D4D4]">
               No meetings found for this filter
             </p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#888888] dark:text-[#A3A3A3]">
               Schedule a new meeting or choose another filter tab.
             </p>
           </div>
@@ -314,12 +314,12 @@ export const MeetingsManagementView: React.FC = () => {
             return (
               <div
                 key={m.id}
-                className={`bg-white dark:bg-slate-900 rounded-3xl p-5 border flex flex-col justify-between transition-all hover:shadow-md ${
+                className={`bg-white dark:bg-[#141414] rounded-3xl p-5 border flex flex-col justify-between transition-all hover:shadow-md ${
                   isPostponed
-                    ? 'border-amber-300 dark:border-amber-900/80 bg-amber-50/20 dark:bg-amber-950/10'
+                    ? 'border-[#FFC928] bg-[#FFC928]/5 dark:bg-[#171717]'
                     : isToday
-                    ? 'border-blue-400 dark:border-blue-800 ring-2 ring-blue-500/10'
-                    : 'border-slate-200 dark:border-slate-800'
+                    ? 'border-[#E50914] ring-2 ring-[#E50914]/10'
+                    : 'border-[#E0E0E0] dark:border-[#333333]'
                 }`}
               >
                 <div className="space-y-3">
@@ -343,58 +343,58 @@ export const MeetingsManagementView: React.FC = () => {
 
                   {/* Title & Description */}
                   <div className="space-y-1">
-                    <h4 className="text-base font-bold text-slate-900 dark:text-white leading-snug">
+                    <h4 className="text-base font-bold text-[#101010] dark:text-white leading-snug">
                       {m.title}
                     </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[#555555] dark:text-[#A3A3A3] line-clamp-2 leading-relaxed">
                       {m.description}
                     </p>
                   </div>
 
                   {/* POSTPONED AUDIT BANNER */}
                   {isPostponed && m.postponedFrom && (
-                    <div className="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-900 space-y-1 text-xs">
-                      <div className="flex items-center gap-1.5 font-bold text-amber-800 dark:text-amber-300">
-                        <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                    <div className="p-3 rounded-2xl bg-[#171717] border border-[#FFC928]/40 space-y-1 text-xs">
+                      <div className="flex items-center gap-1.5 font-bold text-[#FFC928]">
+                        <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-[#FFC928]" />
                         <span>Postponed Reschedule Notice</span>
                       </div>
-                      <p className="text-[11px] text-amber-700 dark:text-amber-400">
+                      <p className="text-[11px] text-[#FFC928]">
                         Original: <span className="font-mono">{m.postponedFrom.originalDate} ({m.postponedFrom.originalStartTime})</span>
                       </p>
-                      <p className="text-[11px] text-slate-700 dark:text-slate-300 italic">
+                      <p className="text-[11px] text-[#A3A3A3] italic">
                         Reason: "{m.postponedFrom.reason}"
                       </p>
                     </div>
                   )}
 
                   {/* Date, Time & Association */}
-                  <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs">
-                    <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                      <Calendar className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                      <span className="font-mono font-semibold">
+                  <div className="space-y-1.5 pt-2 border-t border-[#E0E0E0] dark:border-[#333333] text-xs">
+                    <div className="flex items-center gap-2 text-[#555555] dark:text-[#A3A3A3]">
+                      <Calendar className="w-3.5 h-3.5 text-[#E50914] shrink-0" />
+                      <span className="font-mono font-semibold text-[#101010] dark:text-white">
                         {m.date} {isToday && '(Today)'}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                      <Clock className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                    <div className="flex items-center gap-2 text-[#555555] dark:text-[#A3A3A3]">
+                      <Clock className="w-3.5 h-3.5 text-[#FF7900] shrink-0" />
                       <span className="font-mono">
                         {m.startTime} – {m.endTime}
                       </span>
                     </div>
 
                     {m.projectName && (
-                      <div className="text-[11px] text-slate-500 truncate">
-                        Project: <span className="font-medium text-slate-700 dark:text-slate-300">{m.projectName}</span>
+                      <div className="text-[11px] text-[#555555] dark:text-[#A3A3A3] truncate">
+                        Project: <span className="font-medium text-[#101010] dark:text-white">{m.projectName}</span>
                       </div>
                     )}
                   </div>
 
                   {/* Attendees */}
-                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80">
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1.5">
+                  <div className="pt-2 border-t border-[#E0E0E0] dark:border-[#333333]">
+                    <div className="flex items-center justify-between text-[11px] text-[#555555] dark:text-[#A3A3A3] mb-1.5">
                       <span className="flex items-center gap-1 font-semibold">
-                        <Users className="w-3 h-3 text-slate-400" />
+                        <Users className="w-3 h-3 text-[#555555] dark:text-[#A3A3A3]" />
                         Attendees ({m.attendeeNames.length})
                       </span>
                       <span className="font-mono text-[10px]">Organized by {m.organizerName}</span>
@@ -404,13 +404,13 @@ export const MeetingsManagementView: React.FC = () => {
                       {m.attendeeNames.slice(0, 4).map((name) => (
                         <span
                           key={name}
-                          className="px-2 py-0.5 rounded-md text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium"
+                          className="px-2 py-0.5 rounded-md text-[10px] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white border border-[#E0E0E0] dark:border-[#333333] font-medium"
                         >
                           {name}
                         </span>
                       ))}
                       {m.attendeeNames.length > 4 && (
-                        <span className="text-[10px] text-slate-400 font-mono">
+                        <span className="text-[10px] text-[#555555] dark:text-[#A3A3A3] font-mono">
                           +{m.attendeeNames.length - 4} more
                         </span>
                       )}
@@ -419,21 +419,21 @@ export const MeetingsManagementView: React.FC = () => {
                 </div>
 
                 {/* Bottom Card Action Buttons */}
-                <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                <div className="pt-4 mt-4 border-t border-[#E0E0E0] dark:border-[#333333] flex items-center justify-between gap-2">
                   {/* Join Link */}
                   {m.meetingUrl && m.status !== 'Cancelled' ? (
                     <a
                       href={m.meetingUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+                      className="px-4 py-2 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
                     >
                       <Video className="w-3.5 h-3.5" />
                       <span>Join Call</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   ) : (
-                    <span className="text-xs text-slate-400">No active link</span>
+                    <span className="text-xs text-[#555555] dark:text-[#A3A3A3]">No active link</span>
                   )}
 
                   {/* Actions Dropdown / Postpone & Complete Buttons */}
@@ -441,7 +441,7 @@ export const MeetingsManagementView: React.FC = () => {
                     {m.status !== 'Completed' && m.status !== 'Cancelled' && (
                       <button
                         onClick={() => handleOpenPostpone(m)}
-                        className="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40 border border-amber-200 dark:border-amber-900 transition-colors cursor-pointer"
+                        className="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#FFC928] bg-[#171717] border border-[#FFC928]/40 hover:bg-[#202020] transition-colors cursor-pointer"
                         title="Postpone meeting to new date/time with reason"
                       >
                         Postpone
@@ -451,7 +451,7 @@ export const MeetingsManagementView: React.FC = () => {
                     {m.status !== 'Completed' && (
                       <button
                         onClick={() => updateMeeting(m.id, { status: 'Completed' })}
-                        className="p-1.5 text-slate-400 hover:text-emerald-600 rounded-lg transition-colors cursor-pointer"
+                        className="p-1.5 text-[#555555] dark:text-[#A3A3A3] hover:text-[#FFC928] rounded-lg transition-colors cursor-pointer"
                         title="Mark Completed"
                       >
                         <CheckCircle className="w-4 h-4" />
@@ -461,7 +461,7 @@ export const MeetingsManagementView: React.FC = () => {
                     {m.status !== 'Cancelled' && (
                       <button
                         onClick={() => cancelMeeting(m.id)}
-                        className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
+                        className="p-1.5 text-[#555555] dark:text-[#A3A3A3] hover:text-[#E50914] rounded-lg transition-colors cursor-pointer"
                         title="Cancel Meeting"
                       >
                         <XCircle className="w-4 h-4" />
@@ -479,15 +479,15 @@ export const MeetingsManagementView: React.FC = () => {
       {/* MODAL: SCHEDULE MEETING                                   */}
       {/* ========================================================= */}
       {isScheduleModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
-          <div className="w-full max-w-lg my-6 bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs overflow-y-auto">
+          <div className="w-full max-w-lg my-6 bg-white dark:bg-[#141414] rounded-3xl p-6 border border-[#E0E0E0] dark:border-[#333333] shadow-2xl space-y-4">
+            <h3 className="text-base sm:text-lg font-bold text-[#101010] dark:text-white">
               Schedule Virtual or In-Person Meeting
             </h3>
 
             <form onSubmit={handleScheduleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Meeting Title *
                 </label>
                 <input
@@ -496,12 +496,12 @@ export const MeetingsManagementView: React.FC = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Solutions Architecture Sprint Milestone Review"
                   required
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Description / Purpose
                 </label>
                 <textarea
@@ -509,13 +509,13 @@ export const MeetingsManagementView: React.FC = () => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Goals, topics, and attendees..."
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E50914]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     Date *
                   </label>
                   <input
@@ -523,12 +523,12 @@ export const MeetingsManagementView: React.FC = () => {
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     Start Time
                   </label>
                   <input
@@ -536,12 +536,12 @@ export const MeetingsManagementView: React.FC = () => {
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     End Time
                   </label>
                   <input
@@ -549,20 +549,20 @@ export const MeetingsManagementView: React.FC = () => {
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     Meeting Platform
                   </label>
                   <select
                     value={platform}
                     onChange={(e) => setPlatform(e.target.value as MeetingPlatform)}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white"
                   >
                     <option value="Google Meet">Google Meet</option>
                     <option value="Microsoft Teams">Microsoft Teams</option>
@@ -572,7 +572,7 @@ export const MeetingsManagementView: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                     Meeting URL (Auto-generated if empty)
                   </label>
                   <input
@@ -580,19 +580,19 @@ export const MeetingsManagementView: React.FC = () => {
                     value={meetingUrl}
                     onChange={(e) => setMeetingUrl(e.target.value)}
                     placeholder="https://meet.google.com/..."
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Associated Project (Optional)
                 </label>
                 <select
                   value={projectId}
                   onChange={(e) => setProjectId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white"
                 >
                   <option value="">No Project Association</option>
                   {projects.map((p) => (
@@ -605,16 +605,16 @@ export const MeetingsManagementView: React.FC = () => {
 
               {/* Multi-Select Attendees */}
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-white mb-1">
                   Required Attendees ({selectedAttendeeIds.length} selected)
                 </label>
-                <div className="max-h-32 overflow-y-auto p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-1">
+                <div className="max-h-32 overflow-y-auto p-2.5 rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] space-y-1">
                   {users.map((u) => {
                     const isSelected = selectedAttendeeIds.includes(u.id);
                     return (
                       <label
                         key={u.id}
-                        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer text-xs"
+                        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-[#EFEFEF] dark:hover:bg-[#202020] cursor-pointer text-xs"
                       >
                         <input
                           type="checkbox"
@@ -626,29 +626,29 @@ export const MeetingsManagementView: React.FC = () => {
                               setSelectedAttendeeIds(selectedAttendeeIds.filter((id) => id !== u.id));
                             }
                           }}
-                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-[#333333] accent-[#E50914]"
                         />
-                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                        <span className="font-semibold text-[#101010] dark:text-white">
                           {u.name}
                         </span>
-                        <span className="text-[10px] text-slate-400 font-mono">({u.role})</span>
+                        <span className="text-[10px] text-[#555555] dark:text-[#A3A3A3] font-mono">({u.role})</span>
                       </label>
                     );
                   })}
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
                 <button
                   type="button"
                   onClick={() => setIsScheduleModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#E50914] hover:bg-[#c40812] text-white text-xs font-semibold shadow-xs cursor-pointer"
                 >
                   Schedule Meeting
                 </button>
@@ -662,22 +662,22 @@ export const MeetingsManagementView: React.FC = () => {
       {/* MODAL: POSTPONE MEETING                                    */}
       {/* ========================================================= */}
       {postponingMeeting && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
+          <div className="w-full max-w-md bg-white dark:bg-[#141414] rounded-3xl p-6 border border-[#E0E0E0] dark:border-[#333333] shadow-2xl space-y-4">
+            <div className="flex items-center gap-2 text-[#FF7900]">
               <AlertTriangle className="w-5 h-5" />
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              <h3 className="text-base font-bold text-[#101010] dark:text-white">
                 Postpone & Reschedule Meeting
               </h3>
             </div>
 
-            <p className="text-xs text-slate-500">
-              Postponing: <span className="font-bold text-slate-800 dark:text-slate-200">{postponingMeeting.title}</span>
+            <p className="text-xs text-[#666666] dark:text-[#A3A3A3]">
+              Postponing: <span className="font-bold text-[#101010] dark:text-white">{postponingMeeting.title}</span>
             </p>
 
             <form onSubmit={handlePostponeSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                   New Rescheduled Date *
                 </label>
                 <input
@@ -685,13 +685,13 @@ export const MeetingsManagementView: React.FC = () => {
                   value={newPostponeDate}
                   onChange={(e) => setNewPostponeDate(e.target.value)}
                   required
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                     New Start Time
                   </label>
                   <input
@@ -699,12 +699,12 @@ export const MeetingsManagementView: React.FC = () => {
                     value={newPostponeStartTime}
                     onChange={(e) => setNewPostponeStartTime(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                     New End Time
                   </label>
                   <input
@@ -712,13 +712,13 @@ export const MeetingsManagementView: React.FC = () => {
                     value={newPostponeEndTime}
                     onChange={(e) => setNewPostponeEndTime(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#101010] dark:text-[#D4D4D4] mb-1">
                   Reason for Postponement (Mandatory) *
                 </label>
                 <textarea
@@ -727,21 +727,21 @@ export const MeetingsManagementView: React.FC = () => {
                   onChange={(e) => setPostponeReason(e.target.value)}
                   placeholder="e.g. Awaiting client test environment credentials and updated API logs..."
                   required
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-[#E0E0E0] dark:border-[#333333] bg-[#F7F7F7] dark:bg-[#171717] text-[#101010] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#FF7900]"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E0E0E0] dark:border-[#333333]">
                 <button
                   type="button"
                   onClick={() => setPostponingMeeting(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#555555] dark:text-[#A3A3A3] hover:bg-[#F0F0F0] dark:hover:bg-[#202020] cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#FF7900] hover:bg-[#e06a00] text-white text-xs font-semibold shadow-xs cursor-pointer"
                 >
                   Confirm Postponement
                 </button>

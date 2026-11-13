@@ -16,26 +16,26 @@ export const ToastContainer: React.FC = () => {
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto p-4 rounded-xl border shadow-lg backdrop-blur-md transition-all duration-200 flex items-start gap-3 ${
+            className={`pointer-events-auto p-4 rounded-2xl border shadow-2xl backdrop-blur-md transition-all duration-200 flex items-start gap-3 bg-[#141414]/98 text-white ${
               isSuccess
-                ? 'bg-slate-900/95 text-white border-blue-500/30 dark:bg-slate-900 dark:border-blue-500/40'
+                ? 'border-[#FFC928]/40'
                 : isError
-                ? 'bg-rose-950/95 text-white border-rose-500/30 dark:bg-rose-950 dark:border-rose-500/40'
-                : 'bg-slate-900/95 text-white border-slate-700 dark:bg-slate-900 dark:border-slate-800'
+                ? 'border-[#E50914]/50'
+                : 'border-[#FF7900]/40'
             }`}
           >
             <div className="shrink-0 mt-0.5">
-              {isSuccess && <CheckCircle2 className="w-5 h-5 text-blue-400" />}
-              {isError && <AlertTriangle className="w-5 h-5 text-rose-400" />}
-              {!isSuccess && !isError && <Info className="w-5 h-5 text-sky-400" />}
+              {isSuccess && <CheckCircle2 className="w-5 h-5 text-[#FFC928]" />}
+              {isError && <AlertTriangle className="w-5 h-5 text-[#E50914]" />}
+              {!isSuccess && !isError && <Info className="w-5 h-5 text-[#FF7900]" />}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold tracking-tight text-white">{toast.title}</p>
-              <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{toast.message}</p>
+              <p className="text-sm font-bold tracking-tight text-white">{toast.title}</p>
+              <p className="text-xs text-[#A3A3A3] mt-0.5 leading-relaxed">{toast.message}</p>
             </div>
             <button
               onClick={() => dismissToast(toast.id)}
-              className="shrink-0 text-slate-400 hover:text-white p-1 rounded transition-colors"
+              className="shrink-0 text-[#A3A3A3] hover:text-white p-1 rounded transition-colors cursor-pointer"
               aria-label="Dismiss toast"
             >
               <X className="w-4 h-4" />

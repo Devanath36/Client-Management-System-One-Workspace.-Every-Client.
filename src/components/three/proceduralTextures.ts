@@ -12,12 +12,12 @@ export function createCircuitFloorTexture(renderer: THREE.WebGLRenderer): THREE.
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Deep midnight-navy ground
-    ctx.fillStyle = '#070d1e';
+    // Matte black ground
+    ctx.fillStyle = '#101010';
     ctx.fillRect(0, 0, size, size);
 
     // Primary grid lines
-    ctx.strokeStyle = 'rgba(30, 58, 110, 0.4)';
+    ctx.strokeStyle = 'rgba(51, 51, 51, 0.55)';
     ctx.lineWidth = 1.5;
     const step = 64;
     for (let x = 0; x <= size; x += step) {
@@ -34,7 +34,7 @@ export function createCircuitFloorTexture(renderer: THREE.WebGLRenderer): THREE.
     }
 
     // Secondary subgrid
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+    ctx.strokeStyle = 'rgba(255, 121, 0, 0.16)';
     ctx.lineWidth = 0.8;
     for (let x = 0; x <= size; x += step * 2) {
       ctx.beginPath();
@@ -50,7 +50,7 @@ export function createCircuitFloorTexture(renderer: THREE.WebGLRenderer): THREE.
     }
 
     // High-tech circuit traces & glowing intersection pads
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.65)';
+    ctx.strokeStyle = 'rgba(229, 9, 20, 0.7)';
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
@@ -64,16 +64,16 @@ export function createCircuitFloorTexture(renderer: THREE.WebGLRenderer): THREE.
     nodes.forEach(([x, y]) => {
       // Glow circle
       const radGrad = ctx.createRadialGradient(x, y, 2, x, y, 16);
-      radGrad.addColorStop(0, 'rgba(56, 189, 248, 0.9)');
-      radGrad.addColorStop(0.5, 'rgba(14, 165, 233, 0.4)');
-      radGrad.addColorStop(1, 'rgba(14, 165, 233, 0)');
+      radGrad.addColorStop(0, 'rgba(255, 201, 40, 0.9)');
+      radGrad.addColorStop(0.5, 'rgba(255, 121, 0, 0.45)');
+      radGrad.addColorStop(1, 'rgba(229, 9, 20, 0)');
       ctx.fillStyle = radGrad;
       ctx.beginPath();
       ctx.arc(x, y, 16, 0, Math.PI * 2);
       ctx.fill();
 
       // Core dot
-      ctx.fillStyle = '#e0f2fe';
+      ctx.fillStyle = '#ffffff';
       ctx.beginPath();
       ctx.arc(x, y, 3.5, 0, Math.PI * 2);
       ctx.fill();
@@ -96,7 +96,7 @@ export function createCircuitFloorTexture(renderer: THREE.WebGLRenderer): THREE.
     ctx.stroke();
 
     // Coordinate markers
-    ctx.fillStyle = 'rgba(148, 163, 184, 0.45)';
+    ctx.fillStyle = 'rgba(163, 163, 163, 0.5)';
     ctx.font = '12px monospace';
     ctx.fillText('NEXUS-01 [42.8N]', 270, 250);
     ctx.fillText('NODE-ALPHA [SEC-7]', 526, 506);
@@ -125,10 +125,10 @@ export function createContactShadowTexture(): THREE.CanvasTexture {
   if (ctx) {
     const center = size / 2;
     const gradient = ctx.createRadialGradient(center, center, 0, center, center, center);
-    gradient.addColorStop(0, 'rgba(2, 6, 23, 0.85)');
-    gradient.addColorStop(0.35, 'rgba(2, 6, 23, 0.55)');
-    gradient.addColorStop(0.75, 'rgba(2, 6, 23, 0.18)');
-    gradient.addColorStop(1, 'rgba(2, 6, 23, 0)');
+    gradient.addColorStop(0, 'rgba(16, 16, 16, 0.85)');
+    gradient.addColorStop(0.35, 'rgba(16, 16, 16, 0.55)');
+    gradient.addColorStop(0.75, 'rgba(16, 16, 16, 0.18)');
+    gradient.addColorStop(1, 'rgba(16, 16, 16, 0)');
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, size, size);
@@ -153,17 +153,17 @@ export function createHoloScreenTexture(
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    // Semi-translucent dark glass background
-    ctx.fillStyle = 'rgba(7, 18, 42, 0.85)';
+    // Semi-translucent matte black glass background
+    ctx.fillStyle = 'rgba(16, 16, 16, 0.9)';
     ctx.fillRect(0, 0, 512, 320);
 
     // Glowing border outline
-    ctx.strokeStyle = '#0284c7';
+    ctx.strokeStyle = '#E50914';
     ctx.lineWidth = 4;
     ctx.strokeRect(4, 4, 504, 312);
 
     // Corner accents
-    ctx.strokeStyle = '#38bdf8';
+    ctx.strokeStyle = '#FF7900';
     ctx.lineWidth = 6;
     const corner = 24;
     // Top-left
@@ -180,26 +180,26 @@ export function createHoloScreenTexture(
     ctx.stroke();
 
     // Top status strip
-    ctx.fillStyle = 'rgba(14, 165, 233, 0.15)';
+    ctx.fillStyle = 'rgba(229, 9, 20, 0.15)';
     ctx.fillRect(8, 8, 496, 44);
 
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 20px monospace';
     ctx.fillText(title, 24, 38);
 
-    ctx.fillStyle = '#38bdf8';
+    ctx.fillStyle = '#FFC928';
     ctx.font = 'bold 14px monospace';
     ctx.fillText(`[ ${badge} ]`, 370, 38);
 
     // Content lines
-    ctx.fillStyle = '#94a3b8';
+    ctx.fillStyle = '#d4d4d4';
     ctx.font = '16px monospace';
     lines.forEach((line, i) => {
       ctx.fillText(line, 24, 90 + i * 36);
     });
 
     // Holographic mini bar chart
-    ctx.fillStyle = 'rgba(56, 189, 248, 0.8)';
+    ctx.fillStyle = 'rgba(255, 121, 0, 0.85)';
     const bars = [45, 68, 92, 54, 86, 95, 78, 88];
     bars.forEach((val, i) => {
       const h = (val / 100) * 60;
@@ -207,7 +207,7 @@ export function createHoloScreenTexture(
     });
 
     // Baseline
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+    ctx.strokeStyle = 'rgba(163, 163, 163, 0.35)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(24, 280);

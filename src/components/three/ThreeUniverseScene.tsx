@@ -34,7 +34,7 @@ interface ThreeUniverseSceneProps {
   onExit?: () => void;
 }
 
-type FinishPreset = 'cyber-navy' | 'titanium-studio' | 'quantum-emerald' | 'sunset-amber';
+type FinishPreset = 'crimson-obsidian' | 'matte-graphite' | 'solar-orange' | 'amber-gold';
 type CameraPreset = 'overview' | 'nexus-core' | 'client-pod' | 'pipeline-stream';
 
 // Pre-allocated scratch helpers at module scope to avoid GC in animation loop
@@ -50,7 +50,7 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
   // UI State
   const [isControlsCollapsed, setIsControlsCollapsed] = useState(false);
   const [explodedFactor, setExplodedFactor] = useState(0.0);
-  const [finishPreset, setFinishPreset] = useState<FinishPreset>('cyber-navy');
+  const [finishPreset, setFinishPreset] = useState<FinishPreset>('crimson-obsidian');
   const [cameraPreset, setCameraPreset] = useState<CameraPreset>('overview');
   const [autoRotate, setAutoRotate] = useState(true);
   const [rotationSpeed, setRotationSpeed] = useState(1.0);
@@ -60,7 +60,7 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
   const loopStateRef = useRef({
     explodedFactor: 0.0,
     currentExploded: 0.0,
-    finishPreset: 'cyber-navy' as FinishPreset,
+    finishPreset: 'crimson-obsidian' as FinishPreset,
     autoRotate: true,
     rotationSpeed: 1.0,
     cameraTargetPos: new THREE.Vector3(15, 12, 19),
@@ -156,8 +156,8 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
 
     // 3. Scene & Horizon-Matched Atmosphere Fog
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x050b18);
-    scene.fog = new THREE.FogExp2(0x050b18, 0.016);
+    scene.background = new THREE.Color(0x0c0c0c);
+    scene.fog = new THREE.FogExp2(0x0c0c0c, 0.016);
 
     // 4. Mandatory Studio Environment Reflection (RoomEnvironment)
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -182,8 +182,8 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
       loopStateRef.current.isTransitioningCamera = false;
     });
 
-    // 6. Studio Lighting Rig: Warm Key Light + Cool Hemisphere Fill + Cyan Rim
-    const keyLight = new THREE.DirectionalLight(0xfff5eb, 2.4);
+    // 6. Studio Lighting Rig: Warm Key Light + Neutral Hemisphere Fill + Orange Rim
+    const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.4);
     keyLight.position.set(14, 22, 12);
     keyLight.castShadow = !isSoftwareGl;
     keyLight.shadow.mapSize.width = 2048;
@@ -199,10 +199,10 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
     keyLight.shadow.normalBias = 0.02;
     scene.add(keyLight);
 
-    const hemiLight = new THREE.HemisphereLight(0x60a5fa, 0x091224, 1.3);
+    const hemiLight = new THREE.HemisphereLight(0xffedd5, 0x101010, 1.3);
     scene.add(hemiLight);
 
-    const rimLight = new THREE.DirectionalLight(0x38bdf8, 1.4);
+    const rimLight = new THREE.DirectionalLight(0xff7900, 1.4);
     rimLight.position.set(-15, 10, -15);
     scene.add(rimLight);
 
@@ -228,30 +228,30 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
 
     const materials: SceneMaterials = {
       darkMetal: new THREE.MeshStandardMaterial({
-        color: 0x0f172a,
+        color: 0x101010,
         roughness: 0.35,
         metalness: 0.85,
       }),
       brushedSteel: new THREE.MeshStandardMaterial({
-        color: 0x334155,
+        color: 0x333333,
         roughness: 0.2,
         metalness: 0.95,
       }),
       goldAccent: new THREE.MeshStandardMaterial({
-        color: 0xf59e0b,
+        color: 0xffc928,
         roughness: 0.25,
         metalness: 0.9,
       }),
       glowCyan: new THREE.MeshStandardMaterial({
-        color: 0x38bdf8,
-        emissive: 0x0284c7,
+        color: 0xe50914,
+        emissive: 0xe50914,
         emissiveIntensity: 1.6,
         roughness: 0.2,
         metalness: 0.5,
       }),
       glowBlue: new THREE.MeshStandardMaterial({
-        color: 0x60a5fa,
-        emissive: 0x2563eb,
+        color: 0xff7900,
+        emissive: 0xff7900,
         emissiveIntensity: 1.4,
         roughness: 0.2,
         metalness: 0.4,
@@ -335,8 +335,8 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
 
     // 12. Connect Curved Energy Conduits
     const pipeMat = new THREE.MeshStandardMaterial({
-      color: 0x38bdf8,
-      emissive: 0x0284c7,
+      color: 0xff7900,
+      emissive: 0xe50914,
       emissiveIntensity: 1.8,
       roughness: 0.3,
       metalness: 0.7,
@@ -366,7 +366,7 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
     const particleCount = 120;
     const particleGeo = new THREE.IcosahedronGeometry(0.08, 1);
     const particleMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
+      color: 0xffc928,
       wireframe: true,
     });
     const instancedParticles = new THREE.InstancedMesh(particleGeo, particleMat, particleCount);
@@ -391,39 +391,41 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
     // Handle Finish Preset changes
     const applyFinish = (preset: FinishPreset) => {
       switch (preset) {
-        case 'cyber-navy':
-          materials.darkMetal.color.setHex(0x0f172a);
-          materials.brushedSteel.color.setHex(0x334155);
-          materials.glowCyan.emissive.setHex(0x0284c7);
-          keyLight.color.setHex(0xfff5eb);
-          scene.fog!.color.setHex(0x050b18);
-          scene.background = new THREE.Color(0x050b18);
+        case 'crimson-obsidian':
+          materials.darkMetal.color.setHex(0x101010);
+          materials.brushedSteel.color.setHex(0x333333);
+          materials.glowCyan.color.setHex(0xe50914);
+          materials.glowCyan.emissive.setHex(0xe50914);
+          keyLight.color.setHex(0xfff7ed);
+          scene.fog!.color.setHex(0x0c0c0c);
+          scene.background = new THREE.Color(0x0c0c0c);
           break;
-        case 'titanium-studio':
-          materials.darkMetal.color.setHex(0x1e293b);
-          materials.brushedSteel.color.setHex(0x64748b);
-          materials.glowCyan.emissive.setHex(0x0ea5e9);
+        case 'matte-graphite':
+          materials.darkMetal.color.setHex(0x171717);
+          materials.brushedSteel.color.setHex(0x555555);
+          materials.glowCyan.color.setHex(0xffffff);
+          materials.glowCyan.emissive.setHex(0xe50914);
           keyLight.color.setHex(0xffffff);
-          scene.fog!.color.setHex(0x091326);
-          scene.background = new THREE.Color(0x091326);
+          scene.fog!.color.setHex(0x141414);
+          scene.background = new THREE.Color(0x141414);
           break;
-        case 'quantum-emerald':
-          materials.darkMetal.color.setHex(0x062820);
-          materials.brushedSteel.color.setHex(0x115e59);
-          materials.glowCyan.emissive.setHex(0x059669);
-          materials.glowCyan.color.setHex(0x34d399);
-          keyLight.color.setHex(0xf0fdf4);
-          scene.fog!.color.setHex(0x031814);
-          scene.background = new THREE.Color(0x031814);
-          break;
-        case 'sunset-amber':
-          materials.darkMetal.color.setHex(0x27170a);
-          materials.brushedSteel.color.setHex(0x78350f);
-          materials.glowCyan.emissive.setHex(0xd97706);
-          materials.glowCyan.color.setHex(0xfbbf24);
+        case 'solar-orange':
+          materials.darkMetal.color.setHex(0x17120e);
+          materials.brushedSteel.color.setHex(0x44332a);
+          materials.glowCyan.color.setHex(0xff7900);
+          materials.glowCyan.emissive.setHex(0xff7900);
           keyLight.color.setHex(0xffedd5);
-          scene.fog!.color.setHex(0x1a0f05);
-          scene.background = new THREE.Color(0x1a0f05);
+          scene.fog!.color.setHex(0x120d0a);
+          scene.background = new THREE.Color(0x120d0a);
+          break;
+        case 'amber-gold':
+          materials.darkMetal.color.setHex(0x1a160c);
+          materials.brushedSteel.color.setHex(0x4a3e22);
+          materials.glowCyan.color.setHex(0xffc928);
+          materials.glowCyan.emissive.setHex(0xff7900);
+          keyLight.color.setHex(0xfffbeb);
+          scene.fog!.color.setHex(0x141008);
+          scene.background = new THREE.Color(0x141008);
           break;
       }
     };
@@ -596,7 +598,7 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
   }, [finishPreset]);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-slate-950 select-none">
+    <div className="relative w-screen h-screen overflow-hidden bg-[#101010] select-none">
       {/* Isolated WebGL Canvas Container */}
       <div ref={mountRef} className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing" />
 
@@ -608,29 +610,29 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
           <button
             type="button"
             onClick={onExit}
-            className="h-10 px-3.5 rounded-xl text-xs font-semibold text-white bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 shadow-lg flex items-center gap-2 cursor-pointer transition-colors"
+            className="h-10 px-3.5 rounded-xl text-xs font-semibold text-white bg-[#171717]/95 hover:bg-[#202020] border border-[#333333] shadow-lg flex items-center gap-2 cursor-pointer transition-colors"
             title="Exit 3D Scene"
           >
-            <ArrowLeft className="w-4 h-4 text-blue-400" />
+            <ArrowLeft className="w-4 h-4 text-[#E50914]" />
             <span>Return to Workspace</span>
           </button>
         )}
 
-        <div className="hidden sm:flex items-center gap-2.5 px-3.5 h-10 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs shadow-lg">
-          <div className="w-2 h-2 rounded-full bg-emerald-400" />
+        <div className="hidden sm:flex items-center gap-2.5 px-3.5 h-10 rounded-xl bg-[#171717]/95 border border-[#333333] text-xs shadow-lg">
+          <div className="w-2 h-2 rounded-full bg-[#FFC928]" />
           <span className="font-bold text-white tracking-wide">3D Command Universe</span>
-          <span className="text-slate-500">|</span>
-          <span className="text-slate-400 font-mono text-[11px]">{fps} FPS Studio PBR</span>
+          <span className="text-[#555555]">|</span>
+          <span className="text-[#A3A3A3] font-mono text-[11px]">{fps} FPS Studio PBR</span>
         </div>
       </div>
 
       {/* Top-Right Quick Legend */}
-      <div className="absolute top-4 right-4 z-20 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-[11px] text-slate-300 shadow-lg">
-        <span className="text-slate-400">Drag to orbit • Scroll to zoom • Press</span>
-        <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-sky-400 font-mono text-[10px]">
+      <div className="absolute top-4 right-4 z-20 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#171717]/95 border border-[#333333] text-[11px] text-[#D4D4D4] shadow-lg">
+        <span className="text-[#A3A3A3]">Drag to orbit • Scroll to zoom • Press</span>
+        <kbd className="px-1.5 py-0.5 bg-[#202020] border border-[#333333] rounded text-[#FFC928] font-mono text-[10px]">
           H
         </kbd>
-        <span className="text-slate-400">to toggle HUD</span>
+        <span className="text-[#A3A3A3]">to toggle HUD</span>
       </div>
 
       {/* ========================================================= */}
@@ -647,16 +649,16 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
           <button
             type="button"
             onClick={() => setIsControlsCollapsed(!isControlsCollapsed)}
-            className="px-4 py-1.5 rounded-t-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 border-t border-x border-slate-700/80 shadow-md flex items-center gap-1.5 cursor-pointer transition-colors"
+            className="px-4 py-1.5 rounded-t-xl text-xs font-semibold text-[#D4D4D4] hover:text-white bg-[#171717] border-t border-x border-[#333333] shadow-md flex items-center gap-1.5 cursor-pointer transition-colors"
           >
             {isControlsCollapsed ? (
               <>
-                <ChevronUp className="w-3.5 h-3.5 text-blue-400" />
+                <ChevronUp className="w-3.5 h-3.5 text-[#E50914]" />
                 <span>Show Controls (H)</span>
               </>
             ) : (
               <>
-                <ChevronDown className="w-3.5 h-3.5 text-blue-400" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#E50914]" />
                 <span>Hide Controls (H)</span>
               </>
             )}
@@ -664,16 +666,16 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
         </div>
 
         {/* Floating Solid Control Panel (NO backdrop-filter over WebGL) */}
-        <div className="bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl p-4 sm:p-5 text-xs text-white space-y-4">
+        <div className="bg-[#141414] border border-[#333333] rounded-2xl shadow-2xl p-4 sm:p-5 text-xs text-white space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             {/* 1. Exploded View Slider */}
             <div className="md:col-span-4 space-y-1.5">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-slate-200 flex items-center gap-1.5">
-                  <Layers className="w-3.5 h-3.5 text-blue-400" />
+                <span className="font-bold text-[#D4D4D4] flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-[#FF7900]" />
                   <span>Exploded Architecture</span>
                 </span>
-                <span className="font-mono text-blue-400 font-semibold">
+                <span className="font-mono text-[#FF7900] font-semibold">
                   {Math.round(explodedFactor * 100)}%
                 </span>
               </div>
@@ -684,13 +686,13 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
                 step="0.01"
                 value={explodedFactor}
                 onChange={(e) => setExplodedFactor(parseFloat(e.target.value))}
-                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                className="w-full h-1.5 bg-[#202020] rounded-lg appearance-none cursor-pointer accent-[#E50914]"
               />
             </div>
 
             {/* 2. Camera View Presets */}
             <div className="md:col-span-5 space-y-1.5">
-              <span className="font-bold text-slate-200 block text-xs">
+              <span className="font-bold text-[#D4D4D4] block text-xs">
                 Camera Perspective Presets
               </span>
               <div className="grid grid-cols-4 gap-1.5">
@@ -708,8 +710,8 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
                     onClick={() => handleSelectCamera(c.id)}
                     className={`px-2 py-1.5 rounded-lg text-[11px] font-semibold text-center truncate transition-colors cursor-pointer border ${
                       cameraPreset === c.id
-                        ? 'bg-blue-600 text-white border-blue-500 shadow-xs'
-                        : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700/70 hover:text-white'
+                        ? 'bg-[#E50914] text-white border-[#E50914] shadow-xs'
+                        : 'bg-[#171717] text-[#D4D4D4] border-[#333333] hover:bg-[#202020] hover:text-white'
                     }`}
                   >
                     {c.label}
@@ -719,25 +721,25 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
             </div>
 
             {/* 3. Kinetic Rotation & Speed */}
-            <div className="md:col-span-3 flex items-center justify-between md:justify-end gap-3 pt-1 md:pt-0 border-t md:border-t-0 border-slate-800">
+            <div className="md:col-span-3 flex items-center justify-between md:justify-end gap-3 pt-1 md:pt-0 border-t md:border-t-0 border-[#333333]">
               <button
                 type="button"
                 onClick={() => setAutoRotate(!autoRotate)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border ${
                   autoRotate
-                    ? 'bg-blue-600/20 text-blue-300 border-blue-500/40'
-                    : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-slate-200'
+                    ? 'bg-[#E50914]/15 text-[#FFC928] border-[#E50914]/40'
+                    : 'bg-[#171717] text-[#A3A3A3] border-[#333333] hover:text-white'
                 }`}
               >
-                <RotateCw className={`w-3.5 h-3.5 ${autoRotate ? 'text-blue-400' : ''}`} />
+                <RotateCw className={`w-3.5 h-3.5 ${autoRotate ? 'text-[#FFC928]' : ''}`} />
                 <span>{autoRotate ? 'Orbiting' : 'Paused'}</span>
               </button>
 
-              <div className="flex items-center gap-1 text-[11px] font-mono text-slate-400">
+              <div className="flex items-center gap-1 text-[11px] font-mono text-[#A3A3A3]">
                 <button
                   type="button"
                   onClick={() => setRotationSpeed((s) => Math.max(0.5, s - 0.5))}
-                  className="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 cursor-pointer"
+                  className="w-6 h-6 rounded bg-[#202020] hover:bg-[#333333] flex items-center justify-center text-[#D4D4D4] cursor-pointer"
                 >
                   -
                 </button>
@@ -745,7 +747,7 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
                 <button
                   type="button"
                   onClick={() => setRotationSpeed((s) => Math.min(3.0, s + 0.5))}
-                  className="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 cursor-pointer"
+                  className="w-6 h-6 rounded bg-[#202020] hover:bg-[#333333] flex items-center justify-center text-[#D4D4D4] cursor-pointer"
                 >
                   +
                 </button>
@@ -754,17 +756,17 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
           </div>
 
           {/* Bottom Sub-row: Finish & Lighting Presets */}
-          <div className="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <span className="text-slate-400 text-[11px] font-medium">
+          <div className="pt-3 border-t border-[#333333] flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span className="text-[#A3A3A3] text-[11px] font-medium">
               Studio Atmosphere & Material Swatch:
             </span>
             <div className="flex items-center gap-2 flex-wrap">
               {(
                 [
-                  { id: 'cyber-navy', label: 'Cyber Electric Navy', dot: 'bg-sky-400' },
-                  { id: 'titanium-studio', label: 'Titanium Studio', dot: 'bg-slate-300' },
-                  { id: 'quantum-emerald', label: 'Quantum Emerald', dot: 'bg-emerald-400' },
-                  { id: 'sunset-amber', label: 'Sunset Amber', dot: 'bg-amber-400' },
+                  { id: 'crimson-obsidian', label: 'Crimson Obsidian', dot: 'bg-[#E50914]' },
+                  { id: 'matte-graphite', label: 'Matte Graphite', dot: 'bg-[#D4D4D4]' },
+                  { id: 'solar-orange', label: 'Solar Orange', dot: 'bg-[#FF7900]' },
+                  { id: 'amber-gold', label: 'Amber Gold', dot: 'bg-[#FFC928]' },
                 ] as const
               ).map((f) => (
                 <button
@@ -773,8 +775,8 @@ export const ThreeUniverseScene: React.FC<ThreeUniverseSceneProps> = ({ onExit }
                   onClick={() => setFinishPreset(f.id)}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border ${
                     finishPreset === f.id
-                      ? 'bg-slate-800 text-white border-blue-400 shadow-xs'
-                      : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-300'
+                      ? 'bg-[#202020] text-white border-[#E50914] shadow-xs'
+                      : 'bg-[#171717] text-[#A3A3A3] border-[#333333] hover:border-[#555555] hover:text-white'
                   }`}
                 >
                   <span className={`w-2 h-2 rounded-full ${f.dot}`} />
